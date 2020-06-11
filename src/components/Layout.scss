@@ -1,0 +1,62 @@
+@tailwind base;
+
+body {
+  @apply bg-gray-100;
+}
+h1 {
+  @apply text-2xl mt-3 font-bold;
+}
+h2 {
+  @apply text-xl mt-2 font-bold;
+}
+h3 {
+  @apply text-lg mt-1 font-bold;
+}
+h4,
+h5,
+h6,
+p,
+hr {
+  @apply mt-2;
+}
+a {
+  @apply text-tertiary-500 underline;
+}
+a:focus,
+a:hover {
+  @apply text-tertiary-400;
+}
+th {
+  @apply text-lg;
+}
+pre {
+  @apply block mt-1 p-4 text-xs text-gray-500 bg-white shadow-md rounded;
+}
+
+@tailwind components;
+
+.btn-action {
+  @apply block py-2 px-2 text-white text-center font-bold bg-tertiary-500 border-2 border-tertiary-500 rounded;
+}
+.btn-action:focus,
+.btn-action:hover {
+  @apply bg-tertiary-400;
+}
+
+.link-header {
+  @apply block text-tertiary-500 text-center font-bold border-b-2 border-transparent py-2 px-2 no-underline;
+}
+.link-header:focus,
+.link-header:hover {
+  @apply text-tertiary-400 border-tertiary-400;
+}
+.link-header-active {
+  @apply link-header border-tertiary-100;
+}
+
+// rolltable cell selection class
+table[id*="rolltable"] .selected {
+  @apply bg-tertiary-500 text-white;
+}
+
+@tailwind utilities;
