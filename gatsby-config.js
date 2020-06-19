@@ -1,3 +1,5 @@
+const { typeNameFromFile } = require("gatsby-transformer-csv")
+
 module.exports = {
   siteMetadata: {
     title: `Platen`,
@@ -6,23 +8,6 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-mdx`,
-    // {
-    //   resolve: `gatsby-plugin-mdx`,
-    //   options: {
-    //     // extensions: [`.mdx`, `.md`],
-    //     defaultLayouts: {
-    //       default: require.resolve(`${__dirname}/src/components/layout.js`),
-    //     },
-    //   },
-    // },
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     name: `pages`,
-    //     path: `${__dirname}/src/pages`,
-    //   },
-    // },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -30,6 +15,7 @@ module.exports = {
         path: `${__dirname}/content/pages`,
       },
     },
+    `gatsby-plugin-mdx`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -37,16 +23,17 @@ module.exports = {
         path: `${__dirname}/content/csv`,
       },
     },
-    // {
-    //   resolve: `gatsby-transformer-remark`,
-    //   options: {
-    //     gfm: true,
-    //     commonmark: true,
-    //     footnotes: true,
-    //     pedantic: true,
-    //     plugins: [`gatsby-remark-autolink-headers`],
-    //   },
-    // },
+    {
+      resolve: `gatsby-transformer-csv`,
+      options: {
+        // typeName: () => `Foodstuffs`,
+        // nodePerFile: `ingredients`,
+        // typeName: typeNameFromFile,
+        // noheader: true,
+      },
+    },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-sass`,
       options: {
@@ -56,9 +43,8 @@ module.exports = {
         ],
       },
     },
-    // `gatsby-plugin-catch-links`,
     // // this (optional) plugin enables Progressive Web App + Offline functionality
     // // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-offline`,
   ],
 }

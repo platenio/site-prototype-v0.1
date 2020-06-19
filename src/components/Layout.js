@@ -1,7 +1,7 @@
 import React from "react"
 
 // Layout
-import "./layout.scss"
+import "./Layout.scss"
 import Header from "./Header/Header"
 
 export default function Layout({ children }) {
@@ -10,7 +10,7 @@ export default function Layout({ children }) {
       <div className="container mx-auto px-8 py-16">
         <Header />
 
-        {children}
+        <main>{children}</main>
       </div>
     </div>
   )

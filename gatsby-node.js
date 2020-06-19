@@ -35,6 +35,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             fields {
               slug
             }
+            frontmatter {
+              title
+            }
           }
         }
       }
@@ -49,7 +52,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   pages.forEach(({ node }, index) => {
     createPage({
       path: node.fields.slug,
-      component: path.resolve(`./src/components/MDXLayout.js`),
+      component: path.resolve(`./src/components/Layout-MDX.js`),
       context: { id: node.id },
     })
   })

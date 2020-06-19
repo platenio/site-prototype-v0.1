@@ -30,7 +30,8 @@ th {
   @apply text-lg;
 }
 pre {
-  @apply block mt-1 p-4 text-xs text-gray-500 bg-white shadow-md rounded;
+  @apply block mt-1 p-4 text-xs text-gray-500 bg-gray-900 shadow-md rounded break-all whitespace-pre-wrap overflow-x-hidden;
+  max-height: 32em;
 }
 
 @tailwind components;

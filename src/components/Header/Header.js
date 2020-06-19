@@ -4,6 +4,7 @@ import { Link } from "gatsby"
 const Sitemap = () => {
   return (
     <header className="pb-8 mb-8 border-b border-gray-300">
+      {/* <img src="https://i.imgur.com/iqDDsDo.jpg" alt="" /> */}
       <div className="flex flex-wrap justify-between items-center">
         <div>
           <Link to="/" className="no-underline text-4xl font-bold">
