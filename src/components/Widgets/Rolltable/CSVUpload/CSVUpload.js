@@ -1,7 +1,12 @@
 import React, { Component } from "react"
 import Papa from "papaparse"
 
-import LsStatus, { lsCheck, lsStore, lsClear } from "../LocalStorage"
+import {
+  //LsStatus,
+  lsCheck,
+  lsStore,
+  lsClear,
+} from "../LocalStorage"
 
 import { FaFileUpload } from "react-icons/fa"
 
@@ -73,7 +78,7 @@ export default class CSVUpload extends Component {
       <>
         <button
           type="button"
-          className="flex-1 btn-action"
+          className="flex-1 btn-action-outline"
           style={{ flexBasis: "200px" }}
           onClick={this.handleOverlay}
         >
@@ -135,7 +140,7 @@ export default class CSVUpload extends Component {
         )}
 
         {this.props.debug && (
-          <div className="w-full">
+          <div className="flex-1 w-full">
             <h3>CSV Upload</h3>
             <pre>{JSON.stringify(this.state, null, 4)}</pre>
           </div>

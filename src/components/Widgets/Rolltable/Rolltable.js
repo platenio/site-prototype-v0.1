@@ -63,34 +63,39 @@ export default class Rolltable extends Component {
 
                 <h4 className="italic">{caption && caption}</h4>
               </div>
-              <div className="flex-initial flex flex-wrap justify-center items-start gap-2">
-                <button
-                  className="btn-action text-xs flex justify-center items-center rounded-full"
-                  id={`rolltable-${tableName}-debug`}
-                  onClick={this.toggleDebug}
-                >
-                  <span className="sr-only">
-                    {this.state.debug ? "Open" : "Hide"} Debugger
-                  </span>
-                  {this.state.debug ? <FaSprayCan /> : <FaBug />}
-                </button>
-
-                {this.state.fileData && (
-                  <button
-                    className="btn-action text-xs flex justify-center items-center rounded-full"
-                    id={`rolltable-${tableName}-collapser`}
-                    onClick={this.toggleTableCollapse}
-                  >
-                    <span className="sr-only">
-                      {this.state.collapse ? "Open" : "Hide"} Module
-                    </span>
-                    {this.state.collapse ? (
-                      <FaExpandArrowsAlt />
-                    ) : (
-                      <FaCompressArrowsAlt />
+              <div>
+                <ul className="flex-initial flex flex-wrap justify-center items-start pt-1 pr-1 -mb-1 -ml-1">
+                  <li className="mb-1 ml-1">
+                    <button
+                      className="btn-action-outline text-xs flex justify-center items-center rounded-full"
+                      id={`rolltable-${tableName}-debug`}
+                      onClick={this.toggleDebug}
+                    >
+                      <span className="sr-only">
+                        {this.state.debug ? "Open" : "Hide"} Debugger
+                      </span>
+                      {this.state.debug ? <FaSprayCan /> : <FaBug />}
+                    </button>
+                  </li>
+                  <li className="mb-1 ml-1">
+                    {this.state.fileData && (
+                      <button
+                        className="btn-action-outline text-xs flex justify-center items-center rounded-full"
+                        id={`rolltable-${tableName}-collapser`}
+                        onClick={this.toggleTableCollapse}
+                      >
+                        <span className="sr-only">
+                          {this.state.collapse ? "Open" : "Hide"} Module
+                        </span>
+                        {this.state.collapse ? (
+                          <FaExpandArrowsAlt />
+                        ) : (
+                          <FaCompressArrowsAlt />
+                        )}
+                      </button>
                     )}
-                  </button>
-                )}
+                  </li>
+                </ul>
               </div>
             </div>
 
@@ -115,53 +120,64 @@ export default class Rolltable extends Component {
             />
           </header>
 
-          {this.state.result && (
-            <div id={`result-${tableName}`} className="mt-4">
-              <p className="block py-4 px-8 font-bold text-2xl text-center"></p>
+          {/* TODO: Return results */}
+          <div id={`result-${tableName}`} className="mt-4">
+            <p className="block py-4 px-8 font-bold text-2xl text-center">
+              {this.state.result ? (
+                this.state.result
+              ) : (
+                <span className="p-4 text-sm text-gray-900 bg-yellow-200">
+                  Cannot generate results. Please Add or Upload a CSV.
+                </span>
+              )}
+            </p>
+          </div>
+
+          <menu
+            type="toolbar"
+            label="Rolltable Controls"
+            className="flex justify-center p-0 m-0 mt-4 bg-tertiary-200"
+          >
+            <ul className="flex flex-wrap justify-start align-center p-0 m-0 pt-2 pr-2">
+              <li className="mb-2 ml-2">
+                <CSVUpload
+                  table={tableName}
+                  debug={this.state.debug}
+                  updateData={this.updateData}
+                />
+              </li>
+
+              {this.state.fileData && (
+                <li className="mb-2 ml-2">
+                  <button
+                    id={`rolltable-${tableName}-collapser`}
+                    className="flex-1 btn-action"
+                    style={{ flexBasis: "200px" }}
+                    // onClick={() => getRandomEntries(tableName)}
+                    // onClick={toggleRandomize}
+                  >
+                    <span className="flex justify-center items-center">
+                      <FaDiceD20 className="mr-1" /> Randomize
+                    </span>
+                  </button>
+                </li>
+              )}
+            </ul>
+          </menu>
+
+          {this.state.collapse && (
+            <div className="pt-2 w-full">
+              <p className="px-4 text-center text-xs italic">
+                <strong>Note:</strong> Click on any header to reroll for that
+                column.
+              </p>
+
+              <div className="p-4 bg-red-200">
+                "Table Goes Here"
+                {/* <BuildTable name={tableName} data="data" /> */}
+              </div>
             </div>
           )}
-
-          {this.state.fileData && (
-            <menu
-              type="toolbar"
-              label="Rolltable Controls"
-              className="flex flex-wrap justify-start align-center gap-2 m-0 mt-4 p-2 mx-2 bg-tertiary-200 rounded"
-            >
-              <CSVUpload
-                table={tableName}
-                debug={this.state.debug}
-                updateData={this.updateData}
-              />
-
-              <button
-                id={`rolltable-${tableName}-collapser`}
-                className="flex-1 btn-action"
-                style={{ flexBasis: "200px" }}
-                // onClick={() => getRandomEntries(tableName)}
-                // onClick={toggleRandomize}
-              >
-                <span className="flex justify-center items-center">
-                  <FaDiceD20 className="mr-1" /> Randomize
-                </span>
-              </button>
-            </menu>
-          )}
-
-          <div className="pt-2">
-            {this.state.collapse && (
-              <>
-                <p className="px-4 text-center text-xs italic">
-                  <strong>Note:</strong> Click on any header to reroll for that
-                  column.
-                </p>
-
-                <div className="p-4 bg-red-200">
-                  "Table Goes Here"
-                  {/* <BuildTable name={tableName} data="data" /> */}
-                </div>
-              </>
-            )}
-          </div>
         </div>
       </>
     )

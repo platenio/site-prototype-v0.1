@@ -44,9 +44,10 @@ class CSVQuery extends Component {
       this.updateData(data)
     } else {
       files.forEach(file => {
-        if (this.props.src === file.node.relativePath) {
+        if ("csv/" + this.props.src === file.node.relativePath) {
           this.setState({ fileRequested: file })
           this.parseFile(file, this.updateData)
+          return
         }
       })
     }
@@ -79,7 +80,12 @@ export default ({ src, table, debug, updateData }) => (
   <StaticQuery
     query={graphql`
       query {
-        allFile(filter: { sourceInstanceName: { eq: "csv" } }) {
+        allFile(
+          filter: {
+            extension: { eq: "csv" }
+            relativePath: { regex: "^/csv/" }
+          }
+        ) {
           edges {
             node {
               extension

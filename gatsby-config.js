@@ -11,8 +11,8 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `md-pages`,
-        path: `${__dirname}/content/pages`,
+        name: `pages`,
+        path: `${__dirname}/content`,
       },
     },
     `gatsby-plugin-mdx`,
@@ -21,15 +21,6 @@ module.exports = {
       options: {
         name: `csv`,
         path: `${__dirname}/content/csv`,
-      },
-    },
-    {
-      resolve: `gatsby-transformer-csv`,
-      options: {
-        // typeName: () => `Foodstuffs`,
-        // nodePerFile: `ingredients`,
-        // typeName: typeNameFromFile,
-        // noheader: true,
       },
     },
     `gatsby-transformer-sharp`,

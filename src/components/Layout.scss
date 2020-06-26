@@ -1,7 +1,7 @@
 @tailwind base;
 
 body {
-  @apply bg-gray-100;
+  @apply bg-gray-700;
 }
 h1 {
   @apply text-2xl mt-3 font-bold;
@@ -38,24 +38,104 @@ pre {
 
 .btn-action {
   @apply block py-2 px-2 text-white text-center font-bold bg-tertiary-500 border-2 border-tertiary-500 rounded;
+
+  &:focus,
+  &:hover {
+    @apply bg-tertiary-400;
+  }
+  &:active {
+    @apply bg-tertiary-400 border-tertiary-400;
+  }
 }
-.btn-action:focus,
-.btn-action:hover {
-  @apply bg-tertiary-400;
+.btn-action-outline {
+  @apply btn-action text-tertiary-500 bg-transparent;
+
+  &:focus,
+  &:hover {
+    @apply text-tertiary-400;
+  }
+  &:active {
+    @apply text-tertiary-400 border-tertiary-400;
+  }
 }
 
 .link-header {
   @apply block text-tertiary-500 text-center font-bold border-b-2 border-transparent py-2 px-2 no-underline;
+
+  &:focus,
+  &:hover {
+    @apply text-tertiary-400 border-tertiary-400;
+  }
+  &:active {
+    @apply link-header border-tertiary-100;
+  }
 }
-.link-header:focus,
-.link-header:hover {
-  @apply text-tertiary-400 border-tertiary-400;
+
+#Sidebar menu {
+  h3 {
+    @apply mt-4 mb-2 pb-2 text-sm text-white font-normal border-b border-white border-opacity-25;
+  }
+  ul li {
+    &:not(:last-child) {
+      @apply mb-1;
+    }
+  }
+  a {
+    @apply block py-1 px-2 rounded-sm text-gray-300 no-underline;
+    transition: background-color 0.15s ease-in-out;
+
+    &:focus,
+    &:hover {
+      @apply bg-gray-900 bg-opacity-25;
+    }
+    &:active {
+      @apply bg-white bg-opacity-25;
+    }
+
+    &.active-link {
+      @apply text-white bg-gray-900 bg-white bg-opacity-25;
+    }
+  }
 }
-.link-header-active {
-  @apply link-header border-tertiary-100;
+#Sidebar footer a {
+  @apply text-white no-underline;
+}
+
+#layout-frame {
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+header {
+  a,
+  .link-header {
+    @apply text-white;
+  }
 }
 
 // rolltable cell selection class
+table.style-default {
+  th,
+  td {
+    font-size: initial;
+  }
+  th,
+  td {
+    @apply border px-4 py-2;
+  }
+  tr:nth-child(even) {
+    th,
+    td {
+      @apply bg-gray-100;
+    }
+  }
+  tr:nth-child(odd) {
+    th,
+    td {
+      @apply bg-gray-200;
+    }
+  }
+}
 table[id*="rolltable"] .selected {
   @apply bg-tertiary-500 text-white;
 }
