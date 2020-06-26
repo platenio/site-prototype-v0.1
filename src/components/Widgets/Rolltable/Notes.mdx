@@ -1,0 +1,15 @@
+## Author, adding files
+
+- Upload files under ./content/csv/ (Subfolders allowed)
+- Use shortcode `<Rolltable src="folder/filename" />` in Markdown JSX
+  - src: null | String
+  - name: null | String
+  - Caption: null | String
+
+## Parse
+
+- Reference Localstorage via src
+- Else, Reference GraphQL files query "CSV" reference type for src
+  - Convert CSV into JSON
+  - Prevent rebuild by storing JSON into Localstorage
+- Build table via JSON

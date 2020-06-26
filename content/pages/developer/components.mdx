@@ -1,0 +1,71 @@
+---
+slug: components
+title: Components
+date: 2020-06-09
+---
+
+# Author Component Guide & Showcase
+
+---
+
+## Section, Library
+
+```
+<SecLibrary />
+```
+
+<SecLibrary />
+
+---
+
+## Rolltable component
+
+```
+<Rolltable
+  name="Custom Rolltable Title"
+  caption="This is a custom caption!"
+  src="ambitions.csv"
+/>
+```
+
+<Rolltable
+  name="Custom Rolltable Title"
+  caption="This is a custom caption!"
+  src="ambitions.csv"
+/>
+
+---
+
+#### Child folders
+
+```
+<Rolltable
+  name="Child Rolltable"
+  caption="This file is located under child/state_us.csv"
+  src="samples/state_us.csv"
+/>
+```
+
+<Rolltable
+  name="Child Rolltable"
+  caption="This file is located under child/state_us.csv"
+  src="samples/state_us.csv"
+/>
+
+---
+
+#### Handle invalid src
+
+```
+<Rolltable
+  name="Invalid Rolltable"
+  caption="This file does not exist"
+  src="samples/states_us.csv"
+/>
+```
+
+<Rolltable
+  name="Invalid Rolltable"
+  caption="This file does not exist"
+  src="samples/states_us.csv"
+/>
