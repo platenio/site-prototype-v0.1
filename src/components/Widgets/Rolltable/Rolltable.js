@@ -48,7 +48,7 @@ export default class Rolltable extends Component {
   }
 
   render() {
-    const { name, caption, src } = this.props
+    const { name, caption, src, allowUpload, showDebug } = this.props
     const tableName = name.toLowerCase().replace(/\s+/g, "-")
 
     return (
@@ -66,7 +66,7 @@ export default class Rolltable extends Component {
               </div>
               <div>
                 <ul className="flex-initial flex flex-wrap justify-center items-start pt-1 pr-1 -mb-1 -ml-1">
-                  <li className="mb-1 ml-1">
+                  {showDebug == "true" && (<li className="mb-1 ml-1">
                     <button
                       className="btn-action-outline text-xs flex justify-center items-center rounded-full"
                       id={`rolltable-${tableName}-debug`}
@@ -77,7 +77,7 @@ export default class Rolltable extends Component {
                       </span>
                       {this.state.debug ? <FaSprayCan /> : <FaBug />}
                     </button>
-                  </li>
+                  </li>)}
                   <li className="mb-1 ml-1">
                     {this.state.fileData && (
                       <button
@@ -140,13 +140,13 @@ export default class Rolltable extends Component {
             className="flex justify-center p-0 m-0 mt-4 bg-tertiary-200"
           >
             <ul className="flex flex-wrap justify-start align-center p-0 m-0 pt-2 pr-2">
-              <li className="mb-2 ml-2">
+              {allowUpload === "true" && (<li className="mb-2 ml-2">
                 <CSVUpload
                   table={tableName}
                   debug={this.state.debug}
                   updateData={this.updateData}
                 />
-              </li>
+              </li>)}
 
               {this.state.fileData && (
                 <li className="mb-2 ml-2">

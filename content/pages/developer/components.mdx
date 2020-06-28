@@ -36,13 +36,14 @@ date: 2020-06-09
 
 ---
 
-#### Child folders
+#### Child folders & Debug
 
 ```
 <Rolltable
   name="Child Rolltable"
-  caption="This file is located under child/state_us.csv"
+  caption="This file is located under child/state_us.csv and can show debug information"
   src="samples/state_us.csv"
+  showDebug=true
 />
 ```
 
@@ -50,17 +51,20 @@ date: 2020-06-09
   name="Child Rolltable"
   caption="This file is located under child/state_us.csv"
   src="samples/state_us.csv"
+  showDebug="true"
 />
 
 ---
 
-#### Handle invalid src
+#### Handle invalid src & custom upload
 
 ```
 <Rolltable
   name="Invalid Rolltable"
   caption="This file does not exist"
   src="samples/states_us.csv"
+  showDebug="true"
+  allowUpload="true"
 />
 ```
 
@@ -68,4 +72,6 @@ date: 2020-06-09
   name="Invalid Rolltable"
   caption="This file does not exist"
   src="samples/states_us.csv"
+  showDebug="true"
+  allowUpload="true"
 />
