@@ -8,7 +8,8 @@ import React, { Component } from "react"
 
 import CSVQuery from "./CSVQuery/CSVQuery"
 import CSVUpload from "./CSVUpload/CSVUpload"
-// import CSVTable from "../CSVTable/CSVTable"
+import CSVTable from "./CSVTable/CSVTable"
+import { getRandomEntries } from "./SelectionLogic"
 
 // import Notes from "./Notes.mdx"
 
@@ -153,7 +154,7 @@ export default class Rolltable extends Component {
                     id={`rolltable-${tableName}-collapser`}
                     className="flex-1 btn-action"
                     style={{ flexBasis: "200px" }}
-                    // onClick={() => getRandomEntries(tableName)}
+                    onClick={() => getRandomEntries(tableName)}
                     // onClick={toggleRandomize}
                   >
                     <span className="flex justify-center items-center">
@@ -173,8 +174,7 @@ export default class Rolltable extends Component {
               </p>
 
               <div className="p-4 bg-red-200">
-                "Table Goes Here"
-                {/* <BuildTable name={tableName} data="data" /> */}
+                <CSVTable name={tableName} data={this.state.fileData} />
               </div>
             </div>
           )}
