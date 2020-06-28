@@ -45,8 +45,8 @@ function getEntryElements(tableName, data) {
           key={index}
           className="hover:bg-tertiary-400 hover:text-white px-3 py-1"
           data-prefix={prefixes[index]}
-          onClick={() => selectEntry(tableName, row_index + 1, index)}
-          onKeyPress={() => selectEntry(tableName, row_index + 1, index)}
+          onClick={() => selectEntry(tableName, row_index, index)}
+          onKeyPress={() => selectEntry(tableName, row_index, index)}
         >
           {entry}
         </td>

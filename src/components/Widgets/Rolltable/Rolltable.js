@@ -124,7 +124,7 @@ export default class Rolltable extends Component {
           {/* TODO: Return results */}
           <div id={`result-${tableName}`} className="mt-4">
             <p className="block py-4 px-8 font-bold text-2xl text-center">
-              {this.state.result ? (
+              {this.state.fileData ? (
                 this.state.result
               ) : (
                 <span className="p-4 text-sm text-gray-900 bg-yellow-200">
@@ -166,16 +166,14 @@ export default class Rolltable extends Component {
             </ul>
           </menu>
 
-          {this.state.collapse && (
-            <div className="pt-2 w-full">
+          {this.state.fileData && (
+            <div className={this.state.collapse ? ("pt-2 w-full") : ("pt-2 w-full hidden")}>
+            {/* <div className="pt-2 w-full"> */}
               <p className="px-4 text-center text-xs italic">
                 <strong>Note:</strong> Click on any header to reroll for that
                 column.
               </p>
-
-              <div className="p-4 bg-red-200">
-                <CSVTable name={tableName} data={this.state.fileData} />
-              </div>
+                <CSVTable name={tableName} data={this.state.fileData}/>
             </div>
           )}
         </div>
