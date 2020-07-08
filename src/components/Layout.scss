@@ -1,7 +1,33 @@
 @tailwind base;
 
+/* TYPOGRAPHY */
+// @font-face {
+// font-family: "Noto Sans", sans-serif;
+// font-weight: 100 900;
+// font-display: swap;
+// font-style: normal;
+// font-feature-settings: "salt", "tnum", "cv08", "calt", "kern";
+// font-named-instance: 'Regular';
+// src: url("static/fonts/Inter-roman.var.woff2?v=3.12") format("woff2");
+// }
+// @font-face {
+//   font-family: 'Inter var';
+//   font-weight: 100 900;
+//   font-display: swap;
+//   font-style: italic;
+//   font-feature-settings: "salt", "tnum", "cv08", "calt", "kern";
+//   font-named-instance: 'Italic';
+//   src: url("static/fonts/Inter-italic.var.woff2?v=3.12") format("woff2");
+// }
+
 body {
-  @apply bg-gray-700;
+  @apply bg-gray-700 font-notoSans;
+}
+h1,
+h2,
+h3,
+h4 {
+  @apply font-notoSerif;
 }
 h1 {
   @apply text-2xl mt-3 font-bold;
@@ -20,90 +46,115 @@ hr {
   @apply mt-2;
 }
 a {
-  @apply text-tertiary-500 underline;
+  @apply text-gray-900 underline;
 }
 a:focus,
 a:hover {
-  @apply text-tertiary-400;
+  @apply text-gray-800;
+}
+br {
+  @apply w-full mb-4;
+}
+hr {
+  @apply block mt-4 mb-4 border-0 border-t-3 border-gray-900;
 }
 th {
   @apply text-lg;
 }
 pre {
-  @apply block mt-1 p-4 text-xs text-gray-500 bg-gray-900 shadow-md rounded break-all whitespace-pre-wrap overflow-x-hidden;
+  @apply block mt-1 p-4 text-xs text-gray-900 font-black bg-white border-3 border-gray-900 break-all whitespace-pre-wrap overflow-x-hidden;
   max-height: 32em;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-gray-200;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-900;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-800;
 }
 
 @tailwind components;
 
 .btn-action {
-  @apply block py-2 px-2 text-white text-center font-bold bg-tertiary-500 border-2 border-tertiary-500 rounded;
+  @apply block py-2 px-2 text-white text-center font-bold bg-gray-800 border-3 border-gray-800 no-underline;
 
   &:focus,
   &:hover {
-    @apply bg-tertiary-400;
+    @apply text-white bg-gray-800;
   }
   &:active {
-    @apply bg-tertiary-400 border-tertiary-400;
+    @apply text-white bg-gray-700 border-gray-700;
   }
 }
 .btn-action-outline {
-  @apply btn-action text-tertiary-500 bg-transparent;
+  @apply btn-action text-gray-900 bg-transparent;
 
   &:focus,
   &:hover {
-    @apply text-tertiary-400;
+    @apply text-gray-800;
   }
   &:active {
-    @apply text-tertiary-400 border-tertiary-400;
+    @apply text-gray-700 border-gray-700;
   }
 }
 
 .link-header {
-  @apply block text-tertiary-500 text-center font-bold border-b-2 border-transparent py-2 px-2 no-underline;
+  @apply block text-gray-900 text-center font-bold border-b-2 border-transparent py-2 px-2 no-underline;
 
   &:focus,
   &:hover {
-    @apply text-tertiary-400 border-tertiary-400;
+    @apply text-gray-800 border-gray-800;
   }
   &:active {
-    @apply link-header border-tertiary-100;
+    @apply link-header border-gray-700;
   }
 }
 
-#Sidebar menu {
+#Header,
+#Sidebar {
   h3 {
-    @apply mt-4 mb-2 pb-2 text-sm text-white font-normal border-b border-white border-opacity-25;
+    @apply pb-2 mt-8 mb-2 uppercase border-b-3 border-gray-900;
   }
-  ul li {
-    &:not(:last-child) {
-      @apply mb-1;
-    }
-  }
-  a {
-    @apply block py-1 px-2 rounded-sm text-gray-300 no-underline;
+  .page-link,
+  .fake-link {
+    @apply block p-2 text-gray-900 font-bold no-underline border-r-3 border-transparent cursor-pointer;
     transition: background-color 0.15s ease-in-out;
+
+    &.page-link-active {
+      @apply text-white border-gray-900 bg-gray-900;
+
+      &:focus,
+      &:hover {
+        @apply text-white bg-gray-800;
+      }
+    }
 
     &:focus,
     &:hover {
-      @apply bg-gray-900 bg-opacity-25;
+      @apply text-gray-800 bg-gray-200;
     }
     &:active {
-      @apply bg-white bg-opacity-25;
-    }
-
-    &.active-link {
-      @apply text-white bg-gray-900 bg-white bg-opacity-25;
+      @apply text-gray-700 bg-gray-400;
     }
   }
 }
-#Sidebar footer a {
-  @apply text-white no-underline;
+// Adjust Headers to Bottom Borders
+#Header .page-link,
+#Header .fake-link {
+  @apply border-r-0 border-b-3;
 }
-
-#layout-frame {
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+// Made by
+#Sidebar footer a {
+  @apply text-gray-900 no-underline;
 }
 
 header {

@@ -23,7 +23,7 @@ const SecLibrary = () => {
                 title
                 featureImg {
                   childImageSharp {
-                    fluid {
+                    fluid(maxWidth: 267, maxHeight: 427) {
                       ...GatsbyImageSharpFluid
                     }
                   }
@@ -37,7 +37,7 @@ const SecLibrary = () => {
   `)
 
   return (
-    <section id="library" className="my-16 p-8 bg-gray-200 rounded-sm">
+    <section id="library">
       <div className="mb-4 text-center">
         <h2>Author Library</h2>
         <p>
@@ -62,24 +62,32 @@ const SecLibrary = () => {
           const { slug } = node.fields
 
           return (
-            <li className="flex-auto mb-4 ml-4 bg-white rounded shadow-md overflow-hidden">
-              <article>
-                <Link to={slug} className="no-underline">
-                  <Img
-                    fluid={featureImg.childImageSharp.fluid}
-                    objectFit="cover"
-                    objectPosition="50% 50%"
-                    alt=""
-                  />
-                </Link>
-                <div className="pb-8 p-4">
-                  <h3>
-                    <Link to={slug} className="no-underline">
-                      {title}
-                    </Link>
-                  </h3>
-                  <p>{blurb}</p>
-                  <footer className="mt-4">
+            <li
+              className="flex-initial w-full mb-4 ml-4 bg-white border-3 border-gray-900"
+              style={{ maxWidth: "600px" }}
+            >
+              <article className="flex justify-center items-stretch">
+                <div className="flex-initial m-0 w-40">
+                  <Link to={slug} className="no-underline">
+                    <Img
+                      fluid={featureImg.childImageSharp.fluid}
+                      objectFit="cover"
+                      objectPosition="50% 50%"
+                      alt=""
+                    />
+                  </Link>
+                </div>
+                <div className="flex-1 flex flex-wrap justify-start items-start w-32">
+                  <div className="flex-initial w-full p-4">
+                    <h3 className="text-2xl">
+                      <Link to={slug} className="no-underline">
+                        {title}
+                      </Link>
+                    </h3>
+                    <p>{blurb}</p>
+                  </div>
+                  <footer className="flex-initial w-full p-4 mt-auto bg-gray-100">
+                    {/* TODO: Fetch author meta */}
                     <img src="" alt="" />
 
                     <span className="text-xs">

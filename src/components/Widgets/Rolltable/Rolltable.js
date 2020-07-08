@@ -54,7 +54,7 @@ export default class Rolltable extends Component {
       <>
         <div
           id={`rolltable-${tableName}`}
-          className="relative w-full block mt-8 border-2 border-tertiary-200 bg-white rounded shadow-md overflow-hidden"
+          className="relative w-full block mt-8 border-3 border-gray-900 bg-white overflow-hidden"
         >
           <header>
             <div className="w-full flex justify-center items-stretch pt-4 px-4">
@@ -67,7 +67,7 @@ export default class Rolltable extends Component {
                 <ul className="flex-initial flex flex-wrap justify-center items-start pt-1 pr-1 -mb-1 -ml-1">
                   <li className="mb-1 ml-1">
                     <button
-                      className="btn-action-outline text-xs flex justify-center items-center rounded-full"
+                      className="btn-action text-xs flex justify-center items-center"
                       id={`rolltable-${tableName}-debug`}
                       onClick={this.toggleDebug}
                     >
@@ -80,7 +80,7 @@ export default class Rolltable extends Component {
                   <li className="mb-1 ml-1">
                     {this.state.fileData && (
                       <button
-                        className="btn-action-outline text-xs flex justify-center items-center rounded-full"
+                        className="btn-action text-xs flex justify-center items-center"
                         id={`rolltable-${tableName}-collapser`}
                         onClick={this.toggleTableCollapse}
                       >
@@ -126,7 +126,7 @@ export default class Rolltable extends Component {
               {this.state.result ? (
                 this.state.result
               ) : (
-                <span className="p-4 text-sm text-gray-900 bg-yellow-200">
+                <span className="p-4 text-sm text-gray-900 border-3 border-gray-900 bg-yellow-200">
                   Cannot generate results. Please Add or Upload a CSV.
                 </span>
               )}
@@ -136,7 +136,7 @@ export default class Rolltable extends Component {
           <menu
             type="toolbar"
             label="Rolltable Controls"
-            className="flex justify-center p-0 m-0 mt-4 bg-tertiary-200"
+            className="flex justify-center p-0 m-0 mt-4 bg-gray-100"
           >
             <ul className="flex flex-wrap justify-start align-center p-0 m-0 pt-2 pr-2">
               <li className="mb-2 ml-2">
@@ -172,7 +172,7 @@ export default class Rolltable extends Component {
                 column.
               </p>
 
-              <div className="p-4 bg-red-200">
+              <div className="p-4 border-t-3 border-gray-900 bg-red-200">
                 "Table Goes Here"
                 {/* <BuildTable name={tableName} data="data" /> */}
               </div>

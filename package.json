@@ -18,6 +18,7 @@
     "gatsby-plugin-react-helmet": "^3.3.4",
     "gatsby-plugin-sass": "^2.3.4",
     "gatsby-plugin-sharp": "^2.6.11",
+    "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-source-filesystem": "^2.3.11",
     "gatsby-transformer-csv": "^2.3.4",
     "gatsby-transformer-sharp": "^2.5.5",

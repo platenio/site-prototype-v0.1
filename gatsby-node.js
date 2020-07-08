@@ -196,7 +196,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     createPage({
       path: slug,
       component: path.resolve(`./src/components/Layout-MDX.js`),
-      context: { type: "book", id: node.id },
+      context: { type: "chapter", id: node.id },
     })
   })
 }
