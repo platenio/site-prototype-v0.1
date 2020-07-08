@@ -8,7 +8,8 @@ import React, { Component } from "react"
 
 import CSVQuery from "./CSVQuery/CSVQuery"
 import CSVUpload from "./CSVUpload/CSVUpload"
-// import CSVTable from "../CSVTable/CSVTable"
+import CSVTable from "./CSVTable/CSVTable"
+import { getRandomEntries } from "./SelectionLogic"
 
 // import Notes from "./Notes.mdx"
 
@@ -47,7 +48,7 @@ export default class Rolltable extends Component {
   }
 
   render() {
-    const { name, caption, src } = this.props
+    const { name, caption, src, allowUpload, showDebug } = this.props
     const tableName = name.toLowerCase().replace(/\s+/g, "-")
 
     return (
@@ -65,7 +66,7 @@ export default class Rolltable extends Component {
               </div>
               <div>
                 <ul className="flex-initial flex flex-wrap justify-center items-start pt-1 pr-1 -mb-1 -ml-1">
-                  <li className="mb-1 ml-1">
+                  {showDebug == "true" && (<li className="mb-1 ml-1">
                     <button
                       className="btn-action-outline text-xs flex justify-center items-center rounded-full"
                       id={`rolltable-${tableName}-debug`}
@@ -76,7 +77,7 @@ export default class Rolltable extends Component {
                       </span>
                       {this.state.debug ? <FaSprayCan /> : <FaBug />}
                     </button>
-                  </li>
+                  </li>)}
                   <li className="mb-1 ml-1">
                     {this.state.fileData && (
                       <button
@@ -123,7 +124,7 @@ export default class Rolltable extends Component {
           {/* TODO: Return results */}
           <div id={`result-${tableName}`} className="mt-4">
             <p className="block py-4 px-8 font-bold text-2xl text-center">
-              {this.state.result ? (
+              {this.state.fileData ? (
                 this.state.result
               ) : (
                 <span className="p-4 text-sm text-gray-900 bg-yellow-200">
@@ -139,13 +140,13 @@ export default class Rolltable extends Component {
             className="flex justify-center p-0 m-0 mt-4 bg-tertiary-200"
           >
             <ul className="flex flex-wrap justify-start align-center p-0 m-0 pt-2 pr-2">
-              <li className="mb-2 ml-2">
+              {allowUpload === "true" && (<li className="mb-2 ml-2">
                 <CSVUpload
                   table={tableName}
                   debug={this.state.debug}
                   updateData={this.updateData}
                 />
-              </li>
+              </li>)}
 
               {this.state.fileData && (
                 <li className="mb-2 ml-2">
@@ -153,7 +154,7 @@ export default class Rolltable extends Component {
                     id={`rolltable-${tableName}-collapser`}
                     className="flex-1 btn-action"
                     style={{ flexBasis: "200px" }}
-                    // onClick={() => getRandomEntries(tableName)}
+                    onClick={() => getRandomEntries(tableName)}
                     // onClick={toggleRandomize}
                   >
                     <span className="flex justify-center items-center">
@@ -165,17 +166,14 @@ export default class Rolltable extends Component {
             </ul>
           </menu>
 
-          {this.state.collapse && (
-            <div className="pt-2 w-full">
+          {this.state.fileData && (
+            <div className={this.state.collapse ? ("pt-2 w-full") : ("pt-2 w-full hidden")}>
+            {/* <div className="pt-2 w-full"> */}
               <p className="px-4 text-center text-xs italic">
                 <strong>Note:</strong> Click on any header to reroll for that
                 column.
               </p>
-
-              <div className="p-4 bg-red-200">
-                "Table Goes Here"
-                {/* <BuildTable name={tableName} data="data" /> */}
-              </div>
+                <CSVTable name={tableName} data={this.state.fileData}/>
             </div>
           )}
         </div>
