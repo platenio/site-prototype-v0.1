@@ -1,13 +1,75 @@
 ---
-slug: chapter-3
-title: A Long Title
+slug: components
+title: Components
 last-updated: 2020-06-09
 ---
 
-# Chapter 3
+# Custom Components
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero saepe sequi fuga dolor distinctio dolorum expedita, in inventore at incidunt, eaque delectus corporis facere, vel consequuntur. Reprehenderit laborum ad dolorem.
+<br />
 
-## H2 Text Goes Here - Probably Subchapter Title
+## Section, Library
 
-Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique quis culpa nihil id repudiandae laboriosam exercitationem cum repellat? Delectus assumenda ipsam ea error suscipit vel sunt veniam in praesentium beatae! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro placeat vero magnam impedit modi alias accusamus? Eos totam voluptatum error molestias ratione maxime numquam, molestiae sapiente, praesentium debitis, quaerat excepturi!
+```
+<SecLibrary />
+```
+
+<SecLibrary />
+
+<br />
+
+---
+
+## Widget, Rolltable
+
+<br />
+
+```
+<Rolltable
+  name="Custom Rolltable Title"
+  caption="This is a custom caption!"
+  src="ambitions.csv"
+/>
+```
+
+<Rolltable
+  name="Custom Rolltable Title"
+  caption="This is a custom caption!"
+  src="ambitions.csv"
+/>
+
+<br />
+
+### Child folders
+
+```
+<Rolltable
+  name="Child Rolltable"
+  caption="This file is located under child/state_us.csv"
+  src="samples/state_us.csv"
+/>
+```
+
+<Rolltable
+  name="Child Rolltable"
+  caption="This file is located under child/state_us.csv"
+  src="samples/state_us.csv"
+/>
+
+<br />
+
+### Handle invalid src
+
+```
+<Rolltable
+  name="Invalid Rolltable"
+  caption="This file does not exist"
+  src="samples/states_us.csv"
+/>
+```
+
+<Rolltable
+  name="Invalid Rolltable"
+  caption="This file does not exist"
+  src="samples/states_us.csv"
+/>

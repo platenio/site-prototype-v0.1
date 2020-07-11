@@ -17,15 +17,10 @@ class NavLinkBase extends Component {
     let pageID, pageSlug, pageTitle
     const pages = this.props.data.allFile.edges
 
-    pages.map(({ node }) => {
+    pages.forEach(({ node }) => {
       pageSlug = node.fields.slug
 
       if (this.props.path === pageSlug) {
-        console.log("NavLink", this.props.path)
-        console.log("NavLink", pageSlug)
-
-        console.log("NavLink", this.props)
-
         pageID = node.id
         this.props.title
           ? (pageTitle = this.props.title)
@@ -43,6 +38,7 @@ class NavLinkBase extends Component {
       <li>
         {this.state.pageID ? (
           <Link
+            tabIndex="0"
             className="page-link"
             activeClassName="page-link-active"
             id={this.state.pageID}

@@ -7,7 +7,11 @@ module.exports = {
     author: `@Platen`,
   },
   plugins: [
+    `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    `gatsby-remark-images`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -15,7 +19,25 @@ module.exports = {
         path: `${__dirname}/content`,
       },
     },
-    `gatsby-plugin-mdx`,
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1200,
+            },
+          },
+          {
+            resolve: `gatsby-remark-copy-linked-files`,
+            options: {
+              ignoreFileExtensions: [`png`, `jpg`, `jpeg`, `bmp`, `tiff`],
+            },
+          },
+        ],
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -23,13 +45,11 @@ module.exports = {
         path: `${__dirname}/content/csv`,
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
         google: {
-          families: ["Noto Sans", "Noto Serif"],
+          families: ["Open Sans:400,700,800", "Fira Code:300,400,700"],
         },
       },
     },

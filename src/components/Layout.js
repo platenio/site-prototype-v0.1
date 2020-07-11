@@ -1,32 +1,18 @@
 import React from "react"
 
 // Layout
-import "./Layout.scss"
+import "../Style.scss"
+// import "./Layout.scss"
 import Header from "./Header/Header"
-import ChaptersSidebar from "./ChaptersSidebar/ChaptersSidebar"
-import ActionsSidebar from "./ActionsSidebar/ActionsSidebar"
 
-import LayoutUnderpage from "./Layouts/Underpage"
-import LayoutBook from "./Layouts/Book"
-import LayoutChapter from "./Layouts/Chapter"
-
-export default function Layout({ context, data, children }) {
-  const { id, body, frontmatter } = data.file.childMdx
-  const { slug } = data.file.fields
-  const {
-    title,
-    author,
-    blurb,
-    features,
-    date,
-    published,
-    last_updated,
-    tags,
-    featureImg,
-  } = frontmatter
-
+export default function Layout({
+  children,
+  featureImg,
+  sidebarLeft,
+  sidebarRight,
+}) {
   const bgImage = featureImg
-    ? featureImg.childImageSharp.fluid.src
+    ? featureImg
     : "https://cdn.cnn.com/cnnnext/dam/assets/180724145139-stalenhag-kersnuten-full-169.jpg"
 
   return (
@@ -50,15 +36,18 @@ export default function Layout({ context, data, children }) {
             id="layout-frame"
             className="flex flex-col max-w-full h-screen bg-white bg-opacity-90 border-l-3 border-r-3 border-gray-900"
           >
-            <div className="relative z-50 w-full border-b-3 border-gray-700">
-              <Header />
+            <div className="relative z-50 w-full border-b-3 border-gray-900">
+              <div className="max-w-2xl mx-auto">
+                <Header />
+              </div>
             </div>
 
             <div className="flex-auto flex flex-wrap lg:flex-no-wrap justify-center items-stretch w-full overflow-auto">
-              {context.type === "chapter" && (
+              {sidebarLeft && (
                 <div className="flex-1 sm:flex-initial lg:flex-none  px-2 w-full sm:w-64 max-w-full border-r-3 border-gray-900">
                   <div className="h-full overflow-hidden">
-                    <ChaptersSidebar />
+                    {sidebarLeft}
+                    {/* <ChaptersSidebar pathname={location.pathname} /> */}
                   </div>
                 </div>
               )}
@@ -68,38 +57,14 @@ export default function Layout({ context, data, children }) {
                 style={{ width: "960px", maxWidth: "100%" }}
               >
                 <div className="h-full py-8 md:py-16 px-8 overflow-auto">
-                  <div className="max-w-2xl mx-auto">
-                    {context.type === "page" && (
-                      <LayoutUnderpage>{children}</LayoutUnderpage>
-                    )}
-                    {context.type === "book" && (
-                      <LayoutBook
-                        slug={slug}
-                        title={title}
-                        blurb={blurb}
-                        author={author}
-                        published={published}
-                        featureImg={featureImg}
-                        features={features}
-                      >
-                        {children}
-                      </LayoutBook>
-                    )}
-                    {context.type === "chapter" && (
-                      <LayoutChapter>{children}</LayoutChapter>
-                    )}
-
-                    {/* <hr className="my-16" /> */}
-                    {/* <pre>{JSON.stringify(context, null, 4)}</pre> */}
-                    {/* <pre>{JSON.stringify(data, null, 4)}</pre> */}
-                  </div>
+                  <div className="max-w-2xl mx-auto pb-32">{children}</div>
                 </div>
               </main>
 
-              {context.type === "chapter" && (
+              {sidebarRight && (
                 <div className="flex-1 sm:flex-initial lg:flex-none px-2 w-full lg:w-64 max-w-full  flex justify-start xl:justify-start items-start border-l-3 border-gray-900">
                   <div className="text-gray-900 h-full w-full overflow-hidden">
-                    <ActionsSidebar />
+                    {sidebarRight}
                   </div>
                 </div>
               )}

@@ -1,0 +1,62 @@
+#layout-chapter {
+  // Avoid widgets
+  // > *:not([role="form"]) {
+  //   h1,
+  //   h2,
+  //   h3,
+  //   h4 {
+  //     @apply font-open-sans;
+  //   }
+  //   h1 {
+  //     @apply text-2xl font-bold;
+
+  //     &:not(:first-child) {
+  //       @apply mt-8;
+  //     }
+  //   }
+  //   h2 {
+  //     @apply text-xl font-bold;
+
+  //     &:not(:first-child) {
+  //       @apply mt-4;
+  //     }
+  //   }
+  //   h3 {
+  //     @apply text-lg font-bold;
+
+  //     &:not(:first-child) {
+  //       @apply mt-4;
+  //     }
+  //   }
+  //   h4,
+  //   h5,
+  //   h6,
+  //   p,
+  //   hr {
+  //     @apply font-open-sans;
+
+  //     &:not(:first-child) {
+  //       @apply mt-2;
+  //     }
+  //   }
+
+  //   li {
+  //     background-color: red;
+  //   }
+  //   ul {
+  //     @apply list-disc;
+  //   }
+  //   ol {
+  //     @apply list-decimal;
+  //   }
+  //   ul,
+  //   ol {
+  //     @apply list-inside;
+
+  //     ul,
+  //     ol {
+  //       @apply list-inside;
+  //     }
+  //   }
+  // }
+}

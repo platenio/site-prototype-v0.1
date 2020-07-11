@@ -53,8 +53,9 @@ export default class Rolltable extends Component {
     return (
       <>
         <div
+          role="form"
           id={`rolltable-${tableName}`}
-          className="relative w-full block mt-8 border-3 border-gray-900 bg-white overflow-hidden"
+          className="widget relative w-full block mt-8 border-3 border-gray-900 bg-white overflow-hidden"
         >
           <header>
             <div className="w-full flex justify-center items-stretch pt-4 px-4">

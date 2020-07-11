@@ -9,8 +9,8 @@ module.exports = {
     // },
     extend: {
       fontFamily: {
-        notoSans: ["Noto Serif", "serif"],
-        notoSerif: ["Noto Serif", "serif"],
+        "open-sans": ["Open Sans", "sans-serif"],
+        "fira-code": ["Fira Code", "monospace"],
       },
       borderWidth: {
         "3": "3px",

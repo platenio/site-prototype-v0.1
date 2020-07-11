@@ -50,9 +50,10 @@ export default class CSVUpload extends Component {
   handleOverlay = () => {
     this.setState({ overlay: !this.state.overlay })
   }
-  handleClearStorage = () => {
+  handleClearStorage = e => {
     this.setState({ fileData: false })
     lsClear(this.props.table)
+    e.preventDefault()
   }
   handleSubmit = e => {
     let file = e.target.querySelector('input[type="file"]').files[0]
@@ -92,6 +93,11 @@ export default class CSVUpload extends Component {
             <span
               className="absolute top-0 left-0 w-full h-full bg-gray-900 bg-opacity-75"
               onClick={this.handleOverlay}
+              onKeyUp={this.handleOverlay}
+              role="switch"
+              aria-label="Close Upload Window"
+              aria-checked={this.state.overlay}
+              tabIndex="0"
             />
             <div
               className="relative z-10 container mx-auto p-4 bg-white rounded shadow"
@@ -100,11 +106,12 @@ export default class CSVUpload extends Component {
               <form onSubmit={this.handleSubmit}>
                 <fieldset className="flex flex-wrap justify-center items-center gap-2">
                   <label className="flex-1" htmlFor="upload-csv">
-                    <span className="sr-only">Select a CSV</span>
+                    <span className="sr-only">Select a CSV file</span>
                     <input
                       type="file"
                       id="upload-csv"
                       name="upload-csv"
+                      aria-label="Select a CSV File"
                       accept=".csv"
                       className="w-full p-2 text-center text-gray-900 bg-gray-200 hover:bg-gray-100 focus:bg-gray-100 rounded cursor-pointer"
                     />
@@ -131,7 +138,9 @@ export default class CSVUpload extends Component {
                   <p>
                     <strong>Note:</strong> Upload's to your browser's Local
                     Storage.{" "}
-                    <a onClick={this.handleClearStorage}>Delete stored data</a>
+                    <button onClick={e => this.handleClearStorage(e)}>
+                      Delete stored data
+                    </button>
                   </p>
                 </div>
               </form>
