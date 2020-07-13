@@ -83,8 +83,6 @@ export default class Rolltable extends Component {
           {getHeaderElements(name, data)}
         </thead>
         <tbody>{getEntryElements(name, data)}</tbody>
-
-        {/* <tbody>{entry_elements}</tbody> */}
       </RollTable>
     )
   }
