@@ -10,24 +10,25 @@ import ChaptersSidebar from "../Sidebars/Chapters/ChaptersSidebar"
 import "./Chapter.scss"
 
 import Rolltable from "../Widgets/Rolltable/Rolltable"
-import SectionMarker from "../Widgets/SectionMarker/SectionMarker"
-
-const shortcodes = {
-  Rolltable,
-  SectionMarker,
-}
+import Clip from "../Widgets/Clip/Clip"
 
 const LayoutChapter = ({ context, data, location }) => {
   const { chapter } = data.file.fields
-  const { frontmatter, body } = data.file.childMdx
+  const { frontmatter, body, mdxAST } = data.file.childMdx
   const { title, featureImg } = frontmatter
   const featureImgSrc = featureImg && featureImg.childImageSharp.fluid.src
+  const shortcodes = {
+    Rolltable,
+    Clip: props => <Clip {...props} location={location} />,
+  }
 
   return (
     <Layout
       // get book feature image
       featureImg={featureImgSrc}
-      sidebarLeft={<ChaptersSidebar pathname={location.pathname} />}
+      sidebarLeft={
+        <ChaptersSidebar location={location} tableOfContents={mdxAST} />
+      }
       sidebarRight={false}
     >
       <header
@@ -55,6 +56,7 @@ export const query = graphql`
       }
       childMdx {
         body
+        mdxAST
         frontmatter {
           title
           author

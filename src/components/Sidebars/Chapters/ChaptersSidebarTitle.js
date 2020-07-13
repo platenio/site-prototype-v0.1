@@ -29,6 +29,7 @@ const ChaptersSidebarTitle = ({ book }) => {
 
   data.allFile.edges.forEach(({ node }) => {
     const { slug, title, author } = node.childMdx.frontmatter
+
     if (book === slug) {
       bookSlug = node.fields.slug
       bookTitle = title
