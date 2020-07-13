@@ -83,6 +83,7 @@ pre {
   &:hover {
     @apply text-white bg-gray-700 border-transparent;
   }
+  &.active,
   &:active {
     @apply text-white bg-gray-900 border-gray-700;
   }
@@ -94,6 +95,7 @@ pre {
   &:hover {
     @apply text-gray-900 bg-gray-400;
   }
+  &.active,
   &:active {
     @apply text-gray-900 bg-gray-200;
   }
@@ -105,6 +107,7 @@ pre {
   &:hover {
     @apply text-white bg-gray-700 border-gray-900;
   }
+  &.active,
   &:active {
     @apply text-white bg-gray-900 border-gray-700;
   }

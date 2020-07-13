@@ -65,10 +65,9 @@ const ChaptersSidebar = ({ pathname }) => {
             return (
               <li key={element.id}>
                 <Link
-                  className="btn-secondary text-left"
-                  // className="block px-2 py-2 text-lg no-underline hover:bg-gray-200"
-                  // activeClassName="text-white bg-gray-900 hover:bg-gray-800 hover:text-white"
                   to={slug}
+                  className="btn-secondary text-left"
+                  activeClassName="active"
                 >
                   {chapterNum} <span className="font-bold">{title}</span>
                 </Link>
