@@ -1,60 +1,73 @@
 import React from "react"
 
 // Layout
-import "./Layout.scss"
-import Sidebar from "./Sidebar/Sidebar"
+import "../Style.scss"
+// import "./Layout.scss"
+import Header from "./Header/Header"
 
-export default function Layout({ children }) {
+export default function Layout({
+  children,
+  featureImg,
+  sidebarLeft,
+  sidebarRight,
+}) {
+  const bgImage = featureImg
+    ? featureImg
+    : "https://cdn.cnn.com/cnnnext/dam/assets/180724145139-stalenhag-kersnuten-full-169.jpg"
+
   return (
-    <div className="text-gray-900 antialiased leading-tight">
+    <div className="text-gray-700 antialiased leading-tight bg-black">
       <span
         className="fixed top-0 left-0 w-full h-screen"
         style={{
-          backgroundRepeat: "none",
+          WebkitFilter: "grayscale(100%) contrast(100%) brightness(150%)",
+          filter: "grayscale(100%) contrast(100%) brightness(150%)",
+          backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          backgroundPosition: "top center",
-          backgroundImage:
-            "url(https://cdn.vox-cdn.com/thumbor/78Wm0Nc8uozUl4lc9mRgmIHXhhY=/0x610:1280x1280/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/8799603/tumblr_om101cfekn1rc69zjo4_1280.jpg)",
+          backgroundPosition: "center center",
+          backgroundImage: `url(` + bgImage + `)`,
         }}
       ></span>
       <div className="relative flex flex-col justify-start items-start min-h-full">
         {/* Keep content centered */}
         <div class="flex justify-center items-start w-full">
-          {/* h-screen  overflow-auto */}
-
           {/* Layout Wrapper */}
           <div
             id="layout-frame"
-            className="flex flex-wrap lg:flex-no-wrap justify-center items-stretch h-screen w-full p-1 bg-gray-900 bg-opacity-75"
+            className="flex flex-col max-w-full h-screen bg-white bg-opacity-90 border-l-3 border-r-3 border-gray-900"
           >
-            <div className="flex-auto lg:flex-none lg:flex-none max-w-full w-full lg:w-64">
-              <div className=" text-white h-full overflow-hidden">
-                <Sidebar />
+            <div className="relative z-50 w-full border-b-3 border-gray-900">
+              <div className="max-w-2xl mx-auto">
+                <Header />
               </div>
             </div>
 
-            <main
-              className="flex-auto sm:flex-1 lg:flex-initial m-2"
-              style={{ width: "1200px", maxWidth: "100%" }}
-            >
-              <div className="h-full py-8 md:py-16 px-8 bg-gray-100 rounded shadow-2xl overflow-auto">
-                <div className="max-w-2xl mx-auto">{children}</div>
-              </div>
-            </main>
-
-            <div className="flex-1 sm:flex-initial lg:flex-none max-w-full w-full sm:w-64  flex justify-start xl:justify-start items-start">
-              <div className=" text-white h-full overflow-hidden">
-                <div className="p-4">
-                  <h2>Modulebar</h2>
-
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Officiis labore mollitia doloremque, maiores quisquam natus
-                    reiciendis animi, nobis dolore quibusdam in? Quas suscipit
-                    accusamus aut, assumenda nemo eveniet corporis quisquam?
-                  </p>
+            <div className="flex-auto flex flex-wrap lg:flex-no-wrap justify-center items-stretch w-full overflow-auto">
+              {sidebarLeft && (
+                <div className="flex-1 sm:flex-initial lg:flex-none  px-2 w-full sm:w-64 max-w-full border-r-3 border-gray-900">
+                  <div className="h-full overflow-hidden">
+                    {sidebarLeft}
+                    {/* <ChaptersSidebar pathname={location.pathname} /> */}
+                  </div>
                 </div>
-              </div>
+              )}
+
+              <main
+                className="flex-auto sm:flex-1 lg:flex-auto bg-white"
+                style={{ width: "960px", maxWidth: "100%" }}
+              >
+                <div className="h-full py-8 md:py-16 px-8 overflow-auto">
+                  <div className="max-w-2xl mx-auto pb-32">{children}</div>
+                </div>
+              </main>
+
+              {sidebarRight && (
+                <div className="flex-1 sm:flex-initial lg:flex-none px-2 w-full lg:w-64 max-w-full  flex justify-start xl:justify-start items-start border-l-3 border-gray-900">
+                  <div className="text-gray-900 h-full w-full overflow-hidden">
+                    {sidebarRight}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
