@@ -54,8 +54,9 @@ export default class Rolltable extends Component {
     return (
       <>
         <div
+          role="form"
           id={`rolltable-${tableName}`}
-          className="relative w-full block mt-8 border-2 border-tertiary-200 bg-white rounded shadow-md overflow-hidden"
+          className="widget relative w-full block mt-8 border-3 border-gray-900 bg-white overflow-hidden"
         >
           <header>
             <div className="w-full flex justify-center items-stretch pt-4 px-4">
@@ -66,22 +67,24 @@ export default class Rolltable extends Component {
               </div>
               <div>
                 <ul className="flex-initial flex flex-wrap justify-center items-start pt-1 pr-1 -mb-1 -ml-1">
-                  {showDebug == "true" && (<li className="mb-1 ml-1">
-                    <button
-                      className="btn-action-outline text-xs flex justify-center items-center rounded-full"
-                      id={`rolltable-${tableName}-debug`}
-                      onClick={this.toggleDebug}
-                    >
-                      <span className="sr-only">
-                        {this.state.debug ? "Open" : "Hide"} Debugger
-                      </span>
-                      {this.state.debug ? <FaSprayCan /> : <FaBug />}
-                    </button>
-                  </li>)}
+                  {showDebug == "true" && (
+                    <li className="mb-1 ml-1">
+                      <button
+                        className="btn-primary text-xs flex justify-center items-center"
+                        id={`rolltable-${tableName}-debug`}
+                        onClick={this.toggleDebug}
+                      >
+                        <span className="sr-only">
+                          {this.state.debug ? "Open" : "Hide"} Debugger
+                        </span>
+                        {this.state.debug ? <FaSprayCan /> : <FaBug />}
+                      </button>
+                    </li>
+                  )}
                   <li className="mb-1 ml-1">
                     {this.state.fileData && (
                       <button
-                        className="btn-action-outline text-xs flex justify-center items-center rounded-full"
+                        className="btn-primary text-xs flex justify-center items-center"
                         id={`rolltable-${tableName}-collapser`}
                         onClick={this.toggleTableCollapse}
                       >
@@ -127,7 +130,7 @@ export default class Rolltable extends Component {
               {this.state.fileData ? (
                 this.state.result
               ) : (
-                <span className="p-4 text-sm text-gray-900 bg-yellow-200">
+                <span className="p-4 text-sm text-gray-900 border-3 border-gray-900 bg-yellow-200">
                   Cannot generate results. Please Add or Upload a CSV.
                 </span>
               )}
@@ -137,22 +140,24 @@ export default class Rolltable extends Component {
           <menu
             type="toolbar"
             label="Rolltable Controls"
-            className="flex justify-center p-0 m-0 mt-4 bg-tertiary-200"
+            className="flex justify-center p-0 m-0 mt-4 bg-gray-100"
           >
             <ul className="flex flex-wrap justify-start align-center p-0 m-0 pt-2 pr-2">
-              {allowUpload === "true" && (<li className="mb-2 ml-2">
-                <CSVUpload
-                  table={tableName}
-                  debug={this.state.debug}
-                  updateData={this.updateData}
-                />
-              </li>)}
+              {allowUpload === "true" && (
+                <li className="mb-2 ml-2">
+                  <CSVUpload
+                    table={tableName}
+                    debug={this.state.debug}
+                    updateData={this.updateData}
+                  />
+                </li>
+              )}
 
               {this.state.fileData && (
                 <li className="mb-2 ml-2">
                   <button
                     id={`rolltable-${tableName}-collapser`}
-                    className="flex-1 btn-action"
+                    className="flex-1 btn-primary"
                     style={{ flexBasis: "200px" }}
                     onClick={() => getRandomEntries(tableName)}
                     // onClick={toggleRandomize}
@@ -167,13 +172,22 @@ export default class Rolltable extends Component {
           </menu>
 
           {this.state.fileData && (
-            <div className={this.state.collapse ? ("pt-2 w-full") : ("pt-2 w-full hidden")}>
-            {/* <div className="pt-2 w-full"> */}
+            <div
+              className={
+                this.state.collapse ? "pt-2 w-full" : "pt-2 w-full hidden"
+              }
+            >
+              {/* <div className="pt-2 w-full"> */}
               <p className="px-4 text-center text-xs italic">
                 <strong>Note:</strong> Click on any header to reroll for that
                 column.
               </p>
-                <CSVTable name={tableName} data={this.state.fileData}/>
+
+              <CSVTable
+                name={tableName}
+                data={this.state.fileData}
+                className="w-full mt-4"
+              />
             </div>
           )}
         </div>

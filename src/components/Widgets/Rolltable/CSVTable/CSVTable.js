@@ -1,9 +1,20 @@
 import React, { Component } from "react"
-import { getRandomEntry, getRandomEntries, selectEntry } from "../SelectionLogic"
+import {
+  getRandomEntry,
+  getRandomEntries,
+  selectEntry,
+} from "../SelectionLogic"
+import tw, { styled } from "twin.macro"
+
+const RollTable = styled.table`
+  .selected {
+    ${tw`text-white bg-gray-900`};
+  }
+`
 
 function getHeaderElements(tableName, data) {
   const header_elements = []
-  const header_class = "hover:bg-tertiary-400 px-5 py-2"
+  const header_class = "hover:bg-gray-200 py-2 px-2"
   const headers = data[0]
   for (const [index, header] of headers.entries()) {
     if (index === 0) {
@@ -43,7 +54,7 @@ function getEntryElements(tableName, data) {
       elements.push(
         <td
           key={index}
-          className="hover:bg-tertiary-400 hover:text-white px-3 py-1"
+          className="px-2 py-1 text-gray-700 hover:bg-gray-200 hover:text-gray-900 cursor-pointer"
           data-prefix={prefixes[index]}
           onClick={() => selectEntry(tableName, row_index, index)}
           onKeyPress={() => selectEntry(tableName, row_index, index)}
@@ -53,7 +64,7 @@ function getEntryElements(tableName, data) {
       )
     }
     entry_elements.push(
-      <tr key={row_index} className="even:bg-tertiary-100">
+      <tr key={row_index} className="even:bg-gray-100">
         {elements}
       </tr>
     )
@@ -67,16 +78,14 @@ export default class Rolltable extends Component {
     const { data } = this.props
 
     return (
-      <table id={`rolltable-${name}`} className="w-full">
-        <thead className="bg-tertiary-500 text-white text-bold cursor-pointer">
+      <RollTable id={`rolltable-${name}`} {...this.props}>
+        <thead className="text-gray-900 text-left border-b-3 border-gray-900 cursor-pointer">
           {getHeaderElements(name, data)}
         </thead>
-        <tbody>
-          {getEntryElements(name, data)}
-        </tbody>
+        <tbody>{getEntryElements(name, data)}</tbody>
 
         {/* <tbody>{entry_elements}</tbody> */}
-      </table>
+      </RollTable>
     )
   }
 }

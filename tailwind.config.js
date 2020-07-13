@@ -1,7 +1,25 @@
 module.exports = {
   purge: ["./src/**/*.html", "./src/**/*.js", "./src/**/*.jsx"],
   theme: {
+    // debugScreens: {
+    //   style: {
+    //     backgroundColor: "black",
+    //     color: "white",
+    //   },
+    // },
     extend: {
+      fontFamily: {
+        "open-sans": ["Open Sans", "sans-serif"],
+        "fira-code": ["Fira Code", "monospace"],
+      },
+      borderWidth: {
+        "3": "3px",
+      },
+      backgroundOpacity: {
+        "10": "0.1",
+        "20": "0.2",
+        "90": "0.90",
+      },
       colors: {
         primary: {
           100: "#cdb5ea",
@@ -49,4 +67,5 @@ module.exports = {
     "disabled",
   ],
   plugins: [],
+  // plugins: [require("tailwindcss-debug-screens")],
 }

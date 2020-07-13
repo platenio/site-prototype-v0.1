@@ -1,0 +1,207 @@
+@tailwind base;
+
+body {
+  @apply bg-gray-700 font-open-sans;
+}
+
+// ------------------
+// TYPOGRAPHY
+// ------------------
+h1,
+h2,
+h3,
+h4 {
+  @apply font-open-sans font-bold mt-4;
+}
+h1 {
+  @apply text-2xl font-black;
+
+  // &:not(:first-child) {
+  //   @apply mt-8;
+  // }
+}
+h2 {
+  @apply text-xl;
+
+  // &:not(:first-child) {
+  //   @apply mt-4;
+  // }
+}
+h3 {
+  @apply text-lg;
+
+  // &:not(:first-child) {
+  //   @apply mt-4;
+  // }
+}
+h4,
+h5,
+h6,
+p,
+hr {
+  @apply font-open-sans mt-4;
+
+  // &:not(:first-child) {
+  //   @apply mt-2;
+  // }
+}
+
+li {
+  @apply font-open-sans;
+}
+a {
+  @apply text-gray-900 underline;
+}
+a:focus,
+a:hover {
+  @apply text-gray-800;
+}
+br {
+  @apply w-full mb-4;
+}
+hr {
+  @apply block mt-4 mb-4 border-0 border-t-3 border-gray-900;
+}
+th {
+  @apply text-lg;
+}
+pre {
+  @apply block mt-4 p-4 text-xs font-fira-code font-light italic text-gray-700 bg-gray-400 border-3 border-gray-400 break-all whitespace-pre-wrap overflow-x-hidden;
+  max-height: 32em;
+}
+
+// ------------------
+// BUTTONS
+// ------------------
+.btn-defaults {
+  @apply block py-2 px-2 text-center font-bold border-3 no-underline cursor-pointer;
+}
+.btn-primary {
+  @apply btn-defaults text-white bg-gray-900 border-transparent;
+
+  &:focus,
+  &:hover {
+    @apply text-white bg-gray-700 border-transparent;
+  }
+  &:active {
+    @apply text-white bg-gray-900 border-gray-700;
+  }
+}
+.btn-secondary {
+  @apply btn-defaults text-gray-900 border-transparent;
+
+  &:focus,
+  &:hover {
+    @apply text-gray-900 bg-gray-400;
+  }
+  &:active {
+    @apply text-gray-900 bg-gray-200;
+  }
+}
+.btn-outline {
+  @apply btn-secondary border-gray-900;
+
+  &:focus,
+  &:hover {
+    @apply text-white bg-gray-700 border-gray-900;
+  }
+  &:active {
+    @apply text-white bg-gray-900 border-gray-700;
+  }
+}
+
+// ------------------
+// SCROLLBARS
+// ------------------
+::-webkit-scrollbar {
+  width: 8px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-gray-200;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-900;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-800;
+}
+
+// .link-header {
+//   @apply block text-gray-900 text-center font-bold border-b-2 border-transparent py-2 px-2 no-underline;
+
+//   &:focus,
+//   &:hover {
+//     @apply text-gray-800 border-gray-800;
+//   }
+//   &:active {
+//     @apply link-header border-gray-700;
+//   }
+// }
+
+// #Header,
+// #Sidebar {
+//   h3 {
+//     @apply pb-2 mt-8 mb-2 uppercase border-b-3 border-gray-900;
+//   }
+//   .page-link,
+//   .fake-link {
+//     @apply block p-2 text-gray-900 font-bold no-underline border-r-3 border-transparent cursor-pointer;
+//     transition: background-color 0.15s ease-in-out;
+
+//     &.page-link-active {
+//       @apply text-white border-gray-900 bg-gray-900;
+
+//       &:focus,
+//       &:hover {
+//         @apply text-white bg-gray-800;
+//       }
+//     }
+
+//     &:focus,
+//     &:hover {
+//       @apply text-gray-800 bg-gray-200;
+//     }
+//     &:active {
+//       @apply text-gray-700 bg-gray-400;
+//     }
+//   }
+// }
+// Adjust Headers to Bottom Borders
+// #Header .page-link,
+// #Header .fake-link {
+//   @apply border-r-0 border-b-3;
+// }
+// Made by
+// #Sidebar footer a {
+//   @apply text-gray-900 no-underline;
+// }
+
+// rolltable cell selection class
+// table.style-default {
+//   th,
+//   td {
+//     font-size: initial;
+//   }
+//   th,
+//   td {
+//     @apply border px-4 py-2;
+//   }
+//   tr:nth-child(even) {
+//     th,
+//     td {
+//       @apply bg-gray-100;
+//     }
+//   }
+//   tr:nth-child(odd) {
+//     th,
+//     td {
+//       @apply bg-gray-200;
+//     }
+//   }
+// }
+
+@tailwind components;
+@tailwind utilities;

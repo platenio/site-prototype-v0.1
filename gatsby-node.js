@@ -127,7 +127,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
     createPage({
       path: slug,
-      component: path.resolve(`./src/components/Layout-MDX.js`),
+      component: path.resolve(`./src/components/Layouts/Underpage.js`),
       context: { type: "page", id: node.id },
     })
   })
@@ -161,8 +161,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
     createPage({
       path: slug,
-      component: path.resolve(`./src/components/Layout-MDX.js`),
-      context: { type: "book", id: node.id },
+      component: path.resolve(`./src/components/Layouts/Book.js`),
+      context: { id: node.id },
     })
   })
 
@@ -195,8 +195,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
     createPage({
       path: slug,
-      component: path.resolve(`./src/components/Layout-MDX.js`),
-      context: { type: "book", id: node.id },
+      component: path.resolve(`./src/components/Layouts/Chapter.js`),
+      context: { id: node.id },
     })
   })
 }
