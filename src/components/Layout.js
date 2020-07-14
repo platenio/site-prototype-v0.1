@@ -1,4 +1,5 @@
 import React from "react"
+// import tw, { styled } from "twin.macro"
 
 // Layout
 import "../Style.scss"
@@ -37,7 +38,7 @@ export default function Layout({
             className="flex flex-col max-w-full h-screen bg-white bg-opacity-90 border-l-3 border-r-3 border-gray-900"
           >
             <div className="relative z-50 w-full border-b-3 border-gray-900">
-              <div className="max-w-2xl mx-auto">
+              <div className="max-w-full mx-auto" style={{ width: "97.5ch" }}>
                 <Header />
               </div>
             </div>
@@ -45,19 +46,16 @@ export default function Layout({
             <div className="flex-auto flex flex-wrap lg:flex-no-wrap justify-center items-stretch w-full overflow-auto">
               {sidebarLeft && (
                 <div className="flex-1 sm:flex-initial lg:flex-none  px-2 w-full sm:w-64 max-w-full border-r-3 border-gray-900">
-                  <div className="h-full overflow-hidden">
-                    {sidebarLeft}
-                    {/* <ChaptersSidebar pathname={location.pathname} /> */}
-                  </div>
+                  <div className="h-full overflow-hidden">{sidebarLeft}</div>
                 </div>
               )}
 
               <main
-                className="flex-auto sm:flex-1 lg:flex-auto bg-white"
-                style={{ width: "960px", maxWidth: "100%" }}
+                className="flex-auto sm:flex-1 lg:flex-auto max-w-full bg-white"
+                style={{ width: "97.5ch" }}
               >
-                <div className="h-full py-8 md:py-16 px-8 overflow-auto">
-                  <div className="max-w-2xl mx-auto pb-32">{children}</div>
+                <div className="h-full py-8 md:py-16 px-8 overflow-x-hidden">
+                  <article className="prose">{children}</article>
                 </div>
               </main>
 

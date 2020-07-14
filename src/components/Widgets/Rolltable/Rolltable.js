@@ -21,6 +21,8 @@ import {
   FaDiceD20,
 } from "react-icons/fa"
 
+import "../Widgets.scss"
+
 export default class Rolltable extends Component {
   constructor(props) {
     super(props)
@@ -56,7 +58,7 @@ export default class Rolltable extends Component {
         <div
           role="form"
           id={`rolltable-${tableName}`}
-          className="widget relative w-full block mt-8 border-3 border-gray-900 bg-white overflow-hidden"
+          className="Widget relative w-full block mt-8 border-3 border-gray-900 bg-white overflow-hidden"
         >
           <header>
             <div className="w-full flex justify-center items-stretch pt-4 px-4">

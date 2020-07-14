@@ -66,6 +66,6 @@ module.exports = {
     "visited",
     "disabled",
   ],
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
   // plugins: [require("tailwindcss-debug-screens")],
 }

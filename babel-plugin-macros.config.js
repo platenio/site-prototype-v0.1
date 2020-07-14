@@ -1,5 +1,5 @@
-module.exports = {
-  tailwind: {
-    styled: "styled-components",
-  },
-}
+// module.exports = {
+//   tailwind: {
+//     styled: "styled-components",
+//   },
+// }
