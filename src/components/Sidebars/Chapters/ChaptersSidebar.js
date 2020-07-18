@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import { Link } from "gatsby"
+import scrollTo from "gatsby-plugin-smoothscroll"
 
 import { FaBookmark, FaPaperclip } from "react-icons/fa"
 
@@ -29,7 +30,7 @@ const ChaptersSidebar = ({ location, tableOfContents }) => {
       }
     }
   `)
-  const { origin, pathname } = location
+  const { pathname } = location
 
   const files = data.allFile.edges
   let curBook = ""
@@ -49,32 +50,58 @@ const ChaptersSidebar = ({ location, tableOfContents }) => {
     }
   })
 
-  const markers = []
-  tableOfContents.children.forEach((item, i) => {
-    if (item.value) {
-      const val = item.value
-      const markerRegex = new RegExp("^<Marker", "g")
-      const match = val.match(markerRegex)
+  // Create clips
+  const clips = () => {
+    let clipsList = []
 
-      if (match) {
-        const idRegex = new RegExp('id="(.+?)"', "g")
-        const idMatch = idRegex.exec(val)
-        const id = idMatch[1]
-        const nextItem = tableOfContents.children[i + 1]
+    tableOfContents.children.forEach((item, i) => {
+      if (item.value) {
+        const val = item.value
+        const regex = new RegExp("^<Clip", "g")
+        const match = val.match(regex)
 
-        if (nextItem.type === "heading") {
-          let title = ""
+        if (match) {
+          const idRegex = new RegExp('id="(.+?)"', "g")
+          const idMatch = idRegex.exec(val)
+          const id = idMatch[1]
+          const nextItem = tableOfContents.children[i + 1]
 
-          nextItem.children.forEach(item => {
-            if (item.type === "text") {
-              title += item.value
-            }
-          })
-          markers.push({ id, title })
+          if (nextItem.type === "heading") {
+            let title = ""
+
+            nextItem.children.forEach(item => {
+              if (item.type === "text") {
+                title += item.value
+              }
+            })
+            clipsList.push({ id, title })
+          }
         }
       }
-    }
-  })
+    })
+
+    return (
+      <>
+        {clipsList.length > 0 && (
+          <ul className="bg-gray-800">
+            {clipsList.map(clip => {
+              return (
+                <li>
+                  <button
+                    onClick={() => scrollTo("#clip-" + clip.id)}
+                    className="btn-invert flex justify-start items-start w-full py-1 px-4 text-left text-xs font-fira-code"
+                  >
+                    <span className="flex-1">{clip.title}</span>
+                    <FaPaperclip className="inline-block" />
+                  </button>
+                </li>
+              )
+            })}
+          </ul>
+        )}
+      </>
+    )
+  }
 
   return (
     <div
@@ -83,66 +110,50 @@ const ChaptersSidebar = ({ location, tableOfContents }) => {
     >
       <ChaptersSidebarTitle book={curBook} />
 
-      <menu className="flex-1 max-w-full h-32 sm:h-auto m-0 px-0 mt-4 pb-2 border-b-3 border-gray-900 overflow-auto">
+      <menu className="flex-1 max-w-full h-32 sm:h-auto m-0 mt-8 p-0 pb-4 border-t-3 border-b-3 border-gray-700 overflow-y-auto">
         {chapters && (
-          <>
-            <h3>
-              Index <FaBookmark className="float-right" />
+          <div className="mt-4">
+            <h3 className="px-4 uppercase tracking-widest">
+              Chapters <FaBookmark className="float-right" />
             </h3>
-            <ul className="mt-2 pt-2 border-t-3 border-gray-900">
+            <ul className="mt-4">
               {chapters.map(element => {
+                console.log(element)
                 const { title } = element.childMdx.frontmatter
                 const { slug, chapter } = element.fields
                 let chapterNum = ("0" + chapter).slice(-2)
 
                 return (
-                  <li key={element.id}>
+                  <li key={element.id} className="">
                     <Link
                       to={slug}
-                      className="btn-secondary text-left"
+                      className="btn-invert px-4 text-left flex justify-start items-start"
                       activeClassName="active"
                     >
-                      {chapterNum} <span className="font-bold">{title}</span>
+                      <span className="flex-1 mr-1">{title}</span>
+                      <span className="font-thin font-fira-code">
+                        {chapterNum}
+                      </span>
                     </Link>
-                  </li>
-                )
-              })}
-            </ul>
-          </>
-        )}
 
-        {markers.length > 0 && (
-          <>
-            <h3>
-              Clips <FaPaperclip className="float-right" />
-            </h3>
-            <ul className="mt-2 pt-2 border-t-3 border-gray-900">
-              {markers.map(marker => {
-                return (
-                  <li>
-                    <Link
-                      className="btn-secondary text-left"
-                      to={origin + pathname + "#clip-" + marker.id}
-                    >
-                      {marker.title}
-                    </Link>
+                    {slug === pathname && clips()}
                   </li>
                 )
               })}
             </ul>
-          </>
+          </div>
         )}
       </menu>
 
-      <footer className="w-full px-2 py-2">
-        <p className="text-xs m-0">
+      <footer className="w-full px-4 py-2">
+        <p className="text-xs text-right m-0">
           <a
-            className="text-gray-900 no-underline"
+            className="no-underline"
             href="https://www.platen.io"
             target="_blank"
             rel="noreferrer"
           >
-            Powered by Platen.io v1.0
+            Powered by Platen.io v0.1
           </a>
         </p>
       </footer>

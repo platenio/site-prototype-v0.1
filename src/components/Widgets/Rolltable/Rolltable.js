@@ -8,8 +8,9 @@ import React, { Component } from "react"
 
 import CSVQuery from "./CSVQuery/CSVQuery"
 import CSVUpload from "./CSVUpload/CSVUpload"
-import CSVTable from "./CSVTable/CSVTable"
-import { getRandomEntries } from "./SelectionLogic"
+// import CSVTable from "./CSVTable/CSVTable"
+import Table from "./Table"
+// import { getRandomEntries } from "./SelectionLogic"
 
 // import Notes from "./Notes.mdx"
 
@@ -21,7 +22,7 @@ import {
   FaDiceD20,
 } from "react-icons/fa"
 
-import "../Widgets.scss"
+import "../../../Reset.scss"
 
 export default class Rolltable extends Component {
   constructor(props) {
@@ -58,7 +59,7 @@ export default class Rolltable extends Component {
         <div
           role="form"
           id={`rolltable-${tableName}`}
-          className="Widget relative w-full block mt-8 border-3 border-gray-900 bg-white overflow-hidden"
+          className="Reset relative w-full block mt-8 border-3 border-gray-900 bg-white overflow-hidden"
         >
           <header>
             <div className="w-full flex justify-center items-stretch pt-4 px-4">
@@ -69,7 +70,7 @@ export default class Rolltable extends Component {
               </div>
               <div>
                 <ul className="flex-initial flex flex-wrap justify-center items-start pt-1 pr-1 -mb-1 -ml-1">
-                  {showDebug == "true" && (
+                  {showDebug === true && (
                     <li className="mb-1 ml-1">
                       <button
                         className="btn-primary text-xs flex justify-center items-center"
@@ -126,19 +127,19 @@ export default class Rolltable extends Component {
             />
           </header>
 
-          {/* TODO: Return results */}
-          <div id={`result-${tableName}`} className="mt-4">
-            <p className="block py-4 px-8 font-bold text-2xl text-center">
-              {this.state.fileData ? (
-                this.state.result
-              ) : (
-                <span className="p-4 text-sm text-gray-900 border-3 border-gray-900 bg-yellow-200">
-                  Cannot generate results. Please Add or Upload a CSV.
-                </span>
-              )}
-            </p>
-          </div>
+          {(!this.state.fileData || this.state.status) && (
+            <div id={`result-${tableName}`} className="mt-4">
+              <p className="block py-4 px-8 font-bold text-2xl text-center">
+                {this.state.result && "Result"}
 
+                {!this.state.fileData && (
+                  <span className="block p-4 text-sm text-gray-900 border-3 border-cmykYellow-600 bg-cmykYellow-500">
+                    Cannot generate results. Please Add or Upload a CSV.
+                  </span>
+                )}
+              </p>
+            </div>
+          )}
           <menu
             type="toolbar"
             label="Rolltable Controls"
@@ -161,7 +162,7 @@ export default class Rolltable extends Component {
                     id={`rolltable-${tableName}-collapser`}
                     className="flex-1 btn-primary"
                     style={{ flexBasis: "200px" }}
-                    onClick={() => getRandomEntries(tableName)}
+                    // onClick={() => getRandomEntries(tableName)}
                     // onClick={toggleRandomize}
                   >
                     <span className="flex justify-center items-center">
@@ -172,24 +173,30 @@ export default class Rolltable extends Component {
               )}
             </ul>
           </menu>
-
           {this.state.fileData && (
             <div
               className={
-                this.state.collapse ? "pt-2 w-full" : "pt-2 w-full hidden"
+                `w-full pt-2 text-white bg-gray-900 ` +
+                (this.state.collapse && "hidden")
               }
             >
               {/* <div className="pt-2 w-full"> */}
-              <p className="px-4 text-center text-xs italic">
+              <p className="px-4 mx-auto text-center text-xs italic">
                 <strong>Note:</strong> Click on any header to reroll for that
                 column.
               </p>
 
-              <CSVTable
-                name={tableName}
-                data={this.state.fileData}
-                className="w-full mt-4"
-              />
+              <div
+                className="overflow-scroll"
+                // style={{ maxHeight: "25ch" }}
+              >
+                {/* <CSVTable
+                  name={tableName}
+                  data={this.state.fileData}
+                  className="w-full mt-4"
+                /> */}
+                <Table data={this.state.fileData} />
+              </div>
             </div>
           )}
         </div>

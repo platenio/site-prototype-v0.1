@@ -7,6 +7,7 @@ module.exports = {
     author: `@Platen`,
   },
   plugins: [
+    `gatsby-plugin-smoothscroll`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
@@ -23,6 +24,7 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         gatsbyRemarkPlugins: [
+          "gatsby-plugin-mdx-prismjs",
           {
             resolve: `gatsby-remark-images`,
             options: {

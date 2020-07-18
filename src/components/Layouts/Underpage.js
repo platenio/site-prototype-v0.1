@@ -22,14 +22,16 @@ const LayoutUnderpage = ({ context, data, location }) => {
 
   return (
     <Layout featureImg={featureImgSrc} sidebarLeft={false} sidebarRight={false}>
-      <header className="w-full pb-4 border-b-3 border-gray-900">
-        <h1 className="text-3xl leading-none">{title}</h1>
-      </header>
+      <div className="prose mx-auto">
+        <header className="pb-4 border-b-3 border-gray-900">
+          <h1 className="m-0">{title}</h1>
+        </header>
 
-      <div className="mt-8">
-        <MDXProvider components={shortcodes}>
-          <MDXRenderer>{body}</MDXRenderer>
-        </MDXProvider>
+        <div className="mt-8">
+          <MDXProvider components={shortcodes}>
+            <MDXRenderer>{body}</MDXRenderer>
+          </MDXProvider>
+        </div>
       </div>
     </Layout>
   )

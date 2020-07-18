@@ -3,7 +3,7 @@ import tw, { styled } from "twin.macro"
 
 import { FaPaperclip, FaClipboardCheck } from "react-icons/fa"
 
-import "../Widgets.scss"
+import "../../../Reset.scss"
 
 const Content = styled.div`
   > :first-child {
@@ -50,24 +50,33 @@ export default class Clip extends Component {
 
   render() {
     return (
-      <div id={`clip-` + this.props.id} className="Widget pt-16">
+      <div id={`clip-` + this.props.id} className="Reset pt-16">
         <div className="flex flex-wrap justify-start items-start">
-          <div className="flex-1 prose">{this.props.children}</div>
+          <div className="flex-1 prose">
+            <Content>{this.props.children}</Content>
+          </div>
           <div className="mb-4">
-            <button
-              className="relative p-2 text-gray-700 hover:text-white font-bold cursor-pointer bg-white hover:bg-gray-900"
-              onClick={() => this.handleTimeout()}
-            >
+            <div className="relative">
               <Notice
                 className={
                   `absolute z-40 flex justify-start items-center p-2 leading-none text-center font-light text-white bg-gray-900 shadow-lg ` +
                   (this.state.active && "active")
                 }
               >
-                <FaClipboardCheck className="mr-1" /> Copied
+                Copied
               </Notice>
-              <FaPaperclip />
-            </button>
+              <button
+                className={
+                  `p-2 hover:text-white font-bold cursor-pointer hover:bg-gray-900 ` +
+                  (this.state.active
+                    ? "text-white bg-gray-900"
+                    : "text-gray-700 bg-white")
+                }
+                onClick={() => this.handleTimeout()}
+              >
+                {this.state.active ? <FaClipboardCheck /> : <FaPaperclip />}
+              </button>
+            </div>
           </div>
         </div>
       </div>

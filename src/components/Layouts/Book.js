@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 import Img from "gatsby-image"
 
 // export default function LayoutBook({
@@ -21,7 +21,7 @@ import Layout from "../Layout"
 // import ChaptersSidebar from "../ChaptersSidebar/ChaptersSidebar"
 // import ActionsSidebar from "../ActionsSidebar/ActionsSidebar"
 
-// import "./Book.scss"
+import "../../Reset.scss"
 
 const LayoutBook = ({ context, data, location }) => {
   const { slug } = data.file.fields
@@ -37,10 +37,13 @@ const LayoutBook = ({ context, data, location }) => {
 
   return (
     <Layout featureImg={featureImgSrc} sidebarLeft={false} sidebarRight={false}>
-      <div id="LayoutBook" className="pb-32">
+      <div id="LayoutBook" className="Reset pb-32">
+        <header className="prose pb-4 border-b-3 border-gray-900">
+          <h1 className="m-0">{title}</h1>
+        </header>
+
         <div className="w-full flex flex-wrap justify-center items-end pt-8 pr-8 -ml-8 -mb-8">
           <div className="flex-1 mb-8 ml-8">
-            <h1 className="text-4xl">{title}</h1>
             <div className="text-sm">
               <p className="mt-0">Published {published}</p>
               <p className="mt-0">by {author}</p>
@@ -57,7 +60,7 @@ const LayoutBook = ({ context, data, location }) => {
         <div className="w-full flex flex-wrap justify-center items-start pt-8 pr-8 -ml-8">
           <div className="cover flex-initial mb-8 ml-8 w-64">
             <Img
-              className="rounded shadow-xl"
+              className="shadow-xl"
               objectFit="cover"
               objectPosition="50% 50%"
               fluid={featureImg.childImageSharp.fluid}
@@ -116,7 +119,7 @@ export const query = graphql`
       }
       childMdx {
         id
-        body
+        rawBody
         frontmatter {
           title
           blurb
