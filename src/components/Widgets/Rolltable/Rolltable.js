@@ -38,6 +38,10 @@ export default class Rolltable extends Component {
     this.updateData = this.updateData.bind(this)
   }
 
+  handleResults = results => {
+    this.setState({ result: results })
+  }
+
   toggleTableCollapse = () => {
     let collapse = !this.state.collapse
     this.setState({ collapse })
@@ -47,7 +51,7 @@ export default class Rolltable extends Component {
     this.setState({ debug })
   }
   updateData = ({ data }) => {
-    this.setState({ fileData: data })
+    data && this.setState({ fileData: data })
   }
 
   render() {
@@ -127,10 +131,10 @@ export default class Rolltable extends Component {
             />
           </header>
 
-          {(!this.state.fileData || this.state.status) && (
+          {this.state.fileData && (
             <div id={`result-${tableName}`} className="mt-4">
-              <p className="block py-4 px-8 font-bold text-2xl text-center">
-                {this.state.result && "Result"}
+              <p className="block py-4 px-8 m-0 font-bold text-xl text-center leading-tight max-w-full">
+                {this.state.result}
 
                 {!this.state.fileData && (
                   <span className="block p-4 text-sm text-gray-900 border-3 border-cmykYellow-600 bg-cmykYellow-500">
@@ -175,27 +179,28 @@ export default class Rolltable extends Component {
           </menu>
           {this.state.fileData && (
             <div
-              className={
-                `w-full pt-2 text-white bg-gray-900 ` +
-                (this.state.collapse && "hidden")
-              }
+              className={`pt-2 bg-white ` + (this.state.collapse && "hidden")}
             >
-              {/* <div className="pt-2 w-full"> */}
+              {/* Convert to tooltip */}
               <p className="px-4 mx-auto text-center text-xs italic">
-                <strong>Note:</strong> Click on any header to reroll for that
-                column.
+                <b>Note:</b> Click on any header to reroll for that column.
               </p>
 
-              <div
-                className="overflow-scroll"
-                // style={{ maxHeight: "25ch" }}
-              >
+              <div>
                 {/* <CSVTable
                   name={tableName}
                   data={this.state.fileData}
                   className="w-full mt-4"
                 /> */}
-                <Table data={this.state.fileData} />
+                <Table
+                  data={this.state.fileData}
+                  id={`rolltable-${tableName}`}
+                  handleResults={this.handleResults}
+                />
+
+                <p className="mx-auto text-center text-xs">
+                  Table Source "{this.props.src}"
+                </p>
               </div>
             </div>
           )}

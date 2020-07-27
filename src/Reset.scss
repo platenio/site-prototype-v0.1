@@ -31,6 +31,10 @@
   ol,
   ul {
     @apply list-none m-0 p-0;
+
+    li {
+      position: initial;
+    }
   }
 
   img,

@@ -118,7 +118,6 @@ const ChaptersSidebar = ({ location, tableOfContents }) => {
             </h3>
             <ul className="mt-4">
               {chapters.map(element => {
-                console.log(element)
                 const { title } = element.childMdx.frontmatter
                 const { slug, chapter } = element.fields
                 let chapterNum = ("0" + chapter).slice(-2)
