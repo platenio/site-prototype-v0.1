@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 export const lsStore = (key, data) => {
   // console.log("lsStore", key, data)
-  window.localStorage.setItem(key, data)
+  window.localStorage.setItem(key, JSON.stringify(data))
 }
 export const lsCheck = key => {
   return window.localStorage.getItem(key)
@@ -40,13 +40,12 @@ export class LsStatus extends Component {
   }
 
   componentDidMount() {
-    console.log("lsStatus mounted")
-
+    // console.log("lsStatus mounted")
     // this.handleTimer()
   }
 
   render() {
-    console.log("lsStatus", this)
+    // console.log("lsStatus", this)
 
     return (
       <p className="w-full p-2 bg-green-100 border border-green-400 rounded">

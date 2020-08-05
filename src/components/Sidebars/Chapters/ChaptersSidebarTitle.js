@@ -38,9 +38,9 @@ const ChaptersSidebarTitle = ({ book }) => {
   })
 
   return (
-    <header>
+    <header className="px-4">
       <Link to={bookSlug} className="no-underline">
-        <h1 className="leading-none m-0">{bookTitle}</h1>
+        <h2 className="font-black text-2xl leading-none m-0">{bookTitle}</h2>
       </Link>
       <p className="mt-2">by {bookAuthor}</p>
     </header>

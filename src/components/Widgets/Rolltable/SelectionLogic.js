@@ -3,20 +3,20 @@ export function getRandomInteger(min, max) {
 }
 
 export function getRandomEntry(tableName, column) {
+  console.log("getRandomEntry")
   let table = getRollTable(tableName)
   let rows = table.rows.length
   clearSelectedEntries(tableName, column)
   let entry = table.rows[getRandomInteger(1, rows)].cells[column]
-  console.log(
-    `${table.rows[0].cells[column].textContent}: ${entry.textContent}`
-  )
+  // console.log(
+  //   `${table.rows[0].cells[column].textContent}: ${entry.textContent}`
+  // )
   entry.classList.add("selected")
   setResultText(tableName)
 }
 
 export function getRandomEntries(tableName) {
   console.log("getRandomEntries")
-
   let table = getRollTable(tableName)
   let columns = table.rows[0].cells.length
   let i
@@ -83,5 +83,5 @@ export function setResultText(tableName) {
   }
   text += "."
   // Why is this hack necessary???
-  result.innerText = text.replace(" ,", ",").replace(" .", ".")
+  // result.innerText = text.replace(" ,", ",").replace(" .", ".")
 }

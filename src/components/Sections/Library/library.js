@@ -2,6 +2,8 @@ import React from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 
+import "../../../Reset.scss"
+
 const SecLibrary = () => {
   const data = useStaticQuery(graphql`
     {
@@ -36,9 +38,9 @@ const SecLibrary = () => {
   `)
 
   return (
-    <section id="library">
+    <section id="library" className="Reset bg-gray-200 p-8 -mx-8">
       <ul
-        className="grid gap-8"
+        className="grid gap-8 list-none mx-auto max-w-typo"
         style={{
           gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
         }}
@@ -56,13 +58,13 @@ const SecLibrary = () => {
           const { slug } = node.fields
 
           return (
-            <li>
+            <li className="p-0 m-0">
               <article className="flex justify-start items-stretch h-full">
                 <div className="flex-initial m-0 max-w-full w-32">
                   <Link to={slug} className="block no-underline h-full">
                     <Img
                       // className="h-full"
-                      className="rounded shadow-xl"
+                      className="shadow-xl"
                       fluid={featureImg.childImageSharp.fluid}
                       objectFit="cover"
                       objectPosition="50% 50%"
@@ -72,21 +74,19 @@ const SecLibrary = () => {
                 </div>
                 <div className="flex-1 flex flex-wrap justify-start items-start">
                   <div className="flex-0 w-full px-4">
-                    <h3 className="mt-0 text-2xl">
+                    <h3 className="m-0 text-2xl">
                       <Link to={slug} className="no-underline">
                         {title}
                       </Link>
                     </h3>
-                    <p className="text-xs">by {author}</p>
-                    <p className="mt-0 text-xs">published {published}</p>
+                    <p className="m-0 text-xs">by {author}</p>
+                    <p className="mt-0 text-xs">{published}</p>
 
                     <p>{blurb}</p>
                   </div>
                   <footer className="flex-initial w-full mt-auto">
                     <div className="px-4">
-                      <hr className="border-gray-200" />
-
-                      <Link to={slug} className="btn-primary table">
+                      <Link to={slug} className="btn-primary text-sm table">
                         Learn More
                       </Link>
                     </div>

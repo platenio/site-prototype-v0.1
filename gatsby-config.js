@@ -7,6 +7,7 @@ module.exports = {
     author: `@Platen`,
   },
   plugins: [
+    `gatsby-plugin-smoothscroll`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
@@ -23,6 +24,7 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         gatsbyRemarkPlugins: [
+          "gatsby-plugin-mdx-prismjs",
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -53,7 +55,6 @@ module.exports = {
         },
       },
     },
-    `gatsby-plugin-emotion`,
     {
       resolve: `gatsby-plugin-sass`,
       options: {
@@ -63,6 +64,7 @@ module.exports = {
         ],
       },
     },
+    `gatsby-plugin-emotion`,
     // // this (optional) plugin enables Progressive Web App + Offline functionality
     // // To learn more, visit: https://gatsby.dev/offline
     `gatsby-plugin-offline`,

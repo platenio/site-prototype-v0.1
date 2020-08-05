@@ -1,0 +1,76 @@
+.Reset {
+  // ---------------
+  // Resets
+  // ---------------
+
+  // blockquote,
+  // dl,
+  // dd,
+  // h1,
+  // h2,
+  // h3,
+  // h4,
+  // h5,
+  // h6,
+  // figure,
+  // p,
+  // pre {
+  //   @apply mt-0;
+  // }
+
+  // h1,
+  // h2,
+  // h3,
+  // h4,
+  // h5,
+  // h6 {
+  //   font-size: inherit;
+  //   font-weight: inherit;
+  // }
+
+  ol,
+  ul {
+    @apply list-none m-0 p-0;
+
+    li {
+      position: initial;
+    }
+  }
+
+  img,
+  svg,
+  video,
+  canvas,
+  audio,
+  iframe,
+  embed,
+  object {
+    @apply block m-0 p-0 align-middle;
+  }
+
+  table {
+    max-width: initial;
+    font-size: initial;
+    line-height: initial;
+    margin-top: initial;
+    margin-bottom: initial;
+
+    th,
+    td {
+      color: initial;
+      padding: initial;
+      margin: initial;
+    }
+    tr {
+      border: initial;
+    }
+  }
+
+  // *,
+  // *::before,
+  // *::after {
+  //   border-width: 0;
+  //   border-style: solid;
+  //   border-color: theme("borderColor.default", currentColor);
+  // }
+}

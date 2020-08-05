@@ -40,8 +40,11 @@ class CSVQuery extends Component {
     const localData = lsCheck(this.props.table)
 
     if (localData) {
-      const data = Papa.parse(localData)
-      this.updateData(data)
+      // console.log(JSON.parse(localData))
+      // const data = Papa.parse(localData)
+      // const parsedData = JSON.parse(data.data[0])
+      // console.log(parsedData)
+      // this.updateData(data)
     } else {
       files.forEach(file => {
         if ("csv/" + this.props.src === file.node.relativePath) {

@@ -8,39 +8,39 @@ import tw, { styled } from "twin.macro"
 
 const RollTable = styled.table`
   .selected {
-    ${tw`text-white bg-gray-900`};
+    button {
+      ${tw`text-white bg-cmykRed-500`};
+    }
   }
 `
 
+const defaultBtn =
+  "block w-full p-2 text-left hover:text-white hover:bg-gray-700"
+
 function getHeaderElements(tableName, data) {
   const header_elements = []
-  const header_class = "hover:bg-gray-200 py-2 px-2"
   const headers = data[0]
+
   for (const [index, header] of headers.entries()) {
-    if (index === 0) {
-      header_elements.push(
-        <th
-          key={index}
-          onClick={() => getRandomEntries(tableName)}
-          onKeyPress={() => getRandomEntries(tableName)}
-          className={header_class}
-        >
-          {header}
-        </th>
-      )
-    } else {
-      header_elements.push(
-        <th
-          key={index}
-          onClick={() => getRandomEntry(tableName, index)}
-          onKeyPress={() => getRandomEntry(tableName, index)}
-          className={header_class}
-        >
-          {header}
-        </th>
-      )
-    }
+    header_elements.push(
+      <th
+        key={index}
+        // onClick={() =>
+        //   index === 0
+        //     ? getRandomEntry(tableName, index)
+        //     : getRandomEntries(tableName)
+        // }
+        // onKeyPress={() =>
+        //   index === 0
+        //     ? getRandomEntry(tableName, index)
+        //     : getRandomEntries(tableName)
+        // }
+      >
+        <button className={defaultBtn}>HERE {header}</button>
+      </th>
+    )
   }
+
   return header_elements
 }
 
@@ -52,19 +52,19 @@ function getEntryElements(tableName, data) {
     let elements = []
     for (const [index, entry] of row_data.entries()) {
       elements.push(
-        <td
-          key={index}
-          className="px-2 py-1 text-gray-700 hover:bg-gray-200 hover:text-gray-900 cursor-pointer"
-          data-prefix={prefixes[index]}
-          onClick={() => selectEntry(tableName, row_index, index)}
-          onKeyPress={() => selectEntry(tableName, row_index, index)}
-        >
-          {entry}
+        <td key={index} data-prefix={prefixes[index]}>
+          <button
+            className={"py-1 " + defaultBtn}
+            onClick={() => selectEntry(tableName, row_index, index)}
+            onKeyPress={() => selectEntry(tableName, row_index, index)}
+          >
+            {entry}
+          </button>
         </td>
       )
     }
     entry_elements.push(
-      <tr key={row_index} className="even:bg-gray-100">
+      <tr key={row_index} className="even:bg-white even:bg-opacity-10">
         {elements}
       </tr>
     )
@@ -78,7 +78,7 @@ export default class Rolltable extends Component {
     const { data } = this.props
 
     return (
-      <RollTable id={`rolltable-${name}`} {...this.props}>
+      <RollTable id={`rolltable-${name}`}>
         <thead className="text-gray-900 text-left border-b-3 border-gray-900 cursor-pointer">
           {getHeaderElements(name, data)}
         </thead>

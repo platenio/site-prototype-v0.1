@@ -6,11 +6,11 @@ last-updated: 2020-06-09
 
 # Custom Components
 
-<br />
-
 <Clip id="part-1">
 
 ## Section, Library
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi iste reiciendis officiis veritatis repellendus molestiae laudantium, fuga quidem, recusandae quo dicta. Consectetur est, vero expedita praesentium natus eos nisi quasi!
 
 </Clip>
 
@@ -19,10 +19,6 @@ last-updated: 2020-06-09
 ```
 
 <SecLibrary />
-
-<br />
-
----
 
 <Clip id="rolltable">
 
@@ -38,11 +34,9 @@ last-updated: 2020-06-09
 />
 ```
 
-<Rolltable
-  name="Custom Rolltable Title"
-  caption="This is a custom caption!"
-  src="ambitions.csv"
-/>
+<Rolltable name="Custom Rolltable Title" src="ambitions.csv">
+  Their ambition is to <rtAmbition />.
+</Rolltable>
 
 <Clip id="rolltable-child-folders">
 
@@ -64,7 +58,9 @@ last-updated: 2020-06-09
   caption="This file is located under child/state_us.csv"
   src="samples/state_us.csv"
   showDebug="true"
-/>
+>
+  State: <rtState />
+</Rolltable>
 
 <Clip id="rolltable-invalid-src">
 
@@ -85,7 +81,7 @@ last-updated: 2020-06-09
 <Rolltable
   name="Invalid Rolltable"
   caption="This file does not exist"
-  src="samples/states_us.csv"
+  src="invalid.csv"
   showDebug="true"
   allowUpload="true"
 />
