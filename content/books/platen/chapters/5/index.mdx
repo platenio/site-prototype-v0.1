@@ -4,9 +4,14 @@ title: Playground
 last-updated: 2020-06-09
 ---
 
+<Rolltable name="Fallback Rolltable" src="ambitions.csv" />
+
 <Rolltable
-  name="Child Rolltable"
-  caption="This file is located under child/state_us.csv"
-  src="samples/country_full.csv"
-  showDebug="true"
-/>
+  src="ambitions.csv"
+  name="Context Rolltable"
+  caption="Introducing table column variables in your content! Simply add <rtColumnTitle /> to your content. For example, <rtAmbition />."
+  //showDebug="true"
+>
+  Their ambition is to <rtAmbition /> (<rtResult />
+  ).
+</Rolltable>

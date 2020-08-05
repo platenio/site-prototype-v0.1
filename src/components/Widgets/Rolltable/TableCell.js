@@ -13,11 +13,21 @@ export default class TableCell extends Component {
   }
 
   render() {
-    const styleHead =
-      "p-2 m-0 text-white hover:bg-gray-600 ease-in-out duration-300 cursor-pointer"
-    const styleHeadActive = ""
-    const styleData = "inline-block p-1 px-2"
-    const styleDataActive = "text-gray-900 bg-cmykYellow-500 rounded"
+    const styleBase =
+      "m-0 text-gray-500 leading-none transition-color ease-in-out duration-300 cursor-pointer"
+
+    const styleTH =
+      styleBase +
+      " pt-2 pb-1 border-r border-gray-700 hover:text-white hover:bg-gray-700 select-none"
+
+    const styleTD =
+      styleBase + " p-1 border-t border-r border-gray-700 hover:bg-gray-900"
+    // const styleTDActive = ""
+
+    const styleTDSpan = "p-1"
+    const styleTDSpanActive =
+      "text-gray-900 bg-cmykYellow-500 hover:bg-cmykYellow-200 rounded-sm"
+
     // = `bg-cmykRed-500 hover:bg-cmykRed-400 rounded-sm`
 
     const {
@@ -38,22 +48,10 @@ export default class TableCell extends Component {
             onClick={() => {
               handleRandomCell(col)
             }}
-            className={styleHead}
+            className={styleTH}
           >
             {children.length > 0 && (
-              <div
-                className={
-                  styleData
-                  // + ` flex justify-start items-end max-w-full w-48`
-                }
-              >
-                {/* <span className="flex-1"> */}
-                {children}
-                {/* </span> */}
-                {/* <span className="ml-1 text-cmykBlue-500">
-                  {this.state.sort ? <FaSortAlphaUp /> : <FaSortAlphaDown />}
-                </span> */}
-              </div>
+              <div className={styleTDSpan}>{children}</div>
             )}
           </th>
         ) : (
@@ -61,10 +59,12 @@ export default class TableCell extends Component {
             onClick={() => {
               handleActiveCell(row, col)
             }}
-            className={styleHead + ` ` + (active && styleHeadActive)}
+            className={styleTD}
           >
             {children.length > 0 && (
-              <div className={styleData + ` ` + (active && styleDataActive)}>
+              <div
+                className={styleTDSpan + ` ` + (active && styleTDSpanActive)}
+              >
                 {children}
               </div>
             )}

@@ -9,13 +9,30 @@ export default class Table extends Component {
     this.state = {
       table: false,
       tableCols: false,
+      tableHeadData: [],
+      // tableBodyData: [],
       results: [],
     }
   }
 
-  handleRandomCell = currentCol => {
-    const rowLength = this.state.table[currentCol].length
-    const rowMin = Math.ceil(0)
+  handleRamdomAll = () => {
+    const colLength = this.state.table.length
+
+    for (let i = 0; i < colLength; i++) {
+      setTimeout(() => this.handleRandomCell(i), 0)
+    }
+  }
+
+  handleRandomCell = (currentCol, e) => {
+    if (e) {
+      if (e.keyCode !== 32 && e.keyCode !== 13) {
+        return
+      }
+    }
+
+    const col = this.state.table[currentCol]
+    const rowLength = col.length
+    const rowMin = Math.ceil(1) // avoid head, 0
     const rowMax = Math.floor(rowLength)
     const randomRow = Math.floor(Math.random() * (rowMax - rowMin) + rowMin)
 
@@ -29,13 +46,13 @@ export default class Table extends Component {
     const activeValue = table[col][row].value
 
     // Clear all active children
-    table[col].forEach(data => {
-      data.active = false
+    table[col].forEach((data, i) => {
+      if (i !== 0 && data.active === true) {
+        data.active = false
+      }
     })
     // Active selected child
     table[col][row].active = true
-
-    console.log("table")
 
     // Update table
     this.setState({ table: table })
@@ -46,39 +63,92 @@ export default class Table extends Component {
   handleResultsUpdate = (newValue, col, colLength) => {
     let resultsTemplate = []
     let newResults = [...this.state.results]
+    let resultsMsg = this.props.resultsMsg && [...this.props.resultsMsg]
+    let baseStyles =
+      "leading-none font-bold text-cmykBlue-500 bg-cmykBlue-100 bg-opacity-25 cursor-pointer hover:bg-cmykBlue-100 hover:bg-opacity-100 focus:bg-cmykBlue-100 focus:bg-opacity-100 active:bg-cmykBlue-200 active:bg-opacity-100 select-none"
 
+    // For variables not yet randomized, insert ...
     for (var i = 0; i < colLength; i++) {
       !newResults[i] &&
-        (newResults[i] = <span className="text-cmykRed-100">__</span>)
+        (newResults[i] = (
+          <span key={i} className="text-cmykRed-100">
+            ...
+          </span>
+        ))
       if (col === 1 && newValue === "") {
-        newResults[i] = <span className="text-cmykRed-100">__</span>
+        newResults[i] = (
+          <span key={i} className="text-cmykRed-100">
+            ...
+          </span>
+        )
       }
       col === i && (newResults[i] = newValue)
     }
 
-    newResults.forEach((item, i) => {
-      console.log("item", i)
-      resultsTemplate.push(
-        <div className="flex-auto mb-1 ml-1 w-40 bg-gray-100">
-          <div
-            className="flex justify-center p-2 items-start h-full cursor-pointer hover:text-cmykBlue-500 hover:bg-cmykBlue-100 active:bg-cmykBlue-200 select-none"
+    // If there's child content, replace variables in content
+    if (resultsMsg) {
+      resultsMsg.forEach((child, i) => {
+        if (child.props) {
+          const type = child.props.mdxType.replace(/^rt/g, "")
+          const data = this.state.tableHeadData
+          const matchIndex = data.findIndex(obj => obj === type)
+          const value =
+            newResults[matchIndex].length > 0 ? newResults[matchIndex] : "…"
+
+          value &&
+            (resultsMsg[i] = (
+              <button
+                key={i}
+                tabIndex="0"
+                onClick={() => this.handleRandomCell(matchIndex)}
+                onKeyPress={e => this.handleRandomCell(matchIndex, e)}
+                className={`inline-block p-1 -mx-1 ` + baseStyles}
+              >
+                {value}
+              </button>
+            ))
+        }
+      })
+
+      resultsTemplate.push(resultsMsg)
+
+      // Otherwise, fallback to basic variable blocks layout
+    } else {
+      const newResultsData = []
+
+      newResults.forEach((item, i) => {
+        const itemLength = item.length > 0
+
+        newResultsData.push(
+          <button
+            key={i}
+            tabIndex="0"
             onClick={() => this.handleRandomCell(i)}
+            onKeyPress={e => this.handleRandomCell(i, e)}
+            className={
+              `flex justify-center items-start h-full p-2 mb-2 ml-2 ` +
+              (!itemLength && "bg-cmykRed-100 text-cmykRed-500 ") +
+              baseStyles
+            }
           >
-            <span>{item}</span>
-          </div>
+            <span>{itemLength ? item : "Empty"}</span>
+          </button>
+        )
+      })
+
+      resultsTemplate.push(
+        <div
+          key="1"
+          className="flex justify-start items-start pt-2 pr-2 -mb-2 -ml-2"
+        >
+          {newResultsData}
         </div>
       )
-    })
+    }
 
-    console.log("newResults", newResults)
-    console.log("resultsTemplate", resultsTemplate)
-
+    // Push results to state and handle results message
     this.setState({ results: newResults })
-    this.props.handleResults(
-      <div className="break-word flex flex-wrap justify-center items-stretch mt-1 mr-1 -mb-1 -ml-1">
-        {resultsTemplate}
-      </div>
-    )
+    this.props.handleResults(resultsTemplate)
   }
 
   buildTableHead = (key, value) => {
@@ -124,11 +194,12 @@ export default class Table extends Component {
     for (var dataIndex = 0; dataIndex < rowLength; dataIndex++) {
       const tableRowData = []
       const tableRow = []
+      let key
       let tableRowIndex = dataIndex === 0 && true
 
       // for each col, add to row
       for (var colIndex = 0; colIndex < colLength; colIndex++) {
-        const key = dataIndex + "-" + colIndex
+        key = dataIndex + "-" + colIndex
         const data = tableData.findIndex(data => data.key === key)
 
         tableRowData.push(tableData[data])
@@ -136,7 +207,13 @@ export default class Table extends Component {
 
       // build row
       tableRow.push(
-        <tr className={`bg-gray-800 ` + (!tableRowIndex && `odd:bg-gray-700`)}>
+        <tr
+          key={`tr-` + key}
+          className={
+            `bg-gray-800 ` +
+            (!tableRowIndex && `odd:bg-gray-700 odd:bg-opacity-25`)
+          }
+        >
           {tableRowData}
         </tr>
       )
@@ -146,8 +223,16 @@ export default class Table extends Component {
     }
 
     // build table head & body
-    table.push(<thead className="bg-gray-900 border-none">{tableHead}</thead>)
-    table.push(<tbody className="border-none">{tableBody}</tbody>)
+    table.push(
+      <thead key="table-head" className="border-none">
+        {tableHead}
+      </thead>
+    )
+    table.push(
+      <tbody key="table-body" className="border-none">
+        {tableBody}
+      </tbody>
+    )
 
     return table
   }
@@ -161,13 +246,14 @@ export default class Table extends Component {
 
     return (
       <>
-        <table className="table-auto text-gray-900 bg-white">{table}</table>
+        <table className="table-auto border border-gray-700">{table}</table>
       </>
     )
   }
 
   componentDidMount() {
     let Columns = []
+    let tableHead = []
 
     this.props.data.forEach((row, rowIndex) => {
       row.forEach((item, colIndex) => {
@@ -178,9 +264,12 @@ export default class Table extends Component {
           value: item,
         }
 
+        if (rowIndex === 0) {
+          tableHead.push(item)
+        }
+
         // Add array Col if none exists
         !Columns[colIndex] && Columns.push([])
-
         // Push data to col
         Columns[colIndex].push(newArray)
       })
@@ -188,14 +277,21 @@ export default class Table extends Component {
 
     // Store in state
     this.setState({ table: Columns })
+    this.setState({ tableHeadData: tableHead })
   }
 
   render() {
     return (
       <div
-        className="block max-h-full overflow-scroll"
-        style={{ height: "400px" }}
+        className="block max-h-full overflow-y-auto "
+        style={{ height: "250px" }}
       >
+        {/* <button
+          onClick={this.handleRamdomAll}
+          // disabled={this.state.resultsTimer}
+        >
+          Random All
+        </button> */}
         {this.state.table && this.buildTable()}
       </div>
     )

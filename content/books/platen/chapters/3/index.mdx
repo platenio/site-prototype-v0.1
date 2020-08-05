@@ -34,13 +34,9 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi iste reiciendi
 />
 ```
 
-```
-<Rolltable
-  name="Custom Rolltable Title"
-  caption="This is a custom caption!"
-  src="ambitions.csv"
-/>
-```
+<Rolltable name="Custom Rolltable Title" src="ambitions.csv">
+  Their ambition is to <rtAmbition />.
+</Rolltable>
 
 <Clip id="rolltable-child-folders">
 
@@ -62,7 +58,9 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi iste reiciendi
   caption="This file is located under child/state_us.csv"
   src="samples/state_us.csv"
   showDebug="true"
-/>
+>
+  State: <rtState />
+</Rolltable>
 
 <Clip id="rolltable-invalid-src">
 

@@ -20,6 +20,7 @@ import {
   FaExpandArrowsAlt,
   FaCompressArrowsAlt,
   FaDiceD20,
+  FaInfoCircle,
 } from "react-icons/fa"
 
 import "../../../Reset.scss"
@@ -29,7 +30,7 @@ export default class Rolltable extends Component {
     super(props)
 
     this.state = {
-      collapse: false,
+      collapse: true,
       debug: false,
       fileData: false,
       result: false,
@@ -38,6 +39,9 @@ export default class Rolltable extends Component {
     this.updateData = this.updateData.bind(this)
   }
 
+  handleRandomAll = () => {
+    this.refs.table.handleRamdomAll()
+  }
   handleResults = results => {
     this.setState({ result: results })
   }
@@ -65,13 +69,29 @@ export default class Rolltable extends Component {
           id={`rolltable-${tableName}`}
           className="Reset relative w-full block mt-8 border-3 border-gray-900 bg-white overflow-hidden"
         >
-          <header>
+          {/*
+          ------------------
+          HEADER
+          ------------------
+          */}
+          <header className="bg-gray-100">
             <div className="w-full flex justify-center items-stretch pt-4 px-4">
+              {/*
+              ------------------
+              HEADER
+              ------------------
+              */}
               <div className="flex-auto">
                 <h3>{name}</h3>
 
-                <h4 className="italic">{caption && caption}</h4>
+                {caption && <h4 className="italic">{caption}</h4>}
               </div>
+
+              {/*
+              ------------------
+              CONTROLS, WIDGET
+              ------------------
+              */}
               <div>
                 <ul className="flex-initial flex flex-wrap justify-center items-start pt-1 pr-1 -mb-1 -ml-1">
                   {showDebug === true && (
@@ -110,18 +130,17 @@ export default class Rolltable extends Component {
               </div>
             </div>
 
+            {/*
+            ------------------
+            DEBUG, COMPONENT STATE
+            ------------------
+            */}
             {this.state.debug && (
               <div className="w-full px-4 mt-4">
                 <h3>Component State</h3>
                 <pre>{JSON.stringify(this.state, null, 4)}</pre>
               </div>
             )}
-
-            {/* <div className="mw-full mx-2 p-2 text-xs list-disc bg-yellow-200 rounded">
-              <MDXProvider>
-                <Notes />
-              </MDXProvider>
-            </div> */}
 
             <CSVQuery
               src={src}
@@ -131,19 +150,30 @@ export default class Rolltable extends Component {
             />
           </header>
 
+          {/*
+          ------------------
+          RESULTS
+          ------------------
+          */}
           {this.state.fileData && (
             <div id={`result-${tableName}`} className="mt-4">
-              <p className="block py-4 px-8 m-0 font-bold text-xl text-center leading-tight max-w-full">
+              <div className="block py-4 px-4 m-0 font-bold text-2xl leading-tight max-w-full">
                 {this.state.result}
 
                 {!this.state.fileData && (
-                  <span className="block p-4 text-sm text-gray-900 border-3 border-cmykYellow-600 bg-cmykYellow-500">
+                  <p className="block p-4 text-sm text-gray-900 border-3 border-cmykYellow-600 bg-cmykYellow-500">
                     Cannot generate results. Please Add or Upload a CSV.
-                  </span>
+                  </p>
                 )}
-              </p>
+              </div>
             </div>
           )}
+
+          {/*
+          ------------------
+          CONTROLS, DATA
+          ------------------
+          */}
           <menu
             type="toolbar"
             label="Rolltable Controls"
@@ -167,7 +197,7 @@ export default class Rolltable extends Component {
                     className="flex-1 btn-primary"
                     style={{ flexBasis: "200px" }}
                     // onClick={() => getRandomEntries(tableName)}
-                    // onClick={toggleRandomize}
+                    onClick={() => this.handleRandomAll()}
                   >
                     <span className="flex justify-center items-center">
                       <FaDiceD20 className="mr-1" /> Randomize
@@ -177,30 +207,40 @@ export default class Rolltable extends Component {
               )}
             </ul>
           </menu>
+
+          {/*
+          ------------------
+          TABLE
+          ------------------
+          */}
           {this.state.fileData && (
             <div
-              className={`pt-2 bg-white ` + (this.state.collapse && "hidden")}
+              className={
+                `pt-2 text-gray-500 bg-gray-900 ` +
+                (this.state.collapse && "hidden")
+              }
             >
-              {/* Convert to tooltip */}
-              <p className="px-4 mx-auto text-center text-xs italic">
-                <b>Note:</b> Click on any header to reroll for that column.
-              </p>
-
-              <div>
-                {/* <CSVTable
-                  name={tableName}
-                  data={this.state.fileData}
-                  className="w-full mt-4"
-                /> */}
+              <div className="px-4">
                 <Table
-                  data={this.state.fileData}
                   id={`rolltable-${tableName}`}
+                  data={this.state.fileData}
+                  resultsMsg={this.props.children}
                   handleResults={this.handleResults}
+                  ref="table"
                 />
+              </div>
 
-                <p className="mx-auto text-center text-xs">
-                  Table Source "{this.props.src}"
-                </p>
+              <div className="flex flex-wrap justify-start items-start text-xs pt-2 pb-4 px-4 -mb-1 -ml-1 leading-none">
+                {/* TODO: Convert to tooltip */}
+                <div className="flex-1 mb-1 ml-1">
+                  <p className="m-0 flex justify-start items-end">
+                    <FaInfoCircle className="inline-block mr-1" />
+                    <span>Click on any header to reroll for that column</span>
+                  </p>
+                </div>
+                <div className="mb-1 ml-1">
+                  <p className="m-0">{this.props.src}</p>
+                </div>
               </div>
             </div>
           )}

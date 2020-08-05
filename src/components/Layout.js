@@ -31,7 +31,7 @@ export default function Layout({
       ></span>
       <div className="relative flex flex-col justify-start items-start min-h-full">
         {/* Keep content centered */}
-        <div class="flex justify-center items-start w-full">
+        <div className="flex justify-center items-start w-full">
           {/* Layout Wrapper */}
           <div
             id="layout-frame"
