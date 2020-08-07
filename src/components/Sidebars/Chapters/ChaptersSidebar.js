@@ -84,9 +84,9 @@ const ChaptersSidebar = ({ location, tableOfContents }) => {
       <>
         {clipsList.length > 0 && (
           <ul className="bg-gray-800">
-            {clipsList.map(clip => {
+            {clipsList.map((clip, i) => {
               return (
-                <li>
+                <li key={`clip-link-` + i}>
                   <button
                     onClick={() => scrollTo("#clip-" + clip.id)}
                     className="btn-invert flex justify-start items-start w-full py-1 px-4 text-left text-xs font-fira-code"

@@ -6,82 +6,142 @@ last-updated: 2020-06-09
 
 # Custom Components
 
-<Clip id="part-1">
+## Sections
 
-## Section, Library
+<Nest title="<Library />">
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi iste reiciendis officiis veritatis repellendus molestiae laudantium, fuga quidem, recusandae quo dicta. Consectetur est, vero expedita praesentium natus eos nisi quasi!
+### About
 
-</Clip>
+Showcase your book(s) with this section!
+
+### Code
 
 ```
 <SecLibrary />
 ```
 
+### Preview
+
 <SecLibrary />
 
-<Clip id="rolltable">
+</Nest>
 
-## Widget, Rolltable
+### Widgets
+
+<Nest title="<Clip />">
+
+### About
+
+Clips will automatically create waypoints to specified content. With these, you can share direct links to content you want to share and it'll also create a clip under the page index.
+
+### Code
+
+```
+<Clip id="test">
+
+#### This is a clip
+
+</Clip>
+```
+
+### Preview
+
+<Clip id="test">
+
+#### This is a clip
 
 </Clip>
 
+### Attributes
+
+| name | required | accepts | defaults | desc                                          |
+| ---- | -------- | ------- | -------- | --------------------------------------------- |
+| id   | true     | string  | false    | It's important to add context to your link ID |
+
+</Nest>
+
+<Nest title="<Nest />">
+
+### About
+
+Nest's will tuck away content until needed.
+
+### Code
+
+```
+<Nest title="Title">
+
+  Nested contents
+
+</Nest>
+```
+
+### Preview
+
+<Nest title="Title">
+
+Nested contents
+
+</Nest>
+
+### Attributes
+
+| name  | required | accepts    | defaults | desc                                      |
+| ----- | -------- | ---------- | -------- | ----------------------------------------- |
+| title | true     | string     | false    | Title displayed above your nested content |
+| open  | false    | true/false | true     | Display nested contents on page load      |
+
+</Nest>
+
+<Nest title="<Rolltable />">
+
+### About
+
+Rolltables are great for adding randomization to your CSV files.
+
+### Code
+
 ```
 <Rolltable
-  name="Custom Rolltable Title"
-  caption="This is a custom caption!"
-  src="ambitions.csv"
+  name="Basic Day Rolltable"
+  src="samples/day.csv"
 />
 ```
 
-<Rolltable name="Custom Rolltable Title" src="ambitions.csv">
-  Their ambition is to <rtAmbition />.
-</Rolltable>
+### Preview
 
-<Clip id="rolltable-child-folders">
+<Rolltable name="Basic Day Rolltable" src="samples/day.csv" />
 
-### Child folders
-
-</Clip>
+### Code
 
 ```
 <Rolltable
-  name="Child Rolltable"
-  caption="This file is located under child/state_us.csv and can show debug information"
-  src="samples/state_us.csv"
-  showDebug=true
-/>
-```
-
-<Rolltable
-  name="Child Rolltable"
-  caption="This file is located under child/state_us.csv"
-  src="samples/state_us.csv"
-  showDebug="true"
+  name="Context Day Rolltable"
+  caption="You can assign variables within your context!"
+  src="samples/day.csv"
 >
-  State: <rtState />
+  On <rtDay />, the World will end!
+</Rolltable>
+```
+
+### Preview
+
+<Rolltable
+  name="Context Day Rolltable"
+  caption="You can assign variables within your context!"
+  src="samples/day.csv"
+>
+  On <rtDay />, the World will end!
 </Rolltable>
 
-<Clip id="rolltable-invalid-src">
+### Attributes
 
-### Handle invalid src
+| name    | required | accepts    | defaults | desc                           |
+| ------- | -------- | ---------- | -------- | ------------------------------ |
+| src     | true     | string     | false    | Easily add a custom ID         |
+| name    | false    | string     | false    | Add a custom title             |
+| caption | false    | string     | false    | Add a custom caption           |
+| debug   | false    | true/false | false    | Debug your live data           |
+| upload  | false    | true/false | false    | Add a custom CSV upload button |
 
-</Clip>
-
-```
-<Rolltable
-  name="Invalid Rolltable"
-  caption="This file does not exist"
-  src="samples/states_us.csv"
-  showDebug="true"
-  allowUpload="true"
-/>
-```
-
-<Rolltable
-  name="Invalid Rolltable"
-  caption="This file does not exist"
-  src="invalid.csv"
-  showDebug="true"
-  allowUpload="true"
-/>
+</Nest>
