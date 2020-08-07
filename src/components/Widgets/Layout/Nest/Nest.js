@@ -3,11 +3,6 @@ import React, { Component } from "react"
 import { motion } from "framer-motion"
 import { FaFolderOpen, FaFolder } from "react-icons/fa"
 
-const variants = {
-  open: { opacity: 1, maxHeight: 600 },
-  closed: { opacity: 0, maxHeight: 0 },
-}
-
 export default class Nest extends Component {
   state = {
     active: false,
@@ -25,16 +20,22 @@ export default class Nest extends Component {
   }
 
   render() {
+    const maxHeight = this.props.maxHeight
+      ? this.props.maxHeight === "none"
+        ? "none" // set none
+        : this.props.maxHeight // set custom
+      : 600 // set default
+
+    const collapseAnimation = {
+      open: { opacity: 1, maxHeight: maxHeight },
+      closed: { opacity: 0, maxHeight: 0 },
+    }
+
     return (
       <div className="w-full mt-4">
-        <header
-          className={
-            `flex justify-start items-start pb-4 border-b-3 border-gray-900`
-            // + (this.state.active && " border-b-3")
-          }
-        >
+        <header className="flex justify-start items-start pb-2 border-b-3 border-gray-900">
           <div className="flex-1 mr-2">
-            <h2 className="m-0">{this.props.title}</h2>
+            <p className="m-0 text-lg font-bold">{this.props.title}</p>
           </div>
           <div>
             <button
@@ -53,9 +54,11 @@ export default class Nest extends Component {
           className="border-r-3 border-b-3 border-l-3 border-gray-900 overflow-y-scroll overflow-x-hidden"
           initial={false}
           animate={this.state.active ? "open" : "closed"}
-          variants={variants}
+          variants={collapseAnimation}
         >
-          <div className="p-4 overflow-x-hidden">{this.props.children}</div>
+          <div className="p-4 overflow-x-hidden prose-sm">
+            {this.props.children}
+          </div>
         </motion.div>
       </div>
     )

@@ -8,7 +8,7 @@ last-updated: 2020-06-09
 
 ## Sections
 
-<Nest title="<Library />">
+<Nest title="<SecLibrary />">
 
 ### About
 
@@ -26,7 +26,7 @@ Showcase your book(s) with this section!
 
 </Nest>
 
-### Widgets
+## Widgets
 
 <Nest title="<Clip />">
 
@@ -69,27 +69,32 @@ Nest's will tuck away content until needed.
 ### Code
 
 ```
-<Nest title="Title">
+<Nest title="Title" maxHeight="none">
 
-  Nested contents
+  ### Nested contents
+
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque veniam illum at necessitatibus quam architecto quibusdam ipsa similique ducimus consequatur beatae, sint esse odio eum? Ipsum laboriosam necessitatibus impedit ipsa?
 
 </Nest>
 ```
 
 ### Preview
 
-<Nest title="Title">
+<Nest title="Title" maxHeight="none">
 
-Nested contents
+### Nested contents
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque veniam illum at necessitatibus quam architecto quibusdam ipsa similique ducimus consequatur beatae, sint esse odio eum? Ipsum laboriosam necessitatibus impedit ipsa?
 
 </Nest>
 
 ### Attributes
 
-| name  | required | accepts    | defaults | desc                                      |
-| ----- | -------- | ---------- | -------- | ----------------------------------------- |
-| title | true     | string     | false    | Title displayed above your nested content |
-| open  | false    | true/false | true     | Display nested contents on page load      |
+| name      | required | accepts     | defaults | desc                                      |
+| --------- | -------- | ----------- | -------- | ----------------------------------------- |
+| title     | true     | string      | false    | Title displayed above your nested content |
+| open      | false    | true/false  | true     | Display nested contents on page load      |
+| maxHeight | false    | number/none | 600      | Set a max height to your nested content   |
 
 </Nest>
 
