@@ -20,15 +20,15 @@ export default class Nest extends Component {
   }
 
   render() {
-    const maxHeight = this.props.maxHeight
+    const height = this.props.maxHeight
       ? this.props.maxHeight === "none"
-        ? "none" // set none
+        ? "auto" // set none
         : this.props.maxHeight // set custom
-      : 600 // set default
+      : "600px" // set default
 
     const collapseAnimation = {
-      open: { opacity: 1, maxHeight: maxHeight },
-      closed: { opacity: 0, maxHeight: 0 },
+      open: { opacity: 1, height: height },
+      closed: { opacity: 0, height: 0 },
     }
 
     return (
