@@ -28,8 +28,11 @@ const Notice = styled.div`
 `
 
 export default class Clip extends Component {
-  state = {
-    active: false,
+  constructor(props) {
+    super(props)
+    this.state = {
+      active: false,
+    }
   }
 
   handleCopy = () => {
