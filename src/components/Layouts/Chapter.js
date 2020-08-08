@@ -11,7 +11,8 @@ import ChaptersSidebar from "../Sidebars/Chapters/ChaptersSidebar"
 // Shortcodes
 // import * as FontAwesome from "react-icons/fa"
 import Rolltable from "../Widgets/Rolltable/Rolltable"
-import Clip from "../Widgets/Clip/Clip"
+import Clip from "../Widgets/Layout/Clip/Clip"
+import Nest from "../Widgets/Layout/Nest/Nest"
 import SecLibrary from "../Sections/Library/library"
 
 // const Code = styled.pre`
@@ -30,6 +31,7 @@ const LayoutChapter = ({ context, data, location }) => {
   const shortcodes = {
     Rolltable: props => <Rolltable {...props} />,
     Clip: props => <Clip {...props} location={location} />,
+    Nest: props => <Nest {...props} />,
     SecLibrary: props => <SecLibrary {...props} location={location} />,
     // code: Prism,
     // wrapper: ({ children, ...props }) => (

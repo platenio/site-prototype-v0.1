@@ -3,10 +3,10 @@ import tw, { styled } from "twin.macro"
 
 import { FaPaperclip, FaClipboardCheck } from "react-icons/fa"
 
-import "../../../Reset.scss"
+import "../../../../Reset.scss"
 
 const Content = styled.div`
-  > :first-child {
+  > :first-of-type {
     ${tw`mt-0`}
   }
 `

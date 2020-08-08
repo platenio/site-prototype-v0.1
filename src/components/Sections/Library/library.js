@@ -45,7 +45,7 @@ const SecLibrary = () => {
           gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
         }}
       >
-        {data.allFile.edges.map(({ node }) => {
+        {data.allFile.edges.map(({ node }, i) => {
           const {
             author,
             blurb,
@@ -58,7 +58,7 @@ const SecLibrary = () => {
           const { slug } = node.fields
 
           return (
-            <li className="p-0 m-0">
+            <li key={i} className="p-0 m-0">
               <article className="flex justify-start items-stretch h-full">
                 <div className="flex-initial m-0 max-w-full w-32">
                   <Link to={slug} className="block no-underline h-full">

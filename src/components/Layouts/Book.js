@@ -75,9 +75,12 @@ const LayoutBook = ({ context, data, location }) => {
             {features && (
               <>
                 <ul className="mt-2 grid grid-flow-row gap-2 text-lg">
-                  {features.map(feature => {
+                  {features.map((feature, i) => {
                     return (
-                      <li className="py-2 px-4 border-2 border-gray-900">
+                      <li
+                        key={i}
+                        className="py-2 px-4 border-2 border-gray-900"
+                      >
                         {feature}
                       </li>
                     )
