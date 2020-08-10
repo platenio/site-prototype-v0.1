@@ -38,7 +38,7 @@ export default function Layout({
             className="flex flex-col max-w-full h-screen bg-opacity-90"
           >
             <div className="relative z-50 w-full">
-              <div className="max-w-full ml-auto" style={{ width: "97.5ch" }}>
+              <div className="max-w-full mx-auto" style={{ width: "97.5ch" }}>
                 <Header />
               </div>
             </div>

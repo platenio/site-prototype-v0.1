@@ -42,7 +42,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       })
     }
     if (node.relativePath.match(regexBooks)) {
-      console.log("BOOK", node.relativePath)
+      // console.log("BOOK", node.relativePath)
 
       const book = node.relativePath.replace("books/", "").replace(/\/.*/g, "")
 

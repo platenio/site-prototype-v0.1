@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 
 import HeaderLinks from "./HeaderLinks"
+import Logo from "../../img/platen_logo.svg"
 
 const Header = () => {
   return (
@@ -12,7 +13,8 @@ const Header = () => {
       <div className="flex-initial md:flex-1 mb-2 md:mb-0">
         <h1 className="inline-block m-0 text-4xl">
           <Link to="/" className="no-underline">
-            Platen<span className="opacity-75">.io</span>
+            <img src={Logo} alt="Logo" className="w-40 max-w-full" />
+            <span className="sr-only">Platen.io</span>
           </Link>
         </h1>
       </div>

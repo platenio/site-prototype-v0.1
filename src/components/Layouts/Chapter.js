@@ -6,7 +6,9 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 
 // Layout
 import Layout from "../Layout"
+import PageHeader from "./PageHeader"
 import ChaptersSidebar from "../Sidebars/Chapters/ChaptersSidebar"
+import PlatenArray from "./PlatenArray"
 
 // Shortcodes
 // import * as FontAwesome from "react-icons/fa"
@@ -56,16 +58,18 @@ const LayoutChapter = ({ context, data, location }) => {
       sidebarRight={false}
     >
       <div className="prose mx-auto">
-        <header className="pb-4 border-b-3 border-gray-900">
+        <PageHeader>
           <h1 className="m-0">{title}</h1>
           <p className="m-0 uppercase tracking-widest">Chapter {chapter}</p>
-        </header>
+        </PageHeader>
 
-        <div className="mt-8">
+        <div className="mt-8 pb-32">
           <MDXProvider components={shortcodes}>
             <MDXRenderer>{body}</MDXRenderer>
           </MDXProvider>
         </div>
+
+        <PlatenArray />
       </div>
     </Layout>
   )
