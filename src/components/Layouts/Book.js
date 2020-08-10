@@ -1,6 +1,10 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import Img from "gatsby-image"
+import { MDXProvider } from "@mdx-js/react"
+import { MDXRenderer } from "gatsby-plugin-mdx"
+
+import { FaArrowLeft, FaCheckSquare } from "react-icons/fa"
 
 // export default function LayoutBook({
 //   slug,
@@ -18,13 +22,16 @@ import Img from "gatsby-image"
 // }
 
 import Layout from "../Layout"
+import PageHeader from "./PageHeader"
 // import ChaptersSidebar from "../ChaptersSidebar/ChaptersSidebar"
 // import ActionsSidebar from "../ActionsSidebar/ActionsSidebar"
+import BookOverlay from "../../../content/admin/book-overlay.png"
 
 import "../../Reset.scss"
 
-const LayoutBook = ({ context, data, location }) => {
+const LayoutBook = ({ data }) => {
   const { slug } = data.file.fields
+  const { body } = data.file.childMdx
   const {
     title,
     published,
@@ -32,24 +39,41 @@ const LayoutBook = ({ context, data, location }) => {
     featureImg,
     blurb,
     features,
+    meta,
   } = data.file.childMdx.frontmatter
   const featureImgSrc = featureImg.childImageSharp.fluid.src
+  let metaArray = meta && Object.entries(meta)
 
   return (
     <Layout featureImg={featureImgSrc} sidebarLeft={false} sidebarRight={false}>
       <div id="LayoutBook" className="Reset pb-32">
-        <header className="prose pb-4 border-b-3 border-gray-900">
-          <h1 className="m-0">{title}</h1>
-        </header>
-
-        <div className="w-full flex flex-wrap justify-center items-end pt-8 pr-8 -ml-8 -mb-8">
-          <div className="flex-1 mb-8 ml-8">
-            <div className="text-sm">
-              <p className="mt-0">Published {published}</p>
-              <p className="mt-0">by {author}</p>
+        <PageHeader>
+          <div className="flex justify-start items-stretch pt-2 pr-2 -mb-2 -ml-2">
+            <div className="flex-1 mb-2 ml-2">
+              <h1 className="m-0">{title}</h1>
+            </div>
+            <div className="mb-2 ml-2 text-sm">
+              <p className="m-0">
+                Published on <b>{published}</b>
+              </p>
+              <p className="m-0">
+                Written by <b>{author}</b>
+              </p>
             </div>
           </div>
-          <div className="flex-initial mb-8 ml-8">
+        </PageHeader>
+
+        <div className="flex flex-wrap justify-center items-end mt-4 -mb-4 -ml-4">
+          <div className="flex-1 mb-4 ml-4">
+            <Link
+              to="/books/"
+              title="Return to view all books"
+              className="btn-primary table"
+            >
+              <FaArrowLeft className="text-xl" />
+            </Link>
+          </div>
+          <div className="flex-initial mb-4 ml-4">
             <Link className="btn-primary" to={slug + `chapters/1/`}>
               Read
             </Link>
@@ -57,57 +81,77 @@ const LayoutBook = ({ context, data, location }) => {
           </div>
         </div>
 
-        <div className="w-full flex flex-wrap justify-center items-start pt-8 pr-8 -ml-8">
+        <div className="flex flex-wrap justify-center items-start pt-8 -mb-8 -ml-8">
           <div className="cover flex-initial mb-8 ml-8 w-64">
-            <Img
-              className="shadow-xl"
-              objectFit="cover"
-              objectPosition="50% 50%"
-              fluid={featureImg.childImageSharp.fluid}
-              alt=""
-            />
+            <div className="relative rounded shadow-2xl overflow-hidden">
+              <span
+                className="absolute z-10 top-0 left-0 w-full h-full bg-repeat-y bg-contain"
+                style={{ backgroundImage: `url(` + BookOverlay + `)` }}
+              />
+              <Img
+                className="shadow-xl"
+                objectFit="cover"
+                objectPosition="50% 50%"
+                fluid={featureImg.childImageSharp.fluid}
+                alt=""
+              />
+            </div>
           </div>
           <div className="about flex-1 mb-8 ml-8">
-            <div className="py-4 text-xl">“ {blurb} ”</div>
-
-            <hr />
+            {blurb && (
+              <div className="">
+                <h3 className="text-xl font-bold">About</h3>
+                <div className="text-lg mt-4">{blurb}</div>
+              </div>
+            )}
 
             {features && (
-              <>
-                <ul className="mt-2 grid grid-flow-row gap-2 text-lg">
+              <div className="mt-8">
+                <h3 className="text-xl font-bold">Features</h3>
+
+                <ul className="mt-4 grid grid-flow-row gap-2 text-lg">
                   {features.map((feature, i) => {
                     return (
                       <li
                         key={i}
-                        className="py-2 px-4 border-2 border-gray-900"
+                        className="flex justify-start items-start text-xl leading-none"
                       >
-                        {feature}
+                        <div className="img mr-2">
+                          <FaCheckSquare />
+                        </div>
+                        <div className="msg">{feature}</div>
                       </li>
                     )
                   })}
                 </ul>
-              </>
+              </div>
             )}
 
-            {/* TODO: Make dynamic */}
-            <ul className="mt-2 grid grid-flow-cols grid-cols-1 sm:grid-cols-2 gap-2 text-center">
-              <li className="p-2 border-2 border-gray-900">
-                <b className="block font-black text-lg">24</b> Chapters
-              </li>
-              <li className="p-2 border-2 border-gray-900">
-                <b className="block font-black text-lg">248</b> Pages
-              </li>
-              <li className="p-2 border-2 border-gray-900">
-                Ages <b className="block font-black text-lg">12+</b>
-              </li>
-              <li className="p-2 border-2 border-gray-900">
-                Language <b className="block font-black text-lg">English</b>
-              </li>
-            </ul>
+            {meta && (
+              <ul
+                className="mt-8 grid grid-flow-cols gap-4 p-4 text-center bg-gray-200 rounded"
+                style={{
+                  gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))",
+                }}
+              >
+                {metaArray.map(([key, value], i) => {
+                  return (
+                    <li key={i}>
+                      <b className="block text-xl font-black">{value}</b>
+                      <small className="uppercase text-xs">{key}</small>{" "}
+                    </li>
+                  )
+                })}
+              </ul>
+            )}
+
+            <div className="prose mt-8">
+              <MDXProvider>
+                <MDXRenderer>{body}</MDXRenderer>
+              </MDXProvider>
+            </div>
           </div>
         </div>
-
-        {}
       </div>
     </Layout>
   )
@@ -122,12 +166,18 @@ export const query = graphql`
       }
       childMdx {
         id
-        rawBody
+        body
         frontmatter {
           title
           blurb
           author
           features
+          meta {
+            ages
+            chapters
+            language
+            pages
+          }
           date(formatString: "MMMM DD, YYYY")
           published(formatString: "MMMM DD, YYYY")
           last_updated(formatString: "MMMM DD, YYYY")

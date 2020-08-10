@@ -3,11 +3,15 @@ import { useStaticQuery, graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 
 import "../../../Reset.scss"
+import BookOverlay from "../../../../content/admin/book-overlay.png"
 
 const SecLibrary = () => {
   const data = useStaticQuery(graphql`
     {
-      allFile(filter: { fields: { type: { eq: "book" } } }) {
+      allFile(
+        filter: { fields: { type: { eq: "book" } } }
+        sort: { fields: childMdx___frontmatter___title }
+      ) {
         edges {
           node {
             fields {
@@ -42,16 +46,16 @@ const SecLibrary = () => {
       <ul
         className="grid gap-8 list-none mx-auto max-w-typo"
         style={{
-          gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
         }}
       >
         {data.allFile.edges.map(({ node }, i) => {
           const {
             author,
-            blurb,
+            // blurb,
             // date,
             // features,
-            published,
+            // published,
             title,
             featureImg,
           } = node.childMdx.frontmatter
@@ -59,9 +63,16 @@ const SecLibrary = () => {
 
           return (
             <li key={i} className="p-0 m-0">
-              <article className="flex justify-start items-stretch h-full">
-                <div className="flex-initial m-0 max-w-full w-32">
-                  <Link to={slug} className="block no-underline h-full">
+              <article>
+                <div className="m-0 max-w-full w-64">
+                  <Link
+                    to={slug}
+                    className="relative block no-underline h-full rounded shadow-lg overflow-hidden"
+                  >
+                    <span
+                      className="absolute z-10 top-0 left-0 w-full h-full bg-repeat-y bg-contain"
+                      style={{ backgroundImage: `url(` + BookOverlay + `)` }}
+                    />
                     <Img
                       // className="h-full"
                       className="shadow-xl"
@@ -72,25 +83,13 @@ const SecLibrary = () => {
                     />
                   </Link>
                 </div>
-                <div className="flex-1 flex flex-wrap justify-start items-start">
-                  <div className="flex-0 w-full px-4">
-                    <h3 className="m-0 text-2xl">
-                      <Link to={slug} className="no-underline">
-                        {title}
-                      </Link>
-                    </h3>
-                    <p className="m-0 text-xs">by {author}</p>
-                    <p className="mt-0 text-xs">{published}</p>
-
-                    <p>{blurb}</p>
-                  </div>
-                  <footer className="flex-initial w-full mt-auto">
-                    <div className="px-4">
-                      <Link to={slug} className="btn-primary text-sm table">
-                        Learn More
-                      </Link>
-                    </div>
-                  </footer>
+                <div className="mt-2">
+                  <h3 className="m-0">
+                    <Link to={slug} className="no-underline">
+                      {title}
+                    </Link>
+                  </h3>
+                  <p className="m-0 text-xs">by {author}</p>
                 </div>
               </article>
             </li>
