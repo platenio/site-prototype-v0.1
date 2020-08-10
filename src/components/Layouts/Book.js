@@ -1,6 +1,8 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import Img from "gatsby-image"
+import { MDXProvider } from "@mdx-js/react"
+import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import { FaArrowLeft, FaCheckSquare } from "react-icons/fa"
 
@@ -29,6 +31,7 @@ import "../../Reset.scss"
 
 const LayoutBook = ({ data }) => {
   const { slug } = data.file.fields
+  const { body } = data.file.childMdx
   const {
     title,
     published,
@@ -131,8 +134,6 @@ const LayoutBook = ({ data }) => {
                   gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))",
                 }}
               >
-                {/* <pre>{JSON.stringify(metaArray, null, 4)}</pre> */}
-                {/* {console.log(Array.from(metaArray[0], x => x))} */}
                 {metaArray.map(([key, value], i) => {
                   return (
                     <li key={i}>
@@ -143,10 +144,14 @@ const LayoutBook = ({ data }) => {
                 })}
               </ul>
             )}
+
+            <div className="prose mt-8">
+              <MDXProvider>
+                <MDXRenderer>{body}</MDXRenderer>
+              </MDXProvider>
+            </div>
           </div>
         </div>
-
-        {}
       </div>
     </Layout>
   )
@@ -161,7 +166,7 @@ export const query = graphql`
       }
       childMdx {
         id
-        rawBody
+        body
         frontmatter {
           title
           blurb

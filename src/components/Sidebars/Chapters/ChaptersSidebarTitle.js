@@ -1,9 +1,9 @@
 import React from "react"
-import { graphql, useStaticQuery } from "gatsby"
 import { Link } from "gatsby"
 
 const ChaptersSidebarTitle = ({ book }) => {
-  const { slug, title, author } = book.childMdx.frontmatter
+  const { title, author } = book.childMdx.frontmatter
+  const { slug } = book.fields
 
   return (
     <header className="px-4">
