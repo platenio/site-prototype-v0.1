@@ -2,11 +2,11 @@ import React from "react"
 
 const PlatenArray = () => {
   return (
-    <div className="flex pt-2 pr-2 -mb-2 -ml-2">
-      <span className="flex-1 pb-1 mb-2 ml-3 bg-gray-900"></span>
-      <span className="w-20 max-w-full pb-1 mb-2 ml-2 bg-cmykRed-500"></span>
-      <span className="w-20 max-w-full pb-1 mb-2 ml-2 bg-cmykBlue-500"></span>
-      <span className="w-20 max-w-full pb-1 mb-2 ml-2 bg-cmykYellow-500"></span>
+    <div className="w-full flex space-x-2">
+      <span className="h-1 flex-1 bg-gray-200"></span>
+      <span className="h-1 w-6 max-w-full bg-cmykRed-500"></span>
+      <span className="h-1 w-8 max-w-full bg-cmykBlue-500"></span>
+      <span className="h-1 w-12 max-w-full bg-cmykYellow-500"></span>
     </div>
   )
 }

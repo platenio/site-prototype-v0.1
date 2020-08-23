@@ -4,12 +4,12 @@ import { graphql, useStaticQuery, Link } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
-import "./HeaderLinks.scss"
+import "./HeaderLinks.css"
 
 const HeaderLinks = props => {
   const data = useStaticQuery(graphql`
     {
-      file(relativePath: { eq: "admin/header-links.mdx" }) {
+      file(sourceInstanceName: { eq: "globals" }, name: { eq: "main-nav" }) {
         childMdx {
           body
         }
@@ -23,7 +23,7 @@ const HeaderLinks = props => {
         {...props}
         to={props.href}
         tabIndex="0"
-        className="btn-secondary"
+        className="btn-ghost"
         activeClassName="active"
       />
     ),

@@ -1,0 +1,134 @@
+/* Primary – */
+.btn-defaults {
+  @apply block py-2 px-2 text-center font-bold border-3 border-transparent no-underline cursor-pointer;
+}
+
+.btn-ghost {
+  @apply btn-defaults text-cmykBlue-500;
+
+  &:focus,
+  &:hover {
+    @apply bg-cmykBlue-100;
+  }
+  &:active {
+    @apply bg-cmykBlue-100;
+  }
+  &.active {
+    @apply text-gray-900;
+  }
+}
+.btn-ghost-alt {
+  @apply btn-ghost text-white;
+
+  &:focus,
+  &:hover {
+    @apply bg-cmykBlue-800;
+  }
+  &:active {
+    @apply bg-cmykBlue-700;
+  }
+  &.active {
+    @apply text-white bg-cmykBlue-500;
+  }
+}
+.btn-dark {
+  @apply btn-defaults text-cmykBlue-500 bg-gray-900;
+
+  &:focus,
+  &:hover {
+    @apply bg-cmykBlue-800;
+  }
+  &:active {
+    @apply bg-cmykBlue-700;
+  }
+  &.active {
+    @apply text-white bg-cmykBlue-500;
+  }
+}
+.btn-primary {
+  @apply btn-defaults text-white bg-cmykBlue-500;
+
+  &:focus,
+  &:hover {
+    @apply bg-cmykBlue-400;
+  }
+  &:active {
+    @apply bg-cmykBlue-300;
+  }
+  &.active {
+    @apply text-cmykBlue-500 bg-white;
+  }
+}
+.btn-light {
+  @apply btn-defaults text-cmykBlue-500 bg-white;
+
+  &:focus,
+  &:hover {
+    @apply bg-cmykBlue-100;
+  }
+  &:active {
+    @apply bg-cmykBlue-100;
+  }
+  &.active {
+    @apply text-gray-900;
+  }
+}
+.btn-primary {
+
+}
+.btn-primary-rev {}
+
+/* .btn-primary {
+  @apply btn-defaults text-white bg-gray-900 border-transparent bg-green-500;
+
+  &:focus,
+  &:hover {
+    @apply text-white bg-gray-700 border-transparent;
+  }
+  &.active,
+  &:active {
+    @apply text-white bg-gray-900 border-gray-700;
+  }
+} */
+
+/* Secondary – */
+/* .btn-secondary {
+  @apply btn-defaults text-gray-900 border-transparent bg-blue-500;
+
+  &:focus,
+  &:hover {
+    @apply text-gray-900 bg-gray-400;
+  }
+  &.active,
+  &:active {
+    @apply text-gray-900 bg-gray-200;
+  }
+} */
+
+/* Invert – */
+/* .btn-invert {
+  @apply btn-defaults text-gray-500 bg-transparent border-transparent bg-red-500;
+
+  &:focus,
+  &:hover {
+    @apply text-gray-400 bg-transparent;
+  }
+  &.active,
+  &:active {
+    @apply text-gray-200 bg-gray-700;
+  }
+} */
+
+/* Outline – */
+/* .btn-outline {
+  @apply btn-secondary border-gray-900 bg-orange-500;
+
+  &:focus,
+  &:hover {
+    @apply text-white bg-gray-700 border-gray-900;
+  }
+  &.active,
+  &:active {
+    @apply text-white bg-gray-900 border-gray-700;
+  }
+} */

@@ -2,6 +2,9 @@ const typoMaxW = "65ch"
 
 module.exports = {
   important: true,
+  future: {
+    removeDeprecatedGapUtilities: true,
+  },
   purge: ["./src/**/*.html", "./src/**/*.js", "./src/**/*.jsx"],
   theme: {
     // debugScreens: {
@@ -99,32 +102,32 @@ module.exports = {
         },
       },
     },
-    typography: {
-      default: {
-        css: {
-          maxWidth: false,
-          p: { maxWidth: typoMaxW },
-          strong: { maxWidth: typoMaxW },
-          ul: { maxWidth: typoMaxW },
-          ol: { maxWidth: typoMaxW },
-          hr: { maxWidth: typoMaxW },
-          blockquote: { maxWidth: typoMaxW },
-          h1: { maxWidth: typoMaxW },
-          h2: { maxWidth: typoMaxW },
-          h3: { maxWidth: typoMaxW },
-          h4: { maxWidth: typoMaxW },
-          pre: { maxWidth: typoMaxW },
-          code: { maxWidth: typoMaxW },
-          table: { maxWidth: typoMaxW },
-          "ol > li::before": false,
-          "ol > li::after": false,
-          "ul > li::before": false,
-          "ul > li::after": false,
-          "code::before": false,
-          "code::after": false,
-        },
-      },
-    },
+    //   typography: {
+    //     default: {
+    //       css: {
+    //         maxWidth: false,
+    //         p: { maxWidth: typoMaxW },
+    //         strong: { maxWidth: typoMaxW },
+    //         ul: { maxWidth: typoMaxW },
+    //         ol: { maxWidth: typoMaxW },
+    //         hr: { maxWidth: typoMaxW },
+    //         blockquote: { maxWidth: typoMaxW },
+    //         h1: { maxWidth: typoMaxW },
+    //         h2: { maxWidth: typoMaxW },
+    //         h3: { maxWidth: typoMaxW },
+    //         h4: { maxWidth: typoMaxW },
+    //         pre: { maxWidth: typoMaxW },
+    //         code: { maxWidth: typoMaxW },
+    //         table: { maxWidth: typoMaxW },
+    //         "ol > li::before": false,
+    //         "ol > li::after": false,
+    //         "ul > li::before": false,
+    //         "ul > li::after": false,
+    //         "code::before": false,
+    //         "code::after": false,
+    //       },
+    //     },
+    //   },
   },
   variants: [
     "responsive",
@@ -136,6 +139,6 @@ module.exports = {
     "visited",
     "disabled",
   ],
-  plugins: [require("@tailwindcss/typography")],
+  // plugins: [require("@tailwindcss/typography")],
   // plugins: [require("tailwindcss-debug-screens")],
 }

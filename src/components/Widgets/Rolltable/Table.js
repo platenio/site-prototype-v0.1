@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 
+import "../../../styles/components/buttons.css"
+
 import TableCell from "./TableCell.js"
 
 export default class Table extends Component {
@@ -23,23 +25,31 @@ export default class Table extends Component {
     }
   }
 
-  handleRandomCell = (currentCol, e) => {
+  handleRandomCell = (col, e) => {
     if (e) {
-      if (e.keyCode !== 32 && e.keyCode !== 13) {
+      if (e.keyCode !== 13) {
+        console.log("handleRandomCell", e.keyCode)
         return
       }
     }
 
-    const col = this.state.table[currentCol]
-    const rowLength = col.length
+    const curCol = this.state.table[col]
+    const rowLength = curCol.length
     const rowMin = Math.ceil(1) // avoid head, 0
     const rowMax = Math.floor(rowLength)
     const randomRow = Math.floor(Math.random() * (rowMax - rowMin) + rowMin)
 
-    this.handleActiveCell(randomRow, currentCol)
+    this.handleActiveCell(randomRow, col)
   }
 
-  handleActiveCell = (row, col) => {
+  handleActiveCell = (row, col, e) => {
+    if (e) {
+      if (e.keyCode !== 13) {
+        console.log("handleActiveCell", e.keyCode)
+        return
+      }
+    }
+
     // create table clone
     let table = [...this.state.table]
     const colLength = table.length
@@ -64,8 +74,8 @@ export default class Table extends Component {
     let resultsTemplate = []
     let newResults = [...this.state.results]
     let resultsMsg = this.props.resultsMsg && [...this.props.resultsMsg]
-    let baseStyles =
-      "leading-none font-bold text-cmykBlue-500 bg-cmykBlue-100 bg-opacity-25 cursor-pointer hover:bg-cmykBlue-100 hover:bg-opacity-100 focus:bg-cmykBlue-100 focus:bg-opacity-100 active:bg-cmykBlue-200 active:bg-opacity-100 select-none"
+    let baseStyles = " btn-ghost"
+    // "leading-none font-bold text-cmykBlue-500 bg-cmykBlue-100 bg-opacity-25 cursor-pointer hover:bg-cmykBlue-100 hover:bg-opacity-100 focus:bg-cmykBlue-100 focus:bg-opacity-100 active:bg-cmykBlue-200 active:bg-opacity-100 select-none"
 
     // For variables not yet randomized, insert ...
     for (var i = 0; i < colLength; i++) {
@@ -101,7 +111,7 @@ export default class Table extends Component {
                 key={i}
                 tabIndex="0"
                 onClick={() => this.handleRandomCell(matchIndex)}
-                onKeyPress={e => this.handleRandomCell(matchIndex, e)}
+                onKeyUp={e => this.handleRandomCell(matchIndex, e)}
                 className={`inline-block p-1 -mx-1 ` + baseStyles}
               >
                 {value}
@@ -124,7 +134,7 @@ export default class Table extends Component {
             key={i}
             tabIndex="0"
             onClick={() => this.handleRandomCell(i)}
-            onKeyPress={e => this.handleRandomCell(i, e)}
+            onKeyUp={e => this.handleRandomCell(i, e)}
             className={
               `flex justify-center items-start h-full p-2 mb-2 ml-2 ` +
               (!itemLength && "bg-cmykRed-100 text-cmykRed-500 ") +
@@ -194,21 +204,23 @@ export default class Table extends Component {
     for (var dataIndex = 0; dataIndex < rowLength; dataIndex++) {
       const tableRowData = []
       const tableRow = []
-      let key
       let tableRowIndex = dataIndex === 0 && true
+
+      function findData(row, col) {
+        const key = row + "-" + col
+        return tableData.findIndex(data => data.key === key)
+      }
 
       // for each col, add to row
       for (var colIndex = 0; colIndex < colLength; colIndex++) {
-        key = dataIndex + "-" + colIndex
-        const data = tableData.findIndex(data => data.key === key)
-
-        tableRowData.push(tableData[data])
+        const tableDataNew = findData(dataIndex, colIndex)
+        tableRowData.push(tableData[tableDataNew])
       }
 
       // build row
       tableRow.push(
         <tr
-          key={`tr-` + key}
+          key={dataIndex}
           className={
             `bg-gray-800 ` +
             (!tableRowIndex && `odd:bg-gray-700 odd:bg-opacity-25`)

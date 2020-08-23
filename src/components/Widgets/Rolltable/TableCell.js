@@ -3,28 +3,19 @@ import React, { Component } from "react"
 // import { FaSortAlphaUp, FaSortAlphaDown } from "react-icons/fa"
 
 export default class TableCell extends Component {
-  constructor(props) {
-    super(props)
-
-    // this.state = {
-    //   activeHead: false,
-    //   activeCell: false,
-    // }
-  }
-
   render() {
-    const styleBase =
-      "m-0 text-gray-500 leading-none transition-color ease-in-out duration-300 cursor-pointer"
-
-    const styleTH =
-      styleBase +
+    const styleCell = "m-0"
+    const styleCellBase =
+      "text-gray-500 leading-none transition-color ease-in-out duration-300 cursor-pointer"
+    const styleTHCell =
+      styleCellBase +
       " pt-2 pb-1 border-r border-gray-700 hover:text-white hover:bg-gray-700 select-none"
 
-    const styleTD =
-      styleBase + " p-1 border-t border-r border-gray-700 hover:bg-gray-900"
+    const styleTDCell =
+      styleCellBase + " p-1 border-t border-r border-gray-700 hover:bg-gray-900"
     // const styleTDActive = ""
 
-    const styleTDSpan = "p-1"
+    const styleTDSpan = "block p-1"
     const styleTDSpanActive =
       "text-gray-900 bg-cmykYellow-500 hover:bg-cmykYellow-200 rounded-sm"
 
@@ -44,28 +35,34 @@ export default class TableCell extends Component {
     return (
       <>
         {thead ? (
-          <th
-            onClick={() => {
-              handleRandomCell(col)
-            }}
-            className={styleTH}
-          >
+          <th className={styleCell}>
             {children.length > 0 && (
-              <div className={styleTDSpan}>{children}</div>
+              <div
+                className={styleTHCell}
+                tabIndex="0"
+                role="button"
+                onClick={() => handleRandomCell(col)}
+                onKeyPress={e => handleRandomCell(col, e)}
+              >
+                <span className={styleTDSpan}>{children}</span>
+              </div>
             )}
           </th>
         ) : (
-          <td
-            onClick={() => {
-              handleActiveCell(row, col)
-            }}
-            className={styleTD}
-          >
+          <td className={styleCell}>
             {children.length > 0 && (
               <div
-                className={styleTDSpan + ` ` + (active && styleTDSpanActive)}
+                className={styleTDCell}
+                onClick={() => handleActiveCell(row, col)}
+                onKeyPress={e => handleActiveCell(row, col, e)}
+                role="button"
+                tabIndex="0"
               >
-                {children}
+                <span
+                  className={styleTDSpan + ` ` + (active && styleTDSpanActive)}
+                >
+                  {children}
+                </span>
               </div>
             )}
           </td>

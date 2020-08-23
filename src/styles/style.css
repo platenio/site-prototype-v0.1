@@ -1,0 +1,53 @@
+/* @import "./prose.css"; */
+@import "./components/buttons.css";
+
+@tailwind base;
+@tailwind components;
+
+body {
+  @apply bg-gray-100 font-open-sans;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-200;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-800 cursor-move;
+}
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  @apply block m-0 p-0 align-middle;
+}
+
+/* table {
+  max-width: initial;
+  font-size: initial;
+  line-height: initial;
+  margin-top: initial;
+  margin-bottom: initial;
+
+  th,
+  td {
+    color: initial;
+    padding: initial;
+    margin: initial;
+  }
+  tr {
+    border: initial;
+  }
+} */
+
+@tailwind utilities;

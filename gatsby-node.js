@@ -4,46 +4,35 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-const regexPages = /^pages\//g
+// Create META for MDX Pages
+const regexAuthors = /^authors\/(?!index).+?.mdx/g
 const regexBooks = /^(books\/)((?!chapter(s\b|\b)).)*(\/index.mdx)$/g
-const regexChapters = /^(books\/)(.+?\/)(chapter(s\b|\b)\/+?)(\d*\/)(index.mdx)/g
-
+const regexChapters = /^(books\/)(.+?\/)(chapter(s\b|\b)-\d*.mdx)/g
 const { createFilePath } = require("gatsby-source-filesystem")
 
-// Create slugs for MDX Pages
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
-  // if (node.internal.type === "Mdx") {
-  //   // console.log("MATCHED PAGE", { node })
-  //   node.relativePath && console.log("MATCHED PAGE", node.relativePath)
-  //   // if (node.relativePath) {
-  //   // if (node.relativePath.match(/^pages\//g)) {
-  //   // console.log("MATCHED PAGE", value)
-  //   // }
-  //   // }
-  // }
-  if (node.relativePath) {
-    const value = createFilePath({ node, getNode })
-
-    if (node.relativePath.match(regexPages)) {
-      // console.log("PAGE", node.relativePath)
-      const slug = value.replace("pages/", "")
+  // Select only /src/pages/**/*.mdx
+  if (node.relativePath && node.sourceInstanceName === "pages") {
+    // --- Author Pages ---
+    if (node.relativePath.match(regexAuthors)) {
+      const slug = createFilePath({ node, getNode })
 
       createNodeField({
         name: "type",
         node,
-        value: `page`,
+        value: `author`,
       })
       createNodeField({
         name: "slug",
         node,
         value: `${slug}`,
       })
-    }
-    if (node.relativePath.match(regexBooks)) {
-      // console.log("BOOK", node.relativePath)
 
+      // --- Book Pages ---
+    } else if (node.relativePath.match(regexBooks)) {
+      const slug = createFilePath({ node, getNode })
       const book = node.relativePath.replace("books/", "").replace(/\/.*/g, "")
 
       createNodeField({
@@ -54,21 +43,21 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       createNodeField({
         name: "slug",
         node,
-        value: `${value}`,
+        value: `${slug}`,
       })
       createNodeField({
         name: "book",
         node,
         value: `${book}`,
       })
-    }
 
-    if (node.relativePath.match(regexChapters)) {
-      // console.log("CHAPTER", node.relativePath)
+      // --- Chapter Pages ---
+    } else if (node.relativePath.match(regexChapters)) {
+      const slug = createFilePath({ node, getNode })
       const book = node.relativePath.replace("books/", "").replace(/\/.*/g, "")
       const chapter = node.relativePath
-        .replace(/^(books\/)(.+?\/)(chapter(s\b|\b)\/+?)/g, "")
-        .replace(/\/.*/g, "")
+        .replace(/^(books\/)(.+?\/)(chapter(s\b|\b)-)/g, "")
+        .replace(/.mdx/g, "")
 
       createNodeField({
         name: "type",
@@ -76,35 +65,51 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
         value: `chapter`,
       })
       createNodeField({
+        name: "slug",
+        node,
+        value: `${slug}`,
+      })
+      createNodeField({
         name: "chapter",
         node,
         value: `${chapter}`,
-      })
-      createNodeField({
-        name: "slug",
-        node,
-        value: `${value}`,
       })
       createNodeField({
         name: "book",
         node,
         value: `${book}`,
       })
+
+      // --- Underpages ---
+    } else {
+      const slug = createFilePath({ node, getNode })
+
+      createNodeField({
+        name: "type",
+        node,
+        value: `underpage`,
+      })
+      createNodeField({
+        name: "slug",
+        node,
+        value: `${slug}`,
+      })
     }
   }
 }
 
+// Build pages
 const path = require("path")
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
   // ------------------
-  // Create Pages
+  // Create Authors
   // ------------------
-  let pagesQuery = await graphql(`
+  let queryAuthors = await graphql(`
     query {
-      allFile(filter: { fields: { type: { eq: "page" } } }) {
+      allFile(filter: { fields: { type: { eq: "author" } } }) {
         edges {
           node {
             id
@@ -116,27 +121,27 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       }
     }
   `)
-  if (pagesQuery.errors) {
+  if (queryAuthors.errors) {
     reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query')
   }
 
-  const pages = pagesQuery.data.allFile.edges
+  const authors = queryAuthors.data.allFile.edges
 
-  pages.forEach(({ node }, index) => {
-    const slug = node.fields.slug.replace(/\pages\//g, "")
+  authors.forEach(({ node }, index) => {
+    const slug = node.fields.slug
+    const template = path.resolve(`./src/templates/Authors/Author.js`)
 
     createPage({
       path: slug,
-      component: path.resolve(`./src/components/Layouts/Underpage.js`),
-      context: { type: "page", id: node.id },
+      component: template,
+      context: { id: node.id },
     })
   })
 
   // ------------------
-  // Create Book Pages
+  // Create Books & Pages
   // ------------------
-  //
-  let booksQuery = await graphql(`
+  let queryBooks = await graphql(`
     query {
       allFile(filter: { fields: { type: { eq: "book" } } }) {
         edges {
@@ -150,27 +155,38 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       }
     }
   `)
-  if (booksQuery.errors) {
+  if (queryBooks.errors) {
     reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query')
   }
 
-  const books = booksQuery.data.allFile.edges
+  const books = queryBooks.data.allFile.edges
 
   books.forEach(({ node }, index) => {
     const slug = node.fields.slug
+    const templateBook = path.resolve(`./src/templates/Books/Book/Book.js`)
+    const templateBookContents = path.resolve(
+      `./src/templates/Books/Book/Contents.js`
+    )
 
+    // About
     createPage({
       path: slug,
-      component: path.resolve(`./src/components/Layouts/Book.js`),
+      component: templateBook,
+      context: { id: node.id },
+    })
+
+    // Contents
+    createPage({
+      path: slug + "contents/",
+      component: templateBookContents,
       context: { id: node.id },
     })
   })
 
   // ------------------
-  // Create Book Pages
+  // Create Book Chapters
   // ------------------
-  //
-  let chaptersQuery = await graphql(`
+  let queryBookChapters = await graphql(`
     query {
       allFile(filter: { fields: { type: { eq: "chapter" } } }) {
         edges {
@@ -184,18 +200,53 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       }
     }
   `)
-  if (chaptersQuery.errors) {
+  if (queryBookChapters.errors) {
     reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query')
   }
 
-  const chapters = chaptersQuery.data.allFile.edges
+  const chapters = queryBookChapters.data.allFile.edges
 
   chapters.forEach(({ node }, index) => {
     const slug = node.fields.slug
+    const template = path.resolve(`./src/templates/Books/Book/Chapter.js`)
 
     createPage({
       path: slug,
-      component: path.resolve(`./src/components/Layouts/Chapter.js`),
+      component: template,
+      context: { id: node.id },
+    })
+  })
+
+  // ------------------
+  // Create Underpages
+  // ------------------
+  let queryPages = await graphql(`
+    query {
+      allFile(filter: { fields: { type: { eq: "underpage" } } }) {
+        edges {
+          node {
+            id
+            fields {
+              slug
+            }
+          }
+        }
+      }
+    }
+  `)
+  if (queryPages.errors) {
+    reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query')
+  }
+
+  const pages = queryPages.data.allFile.edges
+
+  pages.forEach(({ node }, index) => {
+    const slug = node.fields.slug
+    const template = path.resolve(`./src/templates/Underpage.js`)
+
+    createPage({
+      path: slug,
+      component: template,
       context: { id: node.id },
     })
   })

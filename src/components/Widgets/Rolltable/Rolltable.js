@@ -14,16 +14,8 @@ import Table from "./Table"
 
 // import Notes from "./Notes.mdx"
 
-import {
-  FaBug,
-  FaSprayCan,
-  FaExpandArrowsAlt,
-  FaCompressArrowsAlt,
-  FaDiceD20,
-  FaInfoCircle,
-} from "react-icons/fa"
-
-import "../../../Reset.scss"
+import { FaBug, FaSprayCan, FaDiceD20, FaInfoCircle } from "react-icons/fa"
+import { RiTableAltFill, RiCloseCircleFill } from "react-icons/ri"
 
 export default class Rolltable extends Component {
   constructor(props) {
@@ -67,7 +59,7 @@ export default class Rolltable extends Component {
         <div
           role="form"
           id={`rolltable-${tableName}`}
-          className="Reset relative w-full block mt-8 border-3 border-gray-900 bg-white overflow-hidden"
+          className="relative w-full block mt-8 border-3 border-gray-900 bg-white overflow-hidden"
         >
           {/*
           ------------------
@@ -75,16 +67,16 @@ export default class Rolltable extends Component {
           ------------------
           */}
           <header className="bg-gray-100">
-            <div className="w-full flex justify-center items-stretch pt-4 px-4">
+            <div className="w-full flex justify-center items-center py-2 px-4">
               {/*
               ------------------
               HEADER
               ------------------
               */}
-              <div className="flex-auto">
+              <div className="flex-auto prose">
                 <h3>{name}</h3>
 
-                {caption && <h4 className="italic">{caption}</h4>}
+                {caption && <p>{caption}</p>}
               </div>
 
               {/*
@@ -93,11 +85,11 @@ export default class Rolltable extends Component {
               ------------------
               */}
               <div>
-                <ul className="flex-initial flex flex-wrap justify-center items-start pt-1 pr-1 -mb-1 -ml-1">
+                <ul className="flex-initial flex flex-wrap justify-center items-start space-x-1">
                   {showDebug === true && (
-                    <li className="mb-1 ml-1">
+                    <li>
                       <button
-                        className="btn-primary text-xs flex justify-center items-center"
+                        className="btn-light flex justify-center items-center"
                         id={`rolltable-${tableName}-debug`}
                         onClick={this.toggleDebug}
                       >
@@ -108,10 +100,10 @@ export default class Rolltable extends Component {
                       </button>
                     </li>
                   )}
-                  <li className="mb-1 ml-1">
+                  <li>
                     {this.state.fileData && (
                       <button
-                        className="btn-primary text-xs flex justify-center items-center"
+                        className="btn-light flex justify-center items-center"
                         id={`rolltable-${tableName}-collapser`}
                         onClick={this.toggleTableCollapse}
                       >
@@ -119,9 +111,9 @@ export default class Rolltable extends Component {
                           {this.state.collapse ? "Open" : "Hide"} Module
                         </span>
                         {this.state.collapse ? (
-                          <FaExpandArrowsAlt />
+                          <RiTableAltFill />
                         ) : (
-                          <FaCompressArrowsAlt />
+                          <RiCloseCircleFill />
                         )}
                       </button>
                     )}
@@ -196,7 +188,6 @@ export default class Rolltable extends Component {
                     id={`rolltable-${tableName}-collapser`}
                     className="flex-1 btn-primary"
                     style={{ flexBasis: "200px" }}
-                    // onClick={() => getRandomEntries(tableName)}
                     onClick={() => this.handleRandomAll()}
                   >
                     <span className="flex justify-center items-center">

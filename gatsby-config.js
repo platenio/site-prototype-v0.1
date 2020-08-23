@@ -16,13 +16,30 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        name: `images`,
+        path: `${__dirname}/src/img`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `globals`,
+        path: `${__dirname}/src/globals`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
         name: `pages`,
-        path: `${__dirname}/content`,
+        path: `${__dirname}/src/content`,
       },
     },
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
+        // defaultLayouts: {
+        //   default: require.resolve("./src/templates/Underpage.js"),
+        // },
         gatsbyRemarkPlugins: [
           "gatsby-plugin-mdx-prismjs",
           {
@@ -44,7 +61,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `csv`,
-        path: `${__dirname}/content/csv`,
+        path: `${__dirname}/static/csv`,
       },
     },
     {
@@ -56,13 +73,7 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-sass`,
-      options: {
-        postCssPlugins: [
-          require("tailwindcss"),
-          require("./tailwind.config.js"), // Optional: Load custom Tailwind CSS configuration
-        ],
-      },
+      resolve: `gatsby-plugin-postcss`,
     },
     `gatsby-plugin-emotion`,
     // // this (optional) plugin enables Progressive Web App + Offline functionality

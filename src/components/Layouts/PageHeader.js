@@ -1,6 +1,8 @@
 import React from "react"
 // import { Link } from "gatsby"
 
+import "../../styles/prose.css"
+
 import PlatenArray from "./PlatenArray"
 
 const PageHeader = ({ children }) => {
@@ -8,7 +10,9 @@ const PageHeader = ({ children }) => {
     <header className="pb-4 prose">
       {children}
 
-      <PlatenArray />
+      <div className="mt-2">
+        <PlatenArray />
+      </div>
     </header>
   )
 }
