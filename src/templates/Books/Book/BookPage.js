@@ -24,7 +24,7 @@ const BookPage = props => {
       }
       sidebarRight={false}
     >
-      <div className="prosed mx-auto">{props.children}</div>
+      <div className="prose mx-auto">{props.children}</div>
     </Layout>
   )
 }

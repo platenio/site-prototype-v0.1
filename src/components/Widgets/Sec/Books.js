@@ -38,7 +38,7 @@ const SecBooks = () => {
   `)
 
   return (
-    <section className="bg-gray-200 p-8 -mx-8">
+    <section className="bg-gray-100 p-8 -mx-8">
       <ul
         className="grid gap-8 list-none mx-auto max-w-typo"
         style={{
@@ -60,7 +60,7 @@ const SecBooks = () => {
                 <div className="m-0 max-w-full w-64">
                   <Link
                     to={slug}
-                    className="relative block no-underline h-full rounded shadow-lg overflow-hidden"
+                    className="relative block no-underline h-full rounded-lg rounded-tl-sm rounded-bl-sm shadow-lg overflow-hidden"
                   >
                     <span
                       className="absolute z-10 top-0 left-0 w-full h-full bg-repeat-y bg-contain"

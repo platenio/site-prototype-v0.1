@@ -10,6 +10,7 @@ module.exports = {
     `gatsby-plugin-smoothscroll`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-netlify-cms`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-remark-images`,
@@ -41,7 +42,6 @@ module.exports = {
         //   default: require.resolve("./src/templates/Underpage.js"),
         // },
         gatsbyRemarkPlugins: [
-          "gatsby-plugin-mdx-prismjs",
           {
             resolve: `gatsby-remark-images`,
             options: {

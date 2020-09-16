@@ -3,14 +3,14 @@ import { graphql } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
-import "../styles/prose.css"
+import "../../styles/prose.css"
 
-import Layout from "./Layout"
-import PageHeader from "../components/Layouts/PageHeader"
+import Layout from "../Layout"
+import PageHeader from "../../components/Layouts/PageHeader"
 
-import { shortcodes } from "../components/Widgets/Widgets"
+import { shortcodes } from "../../components/Widgets/Widgets"
 
-const LayoutUnderpage = ({ data }) => {
+const LayoutBlog = ({ data }) => {
   const { frontmatter, body } = data.file.childMdx
   const { title, featureImg } = frontmatter
   const featureImgSrc = featureImg && featureImg.childImageSharp.fluid.src
@@ -33,7 +33,7 @@ const LayoutUnderpage = ({ data }) => {
 }
 
 export const query = graphql`
-  query pageQuery($id: String) {
+  query blogQuery($id: String) {
     file(id: { eq: $id }) {
       childMdx {
         body
@@ -45,4 +45,4 @@ export const query = graphql`
   }
 `
 
-export default LayoutUnderpage
+export default LayoutBlog

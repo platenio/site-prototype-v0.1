@@ -5,55 +5,35 @@ blurb: Tempore dolorem autem voluptates.
 updated: 2020-06-09
 ---
 
-# Custom Components
+## Custom Components
 
-## Sections
+### Sections
 
 <Nest title="<SecBooks />">
 
-### About
+#### About
 
 Showcase your book(s) with this section!
 
-### Code
-
-```
+```jsx live full
 <SecBooks />
 ```
-
-### Preview
-
-<SecBooks />
 
 </Nest>
 
-## Widgets
+### Widgets
 
 <Nest title="<Clip />">
 
-### About
+#### About
 
 Clips will automatically create waypoints to specified content. With these, you can share direct links to content you want to share and it'll also create a clip under the page index.
 
-### Code
-
-```
-<Clip id="test">
-
-#### This is a clip
-
-</Clip>
+```jsx live full
+<Clip id="test">#### This is a clip</Clip>
 ```
 
-### Preview
-
-<Clip id="test">
-
-#### This is a clip
-
-</Clip>
-
-### Attributes
+#### Attributes
 
 | name | required | accepts | defaults | desc                                          |
 | ---- | -------- | ------- | -------- | --------------------------------------------- |
@@ -63,33 +43,20 @@ Clips will automatically create waypoints to specified content. With these, you 
 
 <Nest title="<Nest />">
 
-### About
+#### About
 
 Nest's will tuck away content until needed.
 
-### Code
-
-```
+```jsx live full
 <Nest title="Title" maxHeight="none">
-
-  ### Nested contents
-
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque veniam illum at necessitatibus quam architecto quibusdam ipsa similique ducimus consequatur beatae, sint esse odio eum? Ipsum laboriosam necessitatibus impedit ipsa?
-
+  ### Nested contents Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  Itaque veniam illum at necessitatibus quam architecto quibusdam ipsa similique
+  ducimus consequatur beatae, sint esse odio eum? Ipsum laboriosam
+  necessitatibus impedit ipsa?
 </Nest>
 ```
 
-### Preview
-
-<Nest title="Title" maxHeight="none">
-
-### Nested contents
-
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque veniam illum at necessitatibus quam architecto quibusdam ipsa similique ducimus consequatur beatae, sint esse odio eum? Ipsum laboriosam necessitatibus impedit ipsa?
-
-</Nest>
-
-### Attributes
+#### Attributes
 
 | name      | required | accepts     | defaults | desc                                      |
 | --------- | -------- | ----------- | -------- | ----------------------------------------- |
@@ -101,26 +68,15 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque veniam illum at 
 
 <Nest title="<Rolltable />">
 
-### About
+#### About
 
 Rolltables are great for adding randomization to your CSV files.
 
-### Code
-
-```
-<Rolltable
-  name="Basic Day Rolltable"
-  src="samples/day.csv"
-/>
-```
-
-### Preview
-
+```jsx live full
 <Rolltable name="Basic Day Rolltable" src="samples/day.csv" />
-
-### Code
-
 ```
+
+```jsx live full
 <Rolltable
   name="Context Day Rolltable"
   caption="You can assign variables within your context!"
@@ -130,18 +86,7 @@ Rolltables are great for adding randomization to your CSV files.
 </Rolltable>
 ```
 
-### Preview
-
-<Rolltable
-  debug
-  name="Context Day Rolltable"
-  caption="You can assign variables within your context!"
-  src="samples/day.csv"
->
-  On <rtDay />, the World will end!
-</Rolltable>
-
-### Attributes
+#### Attributes
 
 | name    | required | accepts    | defaults | desc                           |
 | ------- | -------- | ---------- | -------- | ------------------------------ |

@@ -75,6 +75,27 @@ if (isAwesome) {
 }
 ```
 
+```js
+import React from "react"
+import Example from "./place"
+
+export default () => <Example />
+```
+
+```jsx render
+<div
+  style={{
+    backgroundColor: "rebeccapurple",
+    padding: "20px",
+    marginTop: "20px",
+  }}
+/>
+```
+
+```jsx live
+<div style={{ backgroundColor: "tomato", padding: "20px" }} />
+```
+
 ### Extras
 
 GitHub supports many extras in Markdown that help you reference and link to people. If you ever want to direct a comment at someone, you can prefix their name with an @ symbol: Hey @kneath — love your sweater!
@@ -139,9 +160,11 @@ _You **can** combine them_
 
 ## Images
 
-![GitHub Logo](/images/logo.png)
+![Chellocat](https://octodex.github.com/images/chellocat.jpg)
 
-Format: ![Alt Text](url)
+Format:
+
+\!\[Alt Text\]\(url\)
 
 ---
 

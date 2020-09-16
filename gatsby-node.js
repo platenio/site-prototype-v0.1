@@ -8,6 +8,8 @@
 const regexAuthors = /^authors\/(?!index).+?.mdx/g
 const regexBooks = /^(books\/)((?!chapter(s\b|\b)).)*(\/index.mdx)$/g
 const regexChapters = /^(books\/)(.+?\/)(chapter(s\b|\b)-\d*.mdx)/g
+const regexBlog = /^blog\/index.mdx/g
+const regexPosts = /^blog\/.+?.mdx/g
 const { createFilePath } = require("gatsby-source-filesystem")
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
@@ -78,6 +80,36 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
         name: "book",
         node,
         value: `${book}`,
+      })
+
+      // --- Blog Page ---
+    } else if (node.relativePath.match(regexBlog)) {
+      const slug = createFilePath({ node, getNode })
+
+      createNodeField({
+        name: "type",
+        node,
+        value: `blog`,
+      })
+      createNodeField({
+        name: "slug",
+        node,
+        value: `${slug}`,
+      })
+
+      // --- Blog Posts ---
+    } else if (node.relativePath.match(regexPosts)) {
+      const slug = createFilePath({ node, getNode })
+
+      createNodeField({
+        name: "type",
+        node,
+        value: `post`,
+      })
+      createNodeField({
+        name: "slug",
+        node,
+        value: `${slug}`,
       })
 
       // --- Underpages ---
@@ -209,6 +241,68 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   chapters.forEach(({ node }, index) => {
     const slug = node.fields.slug
     const template = path.resolve(`./src/templates/Books/Book/Chapter.js`)
+
+    createPage({
+      path: slug,
+      component: template,
+      context: { id: node.id },
+    })
+  })
+
+  // ------------------
+  // Create Blog
+  // ------------------
+  let queryBlog = await graphql(`
+    query {
+      file(fields: { type: { eq: "blog" } }) {
+        id
+        fields {
+          slug
+        }
+      }
+    }
+  `)
+  if (queryBlog.errors) {
+    reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query')
+  }
+
+  const blog = queryBlog.data.file
+  console.log("blog", blog)
+  const slug = blog.fields.slug
+  const template = path.resolve(`./src/templates/Blog/Blog.js`)
+
+  createPage({
+    path: slug,
+    component: template,
+    context: { id: blog.id },
+  })
+
+  // ------------------
+  // Create Posts
+  // ------------------
+  let queryPosts = await graphql(`
+    query {
+      allFile(filter: { fields: { type: { eq: "post" } } }) {
+        edges {
+          node {
+            id
+            fields {
+              slug
+            }
+          }
+        }
+      }
+    }
+  `)
+  if (queryPosts.errors) {
+    reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query')
+  }
+
+  const posts = queryPosts.data.allFile.edges
+
+  posts.forEach(({ node }, index) => {
+    const slug = node.fields.slug
+    const template = path.resolve(`./src/templates/Blog/Single.js`)
 
     createPage({
       path: slug,

@@ -1,46 +1,64 @@
 ---
-slug: todo
-title: Todo
-blurb: Dolores dolores et odit est.
-updated: 2020-06-09
+slug: code
+title: Code
+blurb: Quo corrupti expedita officiis pariatur fugit voluptates veritatis voluptatem.
+updated: 2020-08-31
 ---
 
-## Home
+## Using Code
 
-- [x] Intro
-- [ ] Author
-  - [ ] Name
-  - [ ] About
-  - [ ] Photo
+`Unspecified Code`
 
-## Books
+```jsx
+Unspecified Code
+```
 
-- [x] List of books
-  - [x] Book Cover
-  - [x] Title
-  - [x] About
-  - [x] Learn More Link
+```
+### html syntax
+```
 
-## Single Book
+```
+<h1>html syntax</h1>
+```
 
-- [x] Book Cover
-- [x] Title
-- [x] Blurb
-- [x] About (Detailed)
-- [x] Notable features
-- [ ] Pages + Chapters Length
-- [ ] Tags and/or Cats
+```markdown render
+<h1>html syntax rendered</h1>
+```
 
-## Chapter
+```jsx live
+<h1>html syntax w/ live render</h1>
+```
 
-- [x] Book Title
-- [x] Sidebar
-  - [ ] Search
-  - [x] Chapters
-  - [ ] Sections
-- [x] Main
-  - [x] Content
+```js
+function example(msg) {
+  return <p>{msg}</p>
+}
+example("this is an example")
+```
 
-## Footer
+```jsx live
+class Counter extends React.Component {
+  constructor() {
+    super()
+    this.state = { count: 0 }
+  }
 
-- [x] Built with Platen.io Ver 1.0
+  componentDidMount() {
+    this.interval = setInterval(() => {
+      this.setState(state => ({ count: state.count + 1 }))
+    }, 1000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
+
+  render() {
+    return (
+      <center>
+        <h3>{this.state.count}</h3>
+      </center>
+    )
+  }
+}
+```

@@ -53,8 +53,8 @@ export default class Clip extends Component {
     return (
       <div id={`clip-` + this.props.id} className="pt-16">
         <div className="flex flex-wrap justify-start items-start">
-          <div className="flex-1 prosed">
-            <Content>{this.props.children}</Content>
+          <div className="flex-1">
+            <Content className="prose">{this.props.children}</Content>
           </div>
           <div className="mb-4">
             <div className="relative">
