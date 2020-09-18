@@ -51,7 +51,7 @@ const Book = ({ data }) => {
           </div>
         </PageHeader>
 
-        <div className="mt-8 -mx-8 px-8 flex flex-wrap justify-start items-stretch">
+        <div className="mt-8 -mx-8 px-8 flex flex-wrap justify-start items-stretch bg-gray-500">
           <div className="flex-intial w-full sm:w-48 mt-8 sm:-mb-4">
             <div className="relative w-48 max-w-full mx-auto rounded-lg rounded-tl-sm rounded-bl-sm shadow-xl overflow-hidden">
               {BookOverlay && (
