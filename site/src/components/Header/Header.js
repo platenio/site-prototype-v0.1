@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import HeaderLinks from "./HeaderLinks"
+// import HeaderLinks from "./HeaderLinks"
 import Logo from "../../img/platen_logo.svg"
 
 const Header = () => {
@@ -20,7 +20,7 @@ const Header = () => {
       </div>
 
       <div className="flex-initial flex justify-center m-0 w-full md:w-auto">
-        <HeaderLinks />
+        {/* <HeaderLinks /> */}
       </div>
     </header>
   )

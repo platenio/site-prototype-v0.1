@@ -1,4 +1,4 @@
-const { typeNameFromFile } = require("gatsby-transformer-csv")
+// const { typeNameFromFile } = require("gatsby-transformer-csv")
 
 module.exports = {
   siteMetadata: {
@@ -7,63 +7,74 @@ module.exports = {
     author: `@Platen`,
   },
   plugins: [
-    `gatsby-plugin-smoothscroll`,
-    `gatsby-plugin-styled-components`,
-    `gatsby-plugin-react-helmet`,
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     name: `globals`,
+    //     path: `${__dirname}/src/globals`,
+    //   },
+    // },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     name: `csv`,
+    //     path: `${__dirname}/static/csv`,
+    //   },
+    // },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     name: `page`,
+    //     path: `${__dirname}/src/pages/`,
+    //   },
+    // },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `post`,
+        path: `${__dirname}/content/posts`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `book`,
+        path: `${__dirname}/content/books`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `author`,
+        path: `${__dirname}/content/authors`,
+      },
+    },
+    `gatsby-plugin-mdx`,
+    // `gatsby-transformer-remark`,
+    `gatsby-transformer-json`,
+    `gatsby-transformer-yaml`,
+    // {
+    //   resolve: `gatsby-plugin-mdx`,
+    //   options: {
+    //     gatsbyRemarkPlugins: [
+    //       {
+    //         resolve: `gatsby-remark-images`,
+    //         options: {
+    //           maxWidth: 1200,
+    //         },
+    //       },
+    //       {
+    //         resolve: `gatsby-remark-copy-linked-files`,
+    //         options: {
+    //           ignoreFileExtensions: [`png`, `jpg`, `jpeg`, `bmp`, `tiff`],
+    //         },
+    //       },
+    //     ],
+    //   },
+    // },
+
     `gatsby-plugin-netlify-cms`,
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
-    `gatsby-remark-images`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/img`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `globals`,
-        path: `${__dirname}/src/globals`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `pages`,
-        path: `${__dirname}/src/content`,
-      },
-    },
-    {
-      resolve: `gatsby-plugin-mdx`,
-      options: {
-        // defaultLayouts: {
-        //   default: require.resolve("./src/templates/Underpage.js"),
-        // },
-        gatsbyRemarkPlugins: [
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              maxWidth: 1200,
-            },
-          },
-          {
-            resolve: `gatsby-remark-copy-linked-files`,
-            options: {
-              ignoreFileExtensions: [`png`, `jpg`, `jpeg`, `bmp`, `tiff`],
-            },
-          },
-        ],
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `csv`,
-        path: `${__dirname}/static/csv`,
-      },
-    },
+    `gatsby-plugin-react-helmet`,
     {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
@@ -72,12 +83,16 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: `gatsby-plugin-postcss`,
-    },
+    `gatsby-plugin-postcss`,
     `gatsby-plugin-emotion`,
-    // // this (optional) plugin enables Progressive Web App + Offline functionality
-    // // To learn more, visit: https://gatsby.dev/offline
-    `gatsby-plugin-offline`,
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-smoothscroll`,
+    // `gatsby-plugin-sharp`,
+    // `gatsby-remark-images`,
+    // `gatsby-transformer-sharp`,
+
+    // this (optional) plugin enables Progressive Web App + Offline functionality
+    // To learn more, visit: https://gatsby.dev/offline
+    // `gatsby-plugin-offline`,
   ],
 }

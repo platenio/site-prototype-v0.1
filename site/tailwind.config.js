@@ -4,6 +4,7 @@ module.exports = {
   important: true,
   future: {
     removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
   },
   purge: ["./src/**/*.html", "./src/**/*.js", "./src/**/*.jsx"],
   theme: {
