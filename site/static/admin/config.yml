@@ -1,8 +1,7 @@
 backend:
-  name: test-repo
-  # branch: master
-  # name: git-gateway
-  # branch: netlify-cms
+  # name: test-repo
+  name: git-gateway
+  branch: netlify-cms
 
 publish_mode: editorial_workflow
 media_folder: "public/images/uploads"
