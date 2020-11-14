@@ -1,10 +1,11 @@
 {
   "name": "site",
-  "description": "Write your next game with Platen, a project for providing scaffolding of digital tabletop roleplaying tools and other interactive web books.",
-  "author": "Thomas Daugherty <msg@tdaug.com>",
-  "version": "1.0.0",
-  "license": "MIT",
   "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Thomas Daugherty <msg@tdaug.com>",
+  "license": "MIT",
+  "description": "Write your next game with Platen, a project for providing scaffolding of digital tabletop roleplaying tools and other interactive web books.",
   "keywords": [
     "gatsby"
   ],
