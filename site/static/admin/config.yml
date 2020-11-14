@@ -10,7 +10,7 @@ public_folder: "images/uploads"
 collections:
   - name: "posts"
     label: "Posts"
-    folder: "content/posts"
+    folder: "./content/posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     media_folder: "static/images/uploads/posts"
@@ -34,7 +34,7 @@ collections:
 
   - name: "books"
     label: "Books"
-    folder: "content/books"
+    folder: "./content/books"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     media_folder: "static/images/uploads/books"

@@ -1,10 +1,7 @@
 {
-  "private": true,
-  "workspaces": [
-    "gatsby-theme-events",
-    "site"
-  ],
-  "dependencies": {
-    "lodash.get": "^4.4.2"
-  }
+    "private": true,
+    "workspaces": [
+        "gatsby-theme-events",
+        "site"
+    ]
 }

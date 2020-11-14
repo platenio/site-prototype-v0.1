@@ -34,12 +34,6 @@ const LayoutBook = ({ data }) => {
               return <li key={i}>{language}</li>
             })}
           </ul>
-          <p>languages</p>
-          <ul>
-            {book.languages.map((language, i) => {
-              return <li key={i}>{language}</li>
-            })}
-          </ul>
           <p>genres</p>
           <ul>
             {book.genres.map((genre, i) => {
