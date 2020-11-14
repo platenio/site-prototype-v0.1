@@ -4,17 +4,17 @@ backend:
   branch: netlify-cms
 
 publish_mode: editorial_workflow
-media_folder: "../../public/images/uploads"
-public_folder: "../../images/uploads"
+media_folder: "site/public/images/uploads"
+public_folder: "site/images/uploads"
 
 collections:
   - name: "posts"
     label: "Posts"
-    folder: "../../content/posts"
+    folder: "site/content/posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    media_folder: "static/images/uploads/posts"
-    public_folder: "../../images/uploads/posts"
+    media_folder: "site/static/images/uploads/posts"
+    public_folder: "site/images/uploads/posts"
     path: "{{title}}"
     editor:
       preview: false
@@ -34,11 +34,11 @@ collections:
 
   - name: "books"
     label: "Books"
-    folder: "../../content/books"
+    folder: "site/content/books"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    media_folder: "static/images/uploads/books"
-    public_folder: "../../images/uploads/books"
+    media_folder: "site/static/images/uploads/books"
+    public_folder: "site/images/uploads/books"
     path: "{{title}}"
     editor:
       preview: false
