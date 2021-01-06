@@ -10,7 +10,7 @@
     "@mdx-js/mdx": "^1.6.5",
     "@mdx-js/react": "^1.6.5",
     "@tailwindcss/typography": "^0.2.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-plugin-styled-components": "^1.10.7",
     "convert-csv-to-json": "0.0.15",
     "csv-parse": "^4.10.1",
