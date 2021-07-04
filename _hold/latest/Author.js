@@ -5,10 +5,10 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import "../styles/prose.css"
 
-import Layout from "./Layout"
-import PageHeader from "../components/Layouts/PageHeader"
+import Layout from "../platen-site/src/templates/Layout"
+import PageHeader from "../platen-site/src/components/Layouts/PageHeader"
 
-import { shortcodes } from "../components/Widgets/Widgets"
+import { shortcodes } from "../platen-site/src/components/Widgets/Widgets"
 
 const LayoutAuthor = ({ data }) => {
   const { author } = data

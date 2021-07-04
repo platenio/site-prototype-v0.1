@@ -1,13 +1,11 @@
 {
-    "name": "gatsby-starter-theme-workspace",
-    "private": true,
-    "version": "0.0.1",
-    "main": "index.js",
-    "scripts": {
-        "build": "yarn workspace site build"
-    },
-    "workspaces": [
-        "gatsby-theme-events",
-        "site"
-    ]
+  "name": "platen.io",
+  "private": true,
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "build": "yarn workspace platen-site build",
+    "dev": "yarn workspace platen-site develop"
+  },
+  "workspaces": ["platen-theme", "platen-site"]
 }
