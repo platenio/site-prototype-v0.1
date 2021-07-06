@@ -1,0 +1,26 @@
+{
+  "name": "platen-site",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Thomas Daugherty <msg@tdaug.com>",
+  "license": "MIT",
+  "description": "",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+  },
+  "dependencies": {
+    "gatsby": "^3.8.0",
+    "platen-theme": "*",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}

@@ -1,0 +1,99 @@
+---
+slug: components
+title: Components
+blurb: Tempore dolorem autem voluptates.
+updated: 2020-06-09
+---
+
+## Custom Components
+
+### Sections
+
+<Nest title="<SecBooks />">
+
+#### About
+
+Showcase your book(s) with this section!
+
+```jsx live full
+<SecBooks />
+```
+
+</Nest>
+
+### Widgets
+
+<Nest title="<Clip />">
+
+#### About
+
+Clips will automatically create waypoints to specified content. With these, you can share direct links to content you want to share and it'll also create a clip under the page index.
+
+```jsx live full
+<Clip id="test">#### This is a clip</Clip>
+```
+
+#### Attributes
+
+| name | required | accepts | defaults | desc                                          |
+| ---- | -------- | ------- | -------- | --------------------------------------------- |
+| id   | true     | string  | false    | It's important to add context to your link ID |
+
+</Nest>
+
+<Nest title="<Nest />">
+
+#### About
+
+Nest's will tuck away content until needed.
+
+```jsx live full
+<Nest title="Title" maxHeight="none">
+  ### Nested contents Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  Itaque veniam illum at necessitatibus quam architecto quibusdam ipsa similique
+  ducimus consequatur beatae, sint esse odio eum? Ipsum laboriosam
+  necessitatibus impedit ipsa?
+</Nest>
+```
+
+#### Attributes
+
+| name      | required | accepts     | defaults | desc                                      |
+| --------- | -------- | ----------- | -------- | ----------------------------------------- |
+| title     | true     | string      | false    | Title displayed above your nested content |
+| open      | false    | true/false  | true     | Display nested contents on page load      |
+| maxHeight | false    | number/none | 600      | Set a max height to your nested content   |
+
+</Nest>
+
+<Nest title="<Rolltable />">
+
+#### About
+
+Rolltables are great for adding randomization to your CSV files.
+
+```jsx live full
+<Rolltable name="Basic Day Rolltable" src="samples/day.csv" />
+```
+
+```jsx live full
+<Rolltable
+  name="Context Day Rolltable"
+  caption="You can assign variables within your context!"
+  src="samples/day.csv"
+>
+  On <rtDay />, the World will end!
+</Rolltable>
+```
+
+#### Attributes
+
+| name    | required | accepts    | defaults | desc                           |
+| ------- | -------- | ---------- | -------- | ------------------------------ |
+| src     | true     | string     | false    | Easily add a custom ID         |
+| name    | false    | string     | false    | Add a custom title             |
+| caption | false    | string     | false    | Add a custom caption           |
+| debug   | false    | true/false | false    | Debug your live data           |
+| upload  | false    | true/false | false    | Add a custom CSV upload button |
+
+</Nest>

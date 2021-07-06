@@ -1,0 +1,56 @@
+backend:
+  # name: test-repo
+  name: git-gateway
+  branch: netlify-cms
+
+publish_mode: editorial_workflow
+media_folder: "site/public/images/uploads"
+public_folder: "site/images/uploads"
+
+collections:
+  - name: "posts"
+    label: "Posts"
+    folder: "site/content/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    media_folder: "site/static/images/uploads/posts"
+    public_folder: "site/images/uploads/posts"
+    path: "{{title}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "publishedAt", widget: "datetime" }
+      - {
+          label: "Cover Image",
+          name: "cover",
+          widget: "image",
+          media_library: { config: { multiple: false } },
+        }
+      - { label: "Categories", name: "cats", widget: "list" }
+      - { label: "Tags", name: "tags", widget: "list", default: ["news"] }
+      - { label: "Blurb", name: "blurb", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "books"
+    label: "Books"
+    folder: "site/content/books"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    media_folder: "site/static/images/uploads/books"
+    public_folder: "site/images/uploads/books"
+    path: "{{title}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "publishedAt", widget: "datetime" }
+      - {
+          label: "Cover Image",
+          name: "cover",
+          widget: "image",
+          media_library: { config: { multiple: false } },
+        }
+      - { label: "Tags", name: "tags", widget: "list", default: ["news"] }
+      - { label: "Blurb", name: "blurb", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }

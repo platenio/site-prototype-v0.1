@@ -1,0 +1,150 @@
+.prose {
+  > {
+    /* Globals */
+    section {
+      margin-top: 4ch;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    hr,
+    p,
+    ol,
+    ul,
+    pre,
+    .pre,
+    table,
+    figure,
+    blockquote,
+    dl,
+    dd {
+      @apply mb-0 w-full;
+      max-width: 70ch;
+      line-height: 3ch;
+
+      &:not(:first-child) {
+        /* @apply mt-4; */
+        margin-top: 2ch;
+      }
+
+      /* Links */
+      & > a {
+        @apply text-cmykBlue-500;
+
+        &:focus,
+        &:hover { @apply text-cmykBlue-400; }
+        &:active { @apply text-cmykBlue-300; }
+      }
+    }
+
+    /* Headings */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply font-bold;
+    }
+    h1 {
+      @apply text-3xl;
+
+      /* &:not(:first-child) {
+        @apply mt-8;
+      } */
+    }
+    h2 {
+      @apply text-2xl;
+
+      /* &:not(:first-child) {
+        @apply mt-6;
+      } */
+    }
+    h3 {
+      @apply text-xl;
+
+      /* &:not(:first-child) {
+        @apply mt-4;
+      } */
+    }
+    h4 {
+      @apply text-lg;
+    }
+    h6,
+    h5 {
+      @apply text-base;
+    }
+
+    /* Margin new headings */
+    p,
+    pre,
+    table,
+    figure,
+    blockquote,
+    dl,
+    dd {
+      & + h1,
+      & + h2,
+      & + h3,
+      & + h4,
+      & + h5,
+      & + h6,
+      & + img {
+        margin-top: 2ch;
+      }
+    }
+
+    /* Lists */
+    ol,
+    ul {
+      &:not([class="contains-task-list"]) {
+        @apply list-outside pl-6;
+
+        ol,
+        ul {
+          @apply list-outside pl-6;
+        }
+        ul { @apply list-disc; }
+        ol { @apply list-decimal; }
+        li {
+          margin-top: .5ch;
+        }
+      }
+    }
+    ul:not([class="contains-task-list"]) { @apply list-disc; }
+    ol:not([class="contains-task-list"]) { @apply list-decimal; }
+
+    /* Tables */
+    table {
+      @apply w-full text-left;
+
+      tbody {
+        tr:nth-child(odd) {
+          @apply bg-gray-100;
+        }
+      }
+
+      th,
+      td {
+        @apply px-2 py-1 border border-gray-500;
+      }
+    }
+
+    .pre {
+      @apply p-2 bg-gray-200;
+    }
+
+    blockquote {
+      @apply p-4 italic bg-gray-200;
+
+      p {
+        &:not(:first-child) {
+          margin-top: 2ch;
+        }
+      }
+    }
+  }
+}

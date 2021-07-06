@@ -1,71 +1,11 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "platen.io",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
-  "dependencies": {
-    "@emotion/core": "^10.0.28",
-    "@emotion/styled": "^10.0.27",
-    "@mdx-js/mdx": "^1.6.5",
-    "@mdx-js/react": "^1.6.5",
-    "@tailwindcss/typography": "^0.2.0",
-    "axios": "^0.19.2",
-    "babel-plugin-styled-components": "^1.10.7",
-    "convert-csv-to-json": "0.0.15",
-    "csv-parse": "^4.10.1",
-    "framer-motion": "^2.3.0",
-    "gatsby": "^2.23.3",
-    "gatsby-image": "^2.4.7",
-    "gatsby-plugin-emotion": "^4.3.10",
-    "gatsby-plugin-manifest": "^2.4.11",
-    "gatsby-plugin-mdx": "^1.2.15",
-    "gatsby-plugin-mdx-prismjs": "^1.0.4",
-    "gatsby-plugin-offline": "^3.2.9",
-    "gatsby-plugin-react-helmet": "^3.3.4",
-    "gatsby-plugin-sass": "^2.3.4",
-    "gatsby-plugin-sharp": "^2.6.19",
-    "gatsby-plugin-smoothscroll": "^1.1.0",
-    "gatsby-plugin-styled-components": "^3.3.10",
-    "gatsby-plugin-web-font-loader": "^1.0.4",
-    "gatsby-remark-copy-linked-files": "^2.3.11",
-    "gatsby-remark-images": "^3.3.18",
-    "gatsby-source-filesystem": "^2.3.11",
-    "gatsby-transformer-csv": "^2.3.4",
-    "gatsby-transformer-sharp": "^2.5.5",
-    "node-sass": "^4.14.1",
-    "prop-types": "^15.7.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-helmet": "^6.1.0",
-    "react-icons": "^3.10.0",
-    "react-papaparse": "^3.3.0",
-    "styled-components": "^5.1.1",
-    "sync-fetch": "^0.1.1",
-    "tailwindcss": "^1.4.6",
-    "twin.macro": "^1.5.0"
-  },
-  "devDependencies": {
-    "prettier": "2.0.5"
-  },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
+  "version": "0.0.1",
+  "main": "index.js",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "build": "yarn workspace platen-site build",
+    "dev": "yarn workspace platen-site develop"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
-  }
+  "workspaces": ["platen-theme", "platen-site"]
 }
